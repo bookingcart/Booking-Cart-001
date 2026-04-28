@@ -524,6 +524,7 @@ app.use((err, req, res, next) => {
 });
 
 if (require.main === module) {
+<<<<<<< HEAD
   app.listen(PORT, () => {
     console.log(`BookingCart server running on http://localhost:${PORT}`);
     console.log(`Duffel API Key configured: ${!!process.env.DUFFEL_API_KEY}`);
@@ -535,3 +536,15 @@ if (require.main === module) {
 
 module.exports = app;
 
+=======
+    app.listen(PORT, () => {
+          console.log(`BookingCart server running on http://localhost:${PORT}`);
+          console.log(`Duffel API Key configured: ${!!process.env.DUFFEL_API_KEY}`);
+          if (stripeConfigError) {
+                  console.error(stripeConfigError);
+          }
+    });
+}
+
+module.exports = app;
+>>>>>>> e54c13086a9c70b52218710f00f64847db4abbdf
