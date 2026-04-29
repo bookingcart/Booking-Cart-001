@@ -739,14 +739,23 @@
     const cachedFlights = readFlightCache(searchSignature);
 
     // Update header
-    const headerRoute = document.querySelector("[data-route]");
-    const headerMeta = document.querySelector("[data-meta]");
-    if (headerRoute) setText(headerRoute, (search.from || "") + " → " + (search.to || ""));
-    if (headerMeta) {
+    const headerRouteDest = document.querySelector("[data-route-dest]");
+    if (headerRouteDest) setText(headerRouteDest, search.to || "Destination");
+
+    const headerSearchFrom = document.querySelector("#search-from");
+    const headerSearchTo = document.querySelector("#search-to");
+    const headerSearchDepart = document.querySelector("[data-cal-label='depart']");
+    const headerSearchReturn = document.querySelector("[data-cal-label='return']");
+    const headerPaxSummary = document.querySelector("[data-passengers-summary]");
+
+    if (headerSearchFrom) headerSearchFrom.value = search.from || "";
+    if (headerSearchTo) headerSearchTo.value = search.to || "";
+    if (headerSearchDepart) headerSearchDepart.textContent = search.depart || "Depart";
+    if (headerSearchReturn) headerSearchReturn.textContent = search.return || "Return";
+    if (headerPaxSummary) {
       const pax = state.passengers || { adults: 1, children: 0, infants: 0 };
       const total = pax.adults + pax.children + pax.infants;
-      const trip = (state.tripType || "round") === "oneway" ? "One-way" : "Round-trip";
-      setText(headerMeta, trip + " • " + (search.depart || "") + (search.return ? " → " + search.return : "") + " • " + total + " pax • " + (search.cabin || "Economy"));
+      headerPaxSummary.textContent = `${total} traveler${total > 1 ? 's' : ''} - ${search.cabin || 'Economy'}`;
     }
 
     const listEl = root.querySelector("[data-results-list]");
@@ -831,52 +840,56 @@
         return;
       }
 
-      list.forEach((f) => {
+      list.forEach((f, i) => {
         const priceVal = typeof f.price === "object" ? parseFloat(f.price.amount || 0) : f.price;
         const card = document.createElement("div");
-        card.className = "bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-200 transition-all overflow-hidden group";
-        card.innerHTML =
-          '<div class="p-5">' +
-          '<div class="flex justify-between items-start mb-6">' +
-          '<div class="flex items-center gap-4">' +
-          '<div class="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center overflow-hidden shadow-sm">' +
-          (f.airline.logoUrl ? '<img src="' + f.airline.logoUrl + '" alt="' + f.airline.name + '" class="w-full h-full object-contain" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">' +
-            '<div class="w-full h-full items-center justify-center text-slate-900 font-medium" style="display:none;">' + f.airline.logo + '</div>' :
-            '<div class="w-full h-full flex items-center justify-center text-slate-900 font-medium">' + f.airline.logo + '</div>') +
+        card.className = "bg-white border border-slate-200 hover:border-green-600 transition-colors p-0 flex flex-col md:flex-row mb-3 group shadow-sm relative";
+        
+        let badgesHtml = '';
+        if (i === 0) {
+          badgesHtml += '<span class="bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm">Cheapest</span>';
+        }
+        badgesHtml += '<span class="bg-green-50 text-green-600 text-[10px] font-bold px-2 py-0.5 rounded-sm flex items-center gap-1"><i class="ph ph-suitcase-rolling"></i> Carry-on baggage included</span>';
+        
+        const logoHtml = f.airline.logoUrl 
+          ? '<img src="' + f.airline.logoUrl + '" alt="' + f.airline.name + '" class="max-w-full max-h-full object-contain" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';"><div class="w-full h-full items-center justify-center text-slate-900 font-medium" style="display:none;">' + f.airline.logo + '</div>' 
+          : '<div class="w-full h-full flex items-center justify-center text-slate-900 font-medium">' + f.airline.logo + '</div>';
+
+        const stopsText = f.stops === 0 ? "Nonstop" : f.stops + " stop" + (f.stops > 1 ? "s" : "");
+
+        card.innerHTML = 
+          '<div class="absolute top-0 left-0 flex gap-1 -mt-2.5 ml-4 z-10">' + badgesHtml + '</div>' +
+          '<div class="flex-1 flex flex-col justify-center p-5 pt-6">' +
+            '<div class="flex items-center gap-8">' +
+              '<div class="flex items-center gap-3 w-40 shrink-0">' +
+                '<div class="w-8 h-8 flex items-center justify-center">' + logoHtml + '</div>' +
+                '<span class="text-sm font-medium text-slate-700">' + f.airline.name + '</span>' +
+              '</div>' +
+              '<div class="flex-1 flex items-center justify-center gap-6">' +
+                '<div class="text-right">' +
+                  '<div class="text-xl font-bold text-slate-900">' + (f.departTime || "--:--") + '</div>' +
+                  '<div class="text-xs text-slate-500 font-medium">' + extractIata(search.from) + '</div>' +
+                '</div>' +
+                '<div class="flex-1 max-w-[150px] flex flex-col items-center">' +
+                  '<div class="text-xs text-slate-400 font-medium mb-1">' + durationLabel(f.durationMin || 0) + '</div>' +
+                  '<div class="w-full relative flex items-center justify-center">' +
+                    '<div class="w-full h-px bg-slate-300"></div>' +
+                    '<div class="absolute bg-white px-2 text-slate-400"><span class="text-[10px] uppercase">' + stopsText + '</span></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="text-left">' +
+                  '<div class="text-xl font-bold text-slate-900">' + (f.arriveTime || "--:--") + '</div>' +
+                  '<div class="text-xs text-slate-500 font-medium">' + extractIata(search.to) + '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
           '</div>' +
-          '<div>' +
-          '<div class="font-medium text-slate-900">' + f.airline.name + '</div>' +
-          '<div class="text-xs font-semibold text-slate-400 mt-0.5 flex items-center gap-1.5">' + (search.from || "") + ' <i class="ph-bold ph-airplane-tilt text-sm text-green-600"></i> ' + (search.to || "") + '</div>' +
-          '</div>' +
-          '</div>' +
-          '<div class="text-right">' +
-          '<div class="text-xl font-semibold text-green-600">' + money(priceVal) + '</div>' +
-          '<div class="text-xs text-slate-400 font-medium">per traveler</div>' +
-          '</div>' +
-          '</div>' +
-          '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">' +
-          '<div class="bg-slate-50 rounded-lg p-2.5 text-center">' +
-          '<div class="font-medium text-slate-700">' + (f.departTime || "--:--") + '</div>' +
-          '<div class="text-xs text-slate-400 font-medium">Depart</div>' +
-          '</div>' +
-          '<div class="bg-slate-50 rounded-lg p-2.5 text-center">' +
-          '<div class="font-medium text-slate-700">' + (f.arriveTime || "--:--") + '</div>' +
-          '<div class="text-xs text-slate-400 font-medium">Arrive</div>' +
-          '</div>' +
-          '<div class="bg-slate-50 rounded-lg p-2.5 text-center">' +
-          '<div class="font-medium text-slate-700">' + durationLabel(f.durationMin || 0) + '</div>' +
-          '<div class="text-xs text-slate-400 font-medium">Duration</div>' +
-          '</div>' +
-          '<div class="bg-slate-50 rounded-lg p-2.5 text-center">' +
-          '<div class="font-medium text-slate-700">' + (f.stops === 0 ? "Non-stop" : f.stops + " stop" + (f.stops > 1 ? "s" : "")) + '</div>' +
-          '<div class="text-xs text-slate-400 font-medium">Stops</div>' +
-          '</div>' +
-          '</div>' +
-          '</div>' +
-          '<div class="bg-slate-50/50 border-t border-slate-100 p-3 flex justify-end">' +
-          '<a class="inline-flex items-center gap-2 text-sm font-medium text-green-600 hover:text-green-700 bg-green-50 hover:bg-green-100 px-4 py-2 rounded-lg transition-colors" href="#" data-flight-link>' +
-          'Select Flight <i class="ph-bold ph-arrow-right"></i>' +
-          '</a>' +
+          '<div class="w-full md:w-48 border-t md:border-t-0 md:border-l border-slate-100 p-5 flex flex-col justify-center items-end bg-slate-50/30">' +
+            '<div class="text-2xl font-bold text-green-600">' + money(priceVal) + '</div>' +
+            '<div class="text-[10px] text-slate-400 font-medium mb-3">per adult</div>' +
+            '<a href="#" data-flight-link class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded text-sm w-full text-center flex items-center justify-center gap-1 transition-colors">' +
+              'Select <i class="ph-bold ph-caret-right"></i>' +
+            '</a>' +
           '</div>';
 
         const link = card.querySelector("[data-flight-link]");
@@ -904,18 +917,36 @@
         filters.maxPrice = sliderMax;
       }
 
-      const airlineSelect = document.querySelector("select[name='airline']");
-      if (airlineSelect) {
-        while (airlineSelect.options.length > 1) airlineSelect.remove(1);
+      const airlineList = document.getElementById("sidebar-airline-list");
+      if (airlineList) {
+        airlineList.innerHTML = "";
         const codes = Array.from(new Set(currentFlights.map((f) => f.airline.code)));
         codes.forEach((c) => {
-          const label = currentFlights.find((f) => f.airline.code === c).airline.name;
-          const opt = document.createElement("option");
-          opt.value = c;
-          opt.textContent = label;
-          airlineSelect.appendChild(opt);
+          const airlineRef = currentFlights.find((f) => f.airline.code === c).airline;
+          const label = airlineRef.name;
+          const minPrice = Math.min(...currentFlights.filter(f => f.airline.code === c).map(f => typeof f.price === "object" ? parseFloat(f.price.amount || 0) : f.price));
+          
+          const lbl = document.createElement("label");
+          lbl.className = "flex justify-between items-center cursor-pointer group";
+          lbl.innerHTML = `
+            <div class="flex items-center gap-3">
+              <input type="checkbox" value="${c}" class="w-4 h-4 rounded border-slate-300 accent-green-600" />
+              <span class="text-sm text-slate-700 group-hover:text-slate-900 flex items-center gap-2">
+                <div class="w-4 h-4 rounded-sm flex items-center justify-center overflow-hidden"><img src="${airlineRef.logoUrl}" onerror="this.style.display='none'"></div>
+                ${label}
+              </span>
+            </div>
+            <span class="text-xs text-slate-400 font-medium">${money(minPrice)}</span>
+          `;
+          airlineList.appendChild(lbl);
         });
       }
+
+      const flightCountEl = document.querySelector("[data-flight-count]");
+      if (flightCountEl) setText(flightCountEl, currentFlights.length);
+
+      const priceTrend = document.getElementById("price-trend-graph");
+      if (priceTrend) priceTrend.style.display = "block";
 
       bindFilterControls();
       if (window.bookingcartLoading && typeof window.bookingcartLoading.setBusy === "function") {

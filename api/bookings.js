@@ -2,7 +2,7 @@
 
 const { getCollections } = require('../lib/mongo');
 const { getCorsHeaders } = require('../lib/cors');
-const { requireAdminPin } = require('../lib/admin');
+const { requireAdminEmail } = require('../lib/admin');
 const { verifyRequestBearer } = require('../lib/google-verify');
 
 async function connectToDatabase() {
@@ -77,7 +77,7 @@ module.exports = async (req, res) => {
     }
 
     if (action === 'list') {
-      const gate = requireAdminPin(pin);
+      const gate = await requireAdminEmail(req);
       if (!gate.ok) return res.status(gate.status).json({ ok: false, error: gate.error });
 
       let all = [];
@@ -117,7 +117,7 @@ module.exports = async (req, res) => {
     }
 
     if (action === 'status') {
-      const gate = requireAdminPin(pin);
+      const gate = await requireAdminEmail(req);
       if (!gate.ok) return res.status(gate.status).json({ ok: false, error: gate.error });
       if (!id || !status) return res.status(400).json({ ok: false, error: 'Missing id or status' });
 
@@ -164,7 +164,7 @@ module.exports = async (req, res) => {
     }
 
     if (action === 'delete') {
-      const gate = requireAdminPin(pin);
+      const gate = await requireAdminEmail(req);
       if (!gate.ok) return res.status(gate.status).json({ ok: false, error: gate.error });
       if (!id) return res.status(400).json({ ok: false, error: 'Missing id' });
 
@@ -177,7 +177,7 @@ module.exports = async (req, res) => {
     }
 
     if (action === 'upload_ticket') {
-      const gate = requireAdminPin(pin);
+      const gate = await requireAdminEmail(req);
       if (!gate.ok) return res.status(gate.status).json({ ok: false, error: gate.error });
       const { ticket } = req.body;
       if (!id || !ticket) return res.status(400).json({ ok: false, error: 'Missing id or ticket data' });

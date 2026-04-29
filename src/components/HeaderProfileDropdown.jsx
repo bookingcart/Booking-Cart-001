@@ -13,7 +13,10 @@ const BTN_CLASS =
 export function HeaderProfileDropdown({ triggerClassName = BTN_CLASS }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef(null);
-  const { refresh } = useAuth();
+  const { user, refresh } = useAuth();
+  
+  const adminEmails = (import.meta.env.VITE_ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase());
+  const isAdmin = user && adminEmails.includes(user.email.toLowerCase());
 
   useEffect(() => {
     function onDocClick(e) {
@@ -62,6 +65,16 @@ export function HeaderProfileDropdown({ triggerClassName = BTN_CLASS }) {
         >
           <i className="ph ph-user-circle text-xl text-slate-400"></i> My Account
         </a>
+        {isAdmin && (
+          <a
+            href="/admin"
+            role="menuitem"
+            className="flex items-center gap-3 px-5 py-3 text-sm font-medium text-teal-700 bg-teal-50 hover:bg-teal-100 transition-colors"
+            onClick={() => setOpen(false)}
+          >
+            <i className="ph ph-shield-check text-xl text-teal-600"></i> Admin Dashboard
+          </a>
+        )}
         <a
           href="/my-bookings"
           role="menuitem"

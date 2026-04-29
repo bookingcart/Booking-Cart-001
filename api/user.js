@@ -3,7 +3,7 @@
 const { getCollections } = require('../lib/mongo');
 const { getCorsHeaders } = require('../lib/cors');
 const { verifyRequestBearer } = require('../lib/google-verify');
-const { requireAdminPin } = require('../lib/admin');
+const { requireAdminEmail } = require('../lib/admin');
 
 function applyCors(req, res) {
   const h = getCorsHeaders(req);
@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
       const action = req.query.action;
 
       if (action === 'count') {
-        const gate = requireAdminPin(req.query.pin);
+        const gate = await requireAdminEmail(req);
         if (!gate.ok) return res.status(gate.status).json({ ok: false, error: gate.error });
 
         let count = 0;

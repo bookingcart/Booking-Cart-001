@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useLegacyScripts } from '../hooks/useLegacyScripts.js';
 import { HeaderAuthCluster } from '../components/HeaderAuthCluster.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
 /* ─── Support Inbox ─────────────────────────────────────────────── */
 const STORAGE_KEY = 'bc_support_messages';
@@ -237,26 +238,32 @@ export default function AdminPage() {
   useEffect(() => { document.title = 'BookingCart — Admin'; }, []);
   useLegacyScripts(SCRIPTS, 'admin');
   const [adminTab, setAdminTab] = useState('bookings');
+  
+  const { user } = useAuth();
+  const adminEmails = (import.meta.env.VITE_ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase());
+  const isAdmin = user && adminEmails.includes(user.email.toLowerCase());
+
+  if (!isAdmin) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+        <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i className="ph-fill ph-lock-key text-red-600 text-3xl"></i>
+        </div>
+        <h2 className="text-2xl font-extrabold text-slate-900 mb-2">Access Denied</h2>
+        <p className="text-slate-500 mb-6 max-w-md">You must be signed in with an administrator account to access this dashboard.</p>
+        {!user ? (
+          <HeaderAuthCluster />
+        ) : (
+          <a href="/" className="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-slate-800 transition-colors">
+            Return to Home
+          </a>
+        )}
+      </div>
+    );
+  }
+
   return (
     <>
-      
-          <div id="login-overlay"
-              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center">
-              <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full mx-4 text-center">
-                  <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                      <i className="ph-fill ph-lock-key text-green-600 text-2xl"></i>
-                  </div>
-                  <h2 className="text-xl font-extrabold text-slate-900 mb-1">Admin Access</h2>
-                  <p className="text-sm text-slate-500 mb-6">Enter admin code 1234 to continue.</p>
-                  <input id="pin-input" type="password" maxLength="10" placeholder="1234"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-center text-lg font-bold tracking-widest mb-4" />
-                  <button id="pin-btn"
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition-all">
-                      Unlock Dashboard
-                  </button>
-                  <p id="pin-error" className="text-red-500 text-sm font-medium mt-3" style={{"display":"none"}}>Invalid PIN</p>
-              </div>
-          </div>
       
           
           <div id="upload-overlay"

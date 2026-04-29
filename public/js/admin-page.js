@@ -27,42 +27,17 @@
             }
         }
 
-        // â”€â”€ PIN Login â”€â”€
-        const overlay = document.getElementById('login-overlay');
-        const pinInput = document.getElementById('pin-input');
-        const pinBtn = document.getElementById('pin-btn');
-        const pinError = document.getElementById('pin-error');
-
-        pinBtn.addEventListener('click', tryLogin);
-        pinInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
-
-        async function tryLogin() {
-            adminPin = pinInput.value.trim();
-            if (!adminPin) return;
-            pinError.style.display = 'none';
-            try {
-                setStatsLoading(true);
-                setTableLoading(true);
-                const resp = await fetch('/api/bookings', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'list', pin: adminPin })
-                });
-                const data = await resp.json();
-                if (!data.ok) {
-                    pinError.textContent = data.error || 'Invalid PIN';
-                    pinError.style.display = 'block';
-                    return;
-                }
-                overlay.style.display = 'none';
-                allBookings = data.bookings || [];
-                renderAll();
-            } catch (err) {
-                setStatsLoading(false);
-                pinError.textContent = 'Error: ' + err.message;
-                pinError.style.display = 'block';
-            }
+        // ── Auth Helper ──
+        function getAuthHeaders() {
+            const token = localStorage.getItem('bookingcart_google_id_token') || '';
+            return {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            };
         }
+
+        // Auto-load on init
+        setTimeout(() => loadBookings(), 100);
 
         // â”€â”€ Refresh â”€â”€
         const refreshBtn = document.getElementById('refresh-btn');
@@ -74,8 +49,8 @@
                 setTableLoading(true);
                 const resp = await fetch('/api/bookings', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'list', pin: adminPin })
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify({ action: 'list' })
                 });
                 const data = await resp.json();
                 if (data.ok) {
@@ -109,7 +84,9 @@
 
         async function loadUserCount() {
             try {
-                const resp = await fetch('/api/user?action=count&pin=' + encodeURIComponent(adminPin));
+                const resp = await fetch('/api/user?action=count', {
+                    headers: getAuthHeaders()
+                });
                 const data = await resp.json();
                 if (data.ok) {
                     document.getElementById('stat-users').textContent = data.count || 0;
@@ -200,8 +177,8 @@
             try {
                 const resp = await fetch('/api/bookings', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'status', id: ref, status: newStatus, pin: adminPin })
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify({ action: 'status', id: ref, status: newStatus })
                 });
                 const data = await resp.json();
                 if (data.ok) {
@@ -266,12 +243,11 @@
 
                     const resp = await fetch('/api/bookings', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: getAuthHeaders(),
                         body: JSON.stringify({
                             action: 'upload_ticket',
                             id: currentUploadRef,
-                            ticket: ticketData,
-                            pin: adminPin
+                            ticket: ticketData
                         })
                     });
 
@@ -555,8 +531,8 @@
 
                 const resp = await fetch('/api/bookings', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'upload_ticket', id: pnr, ticket: ticketData, pin: adminPin })
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify({ action: 'upload_ticket', id: pnr, ticket: ticketData })
                 });
 
                 const data = await resp.json();
