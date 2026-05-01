@@ -246,23 +246,35 @@
    * Safe to call multiple times (e.g. after SPA navigation re-mounts the div).
    */
   function renderGoogleSignInButton() {
-    console.log('renderGoogleSignInButton called', !!window.google, !!window.google?.accounts?.id);
+    console.log('🎯 renderGoogleSignInButton() called');
+    console.log('  - window.google:', !!window.google);
+    console.log('  - window.google.accounts:', !!window.google?.accounts);
+    console.log('  - window.google.accounts.id:', !!window.google?.accounts?.id);
+    
     if (!window.google || !window.google.accounts || !window.google.accounts.id) {
-      console.warn('Google SDK not ready for button rendering');
+      console.warn('⚠️  Google SDK not ready for button rendering');
       return false;
     }
     
     var parent = document.querySelector('.g_id_signin');
-    console.log('Parent element found:', !!parent);
+    console.log('📍 Parent element search:', !!parent);
     if (!parent) {
-      console.warn('Google Sign-In container element not found');
+      console.warn('⚠️  Google Sign-In container element not found');
       return false;
     }
+    
+    console.log('📐 Parent element details:', {
+      offsetWidth: parent.offsetWidth,
+      offsetHeight: parent.offsetHeight,
+      className: parent.className,
+      innerHTML: parent.innerHTML.length > 0 ? 'Has content' : 'Empty'
+    });
     
     // Clear any stale content so the button re-renders cleanly
     parent.innerHTML = '';
     
     try {
+      console.log('🚀 Attempting to render Google button...');
       window.google.accounts.id.renderButton(parent, {
         type: 'standard',
         shape: 'pill',
@@ -271,20 +283,46 @@
         size: 'large',
         logo_alignment: 'left'
       });
-      console.log('Google Sign-In button rendered successfully');
+      
+      // Check if button was actually rendered
+      setTimeout(() => {
+        const hasContent = parent.innerHTML.length > 0;
+        const hasButton = parent.querySelector('div[role="button"]');
+        console.log('✅ Button render check:', {
+          hasContent,
+          hasButton: !!hasButton,
+          innerHTMLLength: parent.innerHTML.length
+        });
+        
+        if (!hasContent && !hasButton) {
+          console.error('❌ Button appears to have failed rendering silently');
+        }
+      }, 1000);
+      
+      console.log('✅ Google Sign-In button render initiated');
       return true;
     } catch (err) {
-      console.error('Google renderButton failed:', err);
+      console.error('❌ Google renderButton failed:', err);
+      // Show error message to user
+      parent.innerHTML = `
+        <div style="padding: 8px 16px; border: 1px solid #dc3545; border-radius: 20px; background: #f8d7da; text-align: center; font-size: 14px; color: #721c24;">
+          <i class="ph ph-warning-circle" style="margin-right: 4px;"></i>
+          Sign-in error
+        </div>
+      `;
       return false;
     }
   }
 
   async function bootGoogle() {
+    console.log('🔧 bootGoogle() called, googleInitDone:', googleInitDone);
+    
     if (googleInitDone) {
       // SDK already loaded & initialized — just re-render the button
       const success = renderGoogleSignInButton();
       if (!success) {
         // If rendering failed, try to re-initialize
+        console.log('🔄 Button rendering failed, re-initializing...');
         googleInitDone = false;
         return bootGoogle();
       }
@@ -293,13 +331,17 @@
 
     var googleClientId = '';
     try {
+      console.log('📡 Fetching Google config...');
       var r = await fetch('/api/config');
+      console.log('📡 Config response status:', r.status);
       var j = await r.json();
+      console.log('📡 Config response:', j);
       if (j && j.googleClientId) {
         googleClientId = String(j.googleClientId).trim();
+        console.log('✅ Google Client ID retrieved:', googleClientId.substring(0, 20) + '...');
       }
     } catch (e) {
-      console.error('Failed to fetch Google config:', e);
+      console.error('❌ Failed to fetch Google config:', e);
     }
 
     window.bookingcartGoogleSignInAvailable = !!googleClientId;
