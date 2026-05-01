@@ -305,7 +305,17 @@
     window.bookingcartGoogleSignInAvailable = !!googleClientId;
 
     if (!googleClientId) {
-      console.warn('Google Client ID not found in config.');
+      console.warn('Google Client ID not found in config. Please check environment variables.');
+      // Show a fallback message or alternative auth method
+      const signInContainer = document.querySelector('.g_id_signin');
+      if (signInContainer) {
+        signInContainer.innerHTML = `
+          <div style="padding: 8px 16px; border: 1px solid #ccc; border-radius: 20px; background: #f8f9fa; text-align: center; font-size: 14px; color: #666;">
+            <i class="ph ph-warning-circle" style="margin-right: 4px;"></i>
+            Sign-in temporarily unavailable
+          </div>
+        `;
+      }
       return;
     }
 
