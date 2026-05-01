@@ -10,11 +10,11 @@ const fetch = require('node-fetch');
 const Stripe = require('stripe');
 const { pickAllowOrigin } = require('./lib/cors');
 
-const bookingsHandler = require('./api/bookings');
-const userHandler = require('./api/user');
-const duffelSearchHandler = require('./api/duffel-search');
-const duffelAirportsHandler = require('./api/duffel-airports');
-const flightDealsHandler = require('./api/flight-deals');
+const bookingsHandler = require('./api-routes/bookings');
+const userHandler = require('./api-routes/user');
+const duffelSearchHandler = require('./api-routes/duffel-search');
+const duffelAirportsHandler = require('./api-routes/duffel-airports');
+const flightDealsHandler = require('./api-routes/flight-deals');
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || '';
 function getStripeConfigError() {
