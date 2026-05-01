@@ -247,12 +247,21 @@
    */
   function renderGoogleSignInButton() {
     console.log('renderGoogleSignInButton called', !!window.google, !!window.google?.accounts?.id);
-    if (!window.google || !window.google.accounts || !window.google.accounts.id) return;
+    if (!window.google || !window.google.accounts || !window.google.accounts.id) {
+      console.warn('Google SDK not ready for button rendering');
+      return false;
+    }
+    
     var parent = document.querySelector('.g_id_signin');
     console.log('Parent element found:', !!parent);
-    if (!parent) return;
+    if (!parent) {
+      console.warn('Google Sign-In container element not found');
+      return false;
+    }
+    
     // Clear any stale content so the button re-renders cleanly
     parent.innerHTML = '';
+    
     try {
       window.google.accounts.id.renderButton(parent, {
         type: 'standard',
@@ -262,15 +271,23 @@
         size: 'large',
         logo_alignment: 'left'
       });
+      console.log('Google Sign-In button rendered successfully');
+      return true;
     } catch (err) {
       console.error('Google renderButton failed:', err);
+      return false;
     }
   }
 
   async function bootGoogle() {
     if (googleInitDone) {
       // SDK already loaded & initialized — just re-render the button
-      renderGoogleSignInButton();
+      const success = renderGoogleSignInButton();
+      if (!success) {
+        // If rendering failed, try to re-initialize
+        googleInitDone = false;
+        return bootGoogle();
+      }
       return;
     }
 
@@ -281,7 +298,9 @@
       if (j && j.googleClientId) {
         googleClientId = String(j.googleClientId).trim();
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error('Failed to fetch Google config:', e);
+    }
 
     window.bookingcartGoogleSignInAvailable = !!googleClientId;
 
@@ -294,8 +313,9 @@
 
     // Wait for the Google SDK to be fully loaded and available
     let retries = 0;
+    const maxRetries = 50; // 5 seconds with 100ms intervals
     while (!window.google || !window.google.accounts || !window.google.accounts.id) {
-      if (retries > 50) {
+      if (retries >= maxRetries) {
         console.warn('Google Sign-In SDK failed to load within 5 seconds.');
         return;
       }
@@ -315,9 +335,12 @@
         });
 
         googleInitDone = true;
+        console.log('Google Sign-In SDK initialized successfully');
 
-        // Render button into current DOM
-        renderGoogleSignInButton();
+        // Wait a bit for DOM to be ready, then render button
+        setTimeout(() => {
+          renderGoogleSignInButton();
+        }, 100);
       } catch (err) {
         console.error('Google ID initialization failed:', err);
       }

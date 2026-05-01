@@ -11,16 +11,26 @@ export function HeaderAuthCluster({ className = '' }) {
   useEffect(() => {
     if (user) return;
 
-    // Small delay so React commits the .g_id_signin div to the DOM first
+    // Wait for DOM to be ready and Google SDK to be available
     const timer = setTimeout(() => {
-      if (typeof window.bootGoogle === 'function') {
+      // Check if Google SDK is loaded
+      if (window.google && window.google.accounts && window.google.accounts.id) {
+        // Directly render the button if SDK is ready
+        if (typeof window.renderGoogleSignInButton === 'function') {
+          window.renderGoogleSignInButton();
+        }
+      } else if (typeof window.bootGoogle === 'function') {
+        // Initialize Google SDK first
         window.bootGoogle();
-      } else if (typeof window.renderGoogleSignInButton === 'function') {
-        window.renderGoogleSignInButton();
-      } else if (typeof window.applyAuthUI === 'function') {
-        window.applyAuthUI();
+      } else {
+        // Fallback: try again after a short delay
+        setTimeout(() => {
+          if (typeof window.bootGoogle === 'function') {
+            window.bootGoogle();
+          }
+        }, 500);
       }
-    }, 100);
+    }, 200);
 
     return () => clearTimeout(timer);
   }, [user]);
