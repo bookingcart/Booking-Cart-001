@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { getCollections } = require('./lib/mongo');
-const bookingsHandler = require('./api/bookings');
-const userHandler = require('./api/user');
+const bookingsHandler = require('./api-routes/bookings');
+const userHandler = require('./api-routes/user');
 
 // Monkeypatch auth verification
 const googleVerify = require('./lib/google-verify');

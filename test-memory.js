@@ -2,8 +2,8 @@
 global.__bookings = [];
 global.__users = {};
 
-const bookingsHandler = require('./api/bookings');
-const userHandler = require('./api/user');
+const bookingsHandler = require('./api-routes/bookings');
+const userHandler = require('./api-routes/user');
 
 const resMock = {
   status: function(s) { this.statusCode = s; return this; },

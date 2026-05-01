@@ -3,8 +3,8 @@
 const test = require('node:test');
 const assert = require('node:assert');
 
-const bookingsHandler = require('../api/bookings');
-const userHandler = require('../api/user');
+const bookingsHandler = require('../api-routes/bookings');
+const userHandler = require('../api-routes/user');
 
 function withAdminEnv(t) {
   const prev = {
