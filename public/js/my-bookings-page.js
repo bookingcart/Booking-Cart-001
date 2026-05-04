@@ -178,6 +178,7 @@
 
             listEl.innerHTML = filtered.map(b => {
                 const statusMap = {
+                    held: { label: 'Payment Required', color: 'text-orange-600 bg-orange-50 border-orange-200' },
                     new: { label: 'Processing', color: 'text-yellow-600 bg-yellow-50 border-yellow-200' },
                     confirmed: { label: 'Pending Upload', color: 'text-blue-600 bg-blue-50 border-blue-200' },
                     issued: { label: 'Ticket Issued', color: 'text-green-600 bg-green-50 border-green-200' },
@@ -267,7 +268,8 @@
               <div class="text-right pl-6 border-l border-slate-100 flex flex-col justify-between items-end">
                 <div class="text-xl font-extrabold text-green-600">${total}</div>
                 <div class="flex flex-col gap-2 mt-6">
-                  ${(b.status === 'issued' && b.ticket && b.ticket.fileData) ? `<button onclick="downloadRealTicket('${b.ref}')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap shadow-green-600/20"><i class="ph-bold ph-download"></i> Download E-Ticket</button>` : (b.status !== 'cancelled' ? `<div class="px-4 py-2 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl text-center flex items-center justify-center gap-2"><i class="ph-bold ph-circle-notch animate-spin"></i> Ticket Processing...</div>` : '')}
+                  ${(b.status === 'held') ? `<button onclick="payForBooking('${b.ref}')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap shadow-green-600/20"><i class="ph-bold ph-credit-card"></i> Pay Now</button>` : ''}
+                  ${(b.status === 'issued' && b.ticket && b.ticket.fileData) ? `<button onclick="downloadRealTicket('${b.ref}')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap shadow-green-600/20"><i class="ph-bold ph-download"></i> Download E-Ticket</button>` : (b.status !== 'cancelled' && b.status !== 'held' ? `<div class="px-4 py-2 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl text-center flex items-center justify-center gap-2"><i class="ph-bold ph-circle-notch animate-spin"></i> Ticket Processing...</div>` : '')}
                   ${b.status !== 'cancelled' ? `<button onclick="downloadTicket('${b.ref}')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap"><i class="ph-bold ph-receipt"></i> Download Invoice</button>` : ''}
                   <button onclick="cancelBooking('${b.ref}')" class="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap"><i class="ph-bold ph-x-circle"></i> Cancel Booking</button>
                 </div>
@@ -276,6 +278,46 @@
           </div>
         </div>`;
             }).join('');
+        }
+
+        async function payForBooking(ref) {
+            const b = allBookings.find(x => x.ref === ref);
+            if (!b) return;
+
+            const btn = document.activeElement;
+            const oldHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="ph-bold ph-circle-notch animate-spin"></i> Redirecting...';
+            btn.disabled = true;
+
+            try {
+                const resp = await fetch("/api/stripe/create-checkout-session", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    amountCents: Math.round(Number(b.total) * 100),
+                    currency: (b.payment && b.payment.currency) ? b.payment.currency.toLowerCase() : "usd",
+                    description: "BookingCart flight payment " + ref,
+                    bookingRef: ref,
+                    customerEmail: (b.contact && b.contact.email) || "",
+                    successPath: "/confirmation",
+                    cancelPath: "/my-bookings"
+                  })
+                });
+                
+                const data = await resp.json().catch(() => null);
+                if (resp.ok && data && data.ok && data.url) {
+                    localStorage.setItem('bc_paying_booking', JSON.stringify({ ref: ref, duffelOrderId: b.duffelOrderId, amount: b.total, currency: b.payment?.currency || "USD" }));
+                    window.location.href = data.url;
+                } else {
+                    alert((data && data.error) || "Unable to start checkout");
+                    btn.innerHTML = oldHtml;
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                alert("Error starting checkout");
+                btn.innerHTML = oldHtml;
+                btn.disabled = false;
+            }
         }
 
         async function downloadRealTicket(ref) {

@@ -75,14 +75,11 @@ export default function ExtrasPage() {
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
                   <h2 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2"><i
                       className="ph-duotone ph-armchair text-green-600 text-xl"></i> Seat Selection</h2>
-                  <div className="space-y-3">
-                    <select
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none"
-                      name="seat">
-                      <option value="none">No specific seat preference</option>
-                      <option value="standard">Standard Aisle/Window</option>
-                      <option value="extra">Extra Legroom</option>
-                    </select>
+                  <div className="space-y-3" id="dynamic-seat-map">
+                    <div className="p-4 bg-slate-50 rounded-xl text-center text-sm text-slate-500 flex flex-col items-center justify-center gap-2">
+                        <i className="ph-bold ph-circle-notch animate-spin text-xl text-green-600"></i>
+                        Loading available seats...
+                    </div>
                   </div>
                 </div>
       

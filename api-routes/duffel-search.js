@@ -122,6 +122,8 @@ module.exports = async (req, res) => {
 
     const createData = await createResponse.json();
     const offerRequestId = createData.data?.id;
+    // Capture Duffel passenger IDs — required by orders.create (Step 3 of Duffel guide)
+    const duffelPassengers = Array.isArray(createData.data?.passengers) ? createData.data.passengers : [];
     if (!offerRequestId) {
       return res.status(502).json({ ok: false, error: 'Flight search failed. Please try again.' });
     }
@@ -154,7 +156,11 @@ module.exports = async (req, res) => {
       ok: true,
       flights,
       total: flights.length,
-      meta: { count: flights.length, source: 'duffel' }
+      // duffelPassengers: one entry per passenger with their Duffel ID.
+      // The frontend must persist these and send them back in /api/duffel-orders
+      // so that passenger IDs match the offer request (required by Duffel's orders.create).
+      duffelPassengers,
+      meta: { count: flights.length, source: 'duffel', offerRequestId }
     };
 
     searchCache.set(cacheKey, {

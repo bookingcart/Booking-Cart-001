@@ -620,17 +620,18 @@
         return;
       }
 
-      writeState({ search: payload, bookingRef: null, _bookingSaved: null });
+      writeState({ search: payload, bookingRef: null, _bookingSaved: null, duffelPassengers: null });
       if (typeof window.__bcNavigate === "function") window.__bcNavigate("results.html");
       else window.location.href = "results.html";
     });
   }
 
-  function money(n) {
+  function money(n, currency = "USD") {
     try {
-      return new Intl.NumberFormat(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+      return new Intl.NumberFormat(undefined, { style: "currency", currency: currency, maximumFractionDigits: 0 }).format(n);
     } catch (e) {
-      return "$" + n;
+      const sym = currency === "GBP" ? "£" : currency === "EUR" ? "€" : "$";
+      return sym + n;
     }
   }
 
@@ -672,6 +673,10 @@
       const data = await resp.json().catch(() => null);
       if (data && data.ok && Array.isArray(data.flights)) {
         console.log(`Duffel search successful: ${data.flights.length} flights`);
+        // Persist Duffel passenger IDs — needed by /api/duffel-orders (Step 3)
+        if (Array.isArray(data.duffelPassengers) && data.duffelPassengers.length > 0) {
+          writeState({ duffelPassengers: data.duffelPassengers });
+        }
         return data.flights;
       } else if (data && !data.ok) {
         console.error("Duffel search error:", data.error);
@@ -708,14 +713,16 @@
       const chipA = document.querySelector("[data-chip-airline]");
       const chipD = document.querySelector("[data-chip-time]");
       const maxLbl = document.querySelector("[data-price-max-label]");
-      if (p && maxLbl) {
-        const mx = Number(p.max || 2000);
-        maxLbl.textContent = money(mx) + "+";
+      
+      const ccy = currentFlights.length > 0 ? (currentFlights[0].currency || "USD") : "USD";
+      const v = Number(p ? p.value : 0);
+      const mx = Number(p ? p.max : 2000);
+
+      if (maxLbl) {
+        maxLbl.textContent = money(mx, ccy) + "+";
       }
       if (chipP && p) {
-        const v = Number(p.value || 0);
-        const mx = Number(p.max || 2000);
-        chipP.textContent = v >= mx - 1 ? "No max" : "≤ " + money(v);
+        chipP.textContent = v >= mx - 1 ? "No max" : "≤ " + money(v, ccy);
       }
       if (chipS && s) {
         const map = { any: "Any", "0": "Nonstop", "1": "≤1 stop" };
@@ -885,7 +892,7 @@
             '</div>' +
           '</div>' +
           '<div class="w-full md:w-48 border-t md:border-t-0 md:border-l border-slate-100 p-5 flex flex-col justify-center items-end bg-slate-50/30">' +
-            '<div class="text-2xl font-bold text-green-600">' + money(priceVal) + '</div>' +
+            '<div class="text-2xl font-bold text-green-600">' + money(priceVal, f.currency) + '</div>' +
             '<div class="text-[10px] text-slate-400 font-medium mb-3">per adult</div>' +
             '<a href="#" data-flight-link class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded text-sm w-full text-center flex items-center justify-center gap-1 transition-colors">' +
               'Select <i class="ph-bold ph-caret-right"></i>' +
@@ -936,7 +943,7 @@
                 ${label}
               </span>
             </div>
-            <span class="text-xs text-slate-400 font-medium">${money(minPrice)}</span>
+            <span class="text-xs text-slate-400 font-medium">${money(minPrice, currentFlights[0].currency)}</span>
           `;
           airlineList.appendChild(lbl);
         });
@@ -1039,7 +1046,7 @@
     if (airlineLogo) airlineLogo.innerHTML = '<div class="w-full h-full flex items-center justify-center text-slate-900 font-medium">' + flight.airline.logo + '</div>';
     if (times) setText(times, (flight.departTime || "--:--") + " → " + (flight.arriveTime || "--:--"));
     if (duration) setText(duration, durationLabel(flight.durationMin || 0) + " • " + (flight.stops === 0 ? "Non-stop" : flight.stops + " stop" + (flight.stops > 1 ? "s" : "")));
-    if (price) setText(price, money(priceVal));
+    if (price) setText(price, money(priceVal, flight.currency));
 
     // Dynamic Trip Breakdown
     const segmentsContainer = document.getElementById("flight-segments-container");
@@ -1154,8 +1161,23 @@
         '<div class="font-medium text-lg text-slate-900 mb-2">Traveler ' + (i + 1) + '</div>' +
         '<div class="text-xs text-slate-500 font-medium mb-6">Enter details exactly as they appear on the travel document.</div>' +
         '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">' +
+        // Title
+        '<div><label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Title</label>' +
+        '<select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none" name="title" required>' +
+        '<option value="">Select title</option>' +
+        '<option value="mr">Mr</option><option value="ms">Ms</option><option value="mrs">Mrs</option>' +
+        '<option value="miss">Miss</option><option value="dr">Dr</option>' +
+        '</select></div>' +
+        // Gender
+        '<div><label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Gender</label>' +
+        '<select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none" name="gender" required>' +
+        '<option value="">Select gender</option>' +
+        '<option value="m">Male</option><option value="f">Female</option>' +
+        '</select></div>' +
+        // First / Last name
         '<div><label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">First Name</label><input class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none" name="firstName" placeholder="e.g., Amina" required></div>' +
         '<div><label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Last Name</label><input class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none" name="lastName" placeholder="e.g., Hassan" required></div>' +
+        // DOB / Passport
         '<div><label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Date of Birth</label><input class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none" name="dob" type="date" required></div>' +
         '<div><label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Passport / ID</label><input class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none" name="doc" placeholder="Passport Number" required></div>' +
         '</div>';
@@ -1173,15 +1195,19 @@
 
       const travelerEls = Array.from(list.querySelectorAll(".traveler-card"));
       const travelers = travelerEls.map((c) => {
-        const f = c.querySelector("input[name='firstName']");
-        const l = c.querySelector("input[name='lastName']");
-        const d = c.querySelector("input[name='dob']");
+        const title  = c.querySelector("select[name='title']");
+        const gender = c.querySelector("select[name='gender']");
+        const f   = c.querySelector("input[name='firstName']");
+        const l   = c.querySelector("input[name='lastName']");
+        const d   = c.querySelector("input[name='dob']");
         const doc = c.querySelector("input[name='doc']");
         return {
-          firstName: f ? f.value.trim() : "",
-          lastName: l ? l.value.trim() : "",
-          dob: d ? d.value : "",
-          doc: doc ? doc.value.trim() : ""
+          title:     title  ? title.value.trim()  : "",
+          gender:    gender ? gender.value.trim() : "",
+          firstName: f   ? f.value.trim()   : "",
+          lastName:  l   ? l.value.trim()   : "",
+          dob:       d   ? d.value          : "",
+          doc:       doc ? doc.value.trim() : ""
         };
       });
 
@@ -1193,14 +1219,25 @@
         return;
       }
 
-      if (travelers.some((t) => !t.firstName || !t.lastName || !t.dob || !t.doc)) {
-        toast("Missing traveler info", "Fill all required traveler fields.");
+      // Phone is required — Duffel orders.create needs a valid E.164 phone number
+      const phoneClean = (phone || "").trim();
+      if (!phoneClean) {
+        toast("Phone required", "Please enter a phone number for your booking (e.g. +14155550100).");
+        return;
+      }
+      if (!/^\+[1-9]\d{6,14}$/.test(phoneClean)) {
+        toast("Invalid phone", "Phone must be in international format, e.g. +14155550100.");
         return;
       }
 
-      writeState({ travelers, contact: { email: contactEmail.trim(), phone: (phone || "").trim() } });
-          if (typeof window.__bcNavigate === "function") window.__bcNavigate("extras.html");
-          else window.location.href = "extras.html";
+      if (travelers.some((t) => !t.title || !t.gender || !t.firstName || !t.lastName || !t.dob || !t.doc)) {
+        toast("Missing traveler info", "Fill all required traveler fields including title and gender.");
+        return;
+      }
+
+      writeState({ travelers, contact: { email: contactEmail.trim(), phone: phoneClean } });
+      if (typeof window.__bcNavigate === "function") window.__bcNavigate("extras.html");
+      else window.location.href = "extras.html";
     });
   }
 
@@ -1219,16 +1256,21 @@
     const base = flight ? flightPriceAmount(flight) * totalPax : 0;
 
     const extras = state.extras || {};
-    const baggage = Number(extras.baggage || 0) * 45;
-    const seats = extras.seat === "standard" ? 14 * totalPax : extras.seat === "extra" ? 28 * totalPax : 0;
+    const baggagePrice = state._baggagePrice || 45;
+    const seatPrice = state._seatPrice || 14;
+
+    const baggage = Number(extras.baggage || 0) * baggagePrice;
+    const seats = typeof state._seatCost === 'number' ? state._seatCost : 
+                  (extras.seat === "standard" ? seatPrice * totalPax : extras.seat === "extra" ? (seatPrice * 2) * totalPax : 0);
     const insurance = extras.insurance ? 19 * totalPax : 0;
     const meals = extras.meal === "premium" ? 12 * totalPax : extras.meal === "standard" ? 7 * totalPax : 0;
 
     const subtotal = base + baggage + seats + insurance + meals;
     const taxes = Math.round(subtotal * 0.11);
     const total = subtotal + taxes;
+    const currency = flight ? (flight.currency || "USD") : "USD";
 
-    return { totalPax, base, baggage, seats, insurance, meals, taxes, total };
+    return { totalPax, base, baggage, seats, insurance, meals, taxes, total, currency };
   }
 
   function initExtras() {
@@ -1255,6 +1297,99 @@
       total: document.querySelector("[data-sum-total]"),
     };
 
+    const updateSummary = () => {
+      const stateNow = readState();
+      const totals = computeTotals(stateNow);
+      const ccy = totals.currency;
+      const extrasCost = totals.baggage + totals.seats + totals.insurance + totals.meals;
+      if (summary.base) setText(summary.base, money(totals.base, ccy));
+      if (summary.extras) setText(summary.extras, money(extrasCost, ccy));
+      if (summary.taxes) setText(summary.taxes, money(totals.taxes, ccy));
+      if (summary.total) setText(summary.total, money(totals.total, ccy));
+    };
+
+    if (state.selectedFlightId && state.selectedFlightId.startsWith("off_")) {
+      (async () => {
+        try {
+          const resp = await fetch('/api/duffel-offer?id=' + encodeURIComponent(state.selectedFlightId));
+          const data = await resp.json().catch(()=>null);
+          if (data && data.ok && data.offer && data.offer.available_services) {
+            const bags = data.offer.available_services.filter(s => s.type === 'baggage');
+            if (bags.length > 0) {
+              writeState({ _baggageServiceId: bags[0].id, _baggagePrice: parseFloat(bags[0].total_amount) });
+              updateSummary();
+            }
+          }
+        } catch(e){}
+      })();
+
+      (async () => {
+        try {
+          const resp = await fetch('/api/duffel-seat-maps?offer_id=' + encodeURIComponent(state.selectedFlightId));
+          const data = await resp.json().catch(()=>null);
+          if (data && data.ok && data.seatMaps) {
+            const seatsArr = [];
+            data.seatMaps.forEach(map => {
+              (map.cabins || []).forEach(cabin => {
+                 (cabin.rows || []).forEach(row => {
+                    (row.sections || []).forEach(section => {
+                       (section.elements || []).forEach(element => {
+                          if (element.type === 'seat' && element.available_services && element.available_services.length > 0) {
+                             seatsArr.push({
+                               designator: element.designator,
+                               service: element.available_services[0]
+                             });
+                          }
+                       })
+                    })
+                 })
+              })
+            });
+
+            const seatMapContainer = document.getElementById('dynamic-seat-map');
+            if (seatMapContainer) {
+                if (seatsArr.length > 0) {
+                    const pax = state.passengers || { adults: 1, children: 0, infants: 0 };
+                    const paxCount = pax.adults + pax.children; // infants don't usually get seats
+                    
+                    let html = '';
+                    for (let i = 0; i < paxCount; i++) {
+                        html += `
+                        <div class="mb-3">
+                            <label class="block text-sm font-bold text-slate-700 mb-1">Passenger ${i + 1}</label>
+                            <select class="seat-select-dynamic w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none" data-pax-index="${i}">
+                                <option value="none">No specific seat preference</option>
+                                ${seatsArr.map(s => `<option value="${s.service.id}" data-price="${s.service.total_amount}">${s.designator} - ${money(s.service.total_amount, s.service.total_currency)}</option>`).join('')}
+                            </select>
+                        </div>
+                        `;
+                    }
+                    seatMapContainer.innerHTML = html;
+
+                    seatMapContainer.querySelectorAll('select').forEach(sel => {
+                        sel.addEventListener('change', () => {
+                            const selections = [];
+                            let seatCost = 0;
+                            seatMapContainer.querySelectorAll('select').forEach(s => {
+                                if (s.value !== 'none') {
+                                    selections.push({ id: s.value, index: parseInt(s.dataset.paxIndex) });
+                                    const opt = s.options[s.selectedIndex];
+                                    seatCost += parseFloat(opt.dataset.price || 0);
+                                }
+                            });
+                            writeState({ _selectedSeats: selections, _seatCost: seatCost });
+                            updateSummary();
+                        });
+                    });
+                } else {
+                    seatMapContainer.innerHTML = '<div class="text-sm text-slate-500">No seats available for selection.</div>';
+                }
+            }
+          }
+        } catch(e){}
+      })();
+    }
+
     function refresh() {
       const next = {
         baggage: baggage ? Number(baggage.value || 0) : 0,
@@ -1263,13 +1398,7 @@
         meal: meal ? meal.value : "none"
       };
       writeState({ extras: next });
-
-      const totals = computeTotals(readState());
-      const extrasCost = totals.baggage + totals.seats + totals.insurance + totals.meals;
-      if (summary.base) setText(summary.base, money(totals.base));
-      if (summary.extras) setText(summary.extras, money(extrasCost));
-      if (summary.taxes) setText(summary.taxes, money(totals.taxes));
-      if (summary.total) setText(summary.total, money(totals.total));
+      updateSummary();
     }
 
     [baggage, seat, insurance, meal].forEach((el) => {
@@ -1278,7 +1407,7 @@
       el.addEventListener("change", refresh);
     });
 
-    refresh();
+    updateSummary();
 
     const form = root.querySelector("form[data-extras-form]");
     if (form)
@@ -1287,6 +1416,98 @@
         if (typeof window.__bcNavigate === "function") window.__bcNavigate("payment.html");
         else window.location.href = "payment.html";
       });
+  }
+
+  async function createDuffelOrder(state, totals, hold = false) {
+    const flight = (state.flights || []).find(f => f.id === state.selectedFlightId) || (state.flights || [])[0];
+    if (!flight || !flight.id || !flight.id.startsWith('off_')) return { ref: null, id: null };
+
+    const duffelPax = state.duffelPassengers || [];
+    const travelers = state.travelers || [];
+    let contactObj = state.contact || {};
+    if (!contactObj.email) {
+      try {
+        const gu = JSON.parse(localStorage.getItem('bookingcart_user') || '{}');
+        if (gu.email) contactObj = { email: gu.email, phone: contactObj.phone || '' };
+      } catch (e) { }
+    }
+
+    const duffelOrderPassengers = duffelPax.map((dp, idx) => {
+      const t = travelers[idx] || {};
+      return {
+        id: dp.id,
+        given_name: (t.firstName || '').trim() || 'Traveler',
+        family_name: (t.lastName || '').trim() || String(idx + 1),
+        born_on: t.dob || '1990-01-01',
+        title: t.title || (dp.type === 'infant_without_seat' ? 'miss' : 'mr'),
+        gender: t.gender || (dp.type === 'infant_without_seat' ? 'f' : 'm'),
+        email: contactObj.email || '',
+        phone_number: contactObj.phone || '+10000000000'
+      };
+    });
+
+    const adultPaxIds = duffelPax.filter(dp => dp.type === 'adult').map(dp => dp.id);
+    duffelPax.forEach((dp) => {
+      if (dp.type === 'infant_without_seat' && adultPaxIds.length > 0) {
+        const adultOrderPax = duffelOrderPassengers.find(p => p.id === adultPaxIds[0]);
+        if (adultOrderPax) adultOrderPax.infant_passenger_id = dp.id;
+      }
+    });
+
+    let confirmedAmount = String(flight.price || totals.total);
+    let confirmedCurrency = flight.currency || 'USD';
+    try {
+      const offerRefreshResp = await fetch('/api/duffel-offer?id=' + encodeURIComponent(flight.id));
+      const offerRefreshData = await offerRefreshResp.json().catch(() => null);
+      if (offerRefreshResp.ok && offerRefreshData && offerRefreshData.ok && offerRefreshData.offer) {
+        if (offerRefreshData.offer.available) {
+          confirmedAmount = offerRefreshData.offer.total_amount;
+          confirmedCurrency = offerRefreshData.offer.total_currency;
+        }
+      }
+    } catch (err) { }
+
+    const services = [];
+    if (state.extras && state.extras.baggage > 0 && state._baggageServiceId && adultPaxIds.length > 0) {
+      services.push({
+        id: state._baggageServiceId,
+        quantity: Math.min(Number(state.extras.baggage), 6),
+        passengers: [adultPaxIds[0]]
+      });
+    }
+
+    if (state._selectedSeats && state._selectedSeats.length > 0) {
+      state._selectedSeats.forEach(sel => {
+        const paxId = adultPaxIds[sel.index];
+        if (paxId) {
+          services.push({
+            id: sel.id,
+            quantity: 1,
+            passengers: [paxId]
+          });
+        }
+      });
+    }
+
+    try {
+      const orderResp = await fetch('/api/duffel-orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          offerId: flight.id,
+          totalAmount: confirmedAmount,
+          currency: confirmedCurrency,
+          passengers: duffelOrderPassengers,
+          hold: hold,
+          services: services.length > 0 ? services : undefined
+        })
+      });
+      const orderData = await orderResp.json().catch(() => null);
+      if (orderResp.ok && orderData && orderData.ok) {
+        return { ref: orderData.bookingReference, id: orderData.orderId };
+      }
+    } catch (err) { }
+    return { ref: null, id: null };
   }
 
   function initPayment() {
@@ -1304,17 +1525,19 @@
     }
 
     const totals = computeTotals(readState());
+    const ccy = totals.currency;
+
     const totalEl = document.querySelector("[data-pay-total]");
-    if (totalEl) setText(totalEl, money(totals.total));
+    if (totalEl) setText(totalEl, money(totals.total, ccy));
     const totalInlineEl = document.querySelector("[data-pay-total-inline]");
-    if (totalInlineEl) setText(totalInlineEl, money(totals.total));
+    if (totalInlineEl) setText(totalInlineEl, money(totals.total, ccy));
     const totalBtnEl = document.querySelector("[data-pay-total-btn]");
-    if (totalBtnEl) setText(totalBtnEl, money(totals.total));
+    if (totalBtnEl) setText(totalBtnEl, money(totals.total, ccy));
 
     const bookingRefEl = root.querySelector("[data-stripe-booking-ref]");
     if (bookingRefEl) setText(bookingRefEl, readState().bookingRef || "—");
-    const amountEl = root.querySelector("[data-stripe-amount]");
-    if (amountEl) setText(amountEl, money(totals.total));
+    const amountEl = document.querySelector("[data-stripe-amount]");
+    if (amountEl) setText(amountEl, money(totals.total, ccy));
 
     const form = root.querySelector("form[data-payment-form]");
     if (!form) return;
@@ -1370,10 +1593,68 @@
           submitBtn.disabled = false;
           submitBtn.innerHTML = 'Continue to Stripe Checkout <span data-pay-total-btn></span> <i class="ph-bold ph-lock-key"></i>';
           const totalBtnInner = submitBtn.querySelector("[data-pay-total-btn]");
-          if (totalBtnInner) setText(totalBtnInner, money(totals.total));
+          if (totalBtnInner) setText(totalBtnInner, money(totals.total, ccy));
         }
       }
     });
+
+    const holdBtn = form.querySelector("[data-hold-order-btn]");
+    if (holdBtn) {
+      holdBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const state = readState();
+        const bookingRef = state.bookingRef || "BC" + Math.random().toString(36).slice(2, 8).toUpperCase();
+        writeState({ bookingRef, _bookingSaved: null, _stripeSessionId: null, payment: null });
+
+        if (submitBtn) submitBtn.disabled = true;
+        holdBtn.disabled = true;
+        holdBtn.innerHTML = '<i class="ph-bold ph-circle-notch animate-spin"></i> Holding...';
+
+        const duffelRes = await createDuffelOrder(state, totals, true);
+        const nextState = writeState({
+          bookingRef: duffelRes.ref || bookingRef,
+          _duffelOrderId: duffelRes.id
+        });
+
+        const s = nextState.search || {};
+        const flight = (nextState.flights || []).find(f => f.id === nextState.selectedFlightId) || (nextState.flights || [])[0];
+        const contactObj = nextState.contact || {};
+
+        const booking = {
+          ref: nextState.bookingRef,
+          route: (s.from || "") + " \u2192 " + (s.to || ""),
+          dates: (s.depart || "") + (s.return ? " \u2192 " + s.return : ""),
+          flight: flight ? { airline: flight.airline.name, time: flight.departTime + " \u2192 " + flight.arriveTime } : null,
+          contact: contactObj,
+          passengers: nextState.travelers || nextState.passengers || [],
+          total: totals.total,
+          extras: nextState.extras || {},
+          status: "held",
+          duffelOrderId: duffelRes.id || null,
+          duffelBookingReference: duffelRes.ref || null,
+          payment: { provider: "none", status: "pending", amountTotal: totals.total * 100, currency: totals.currency }
+        };
+
+        try {
+          const saveResp = await fetch("/api/bookings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "save", booking })
+          });
+          if (saveResp.ok) {
+            writeState({ _bookingSaved: true });
+            if (typeof window.__bcNavigate === "function") window.__bcNavigate("confirmation.html?held=1");
+            else window.location.href = "confirmation.html?held=1";
+            return;
+          }
+        } catch (e) { }
+
+        toast("Error", "Could not hold order. Please try again.");
+        holdBtn.disabled = false;
+        holdBtn.innerHTML = 'Hold Order (Pay Later)';
+        if (submitBtn) submitBtn.disabled = false;
+      });
+    }
   }
 
   function initConfirmation() {
@@ -1388,6 +1669,16 @@
     const statusEl = root.querySelector("[data-payment-status]");
     const headlineEl = document.querySelector('main[data-step="confirmation"] h1');
     const subtitleEl = document.querySelector('main[data-step="confirmation"] p');
+
+    if (query.held === "1") {
+      if (statusEl && window.bookingcartLoading && typeof window.bookingcartLoading.setBusy === "function") {
+        window.bookingcartLoading.setBusy(statusEl, false);
+      }
+      if (statusEl) statusEl.textContent = "Order Held";
+      if (headlineEl) headlineEl.textContent = "Your order has been held";
+      if (subtitleEl) subtitleEl.textContent = "Please go to My Bookings and complete your payment to issue the ticket.";
+      return;
+    }
 
     if (!sessionId) {
       if (statusEl && window.bookingcartLoading && typeof window.bookingcartLoading.setBusy === "function") {
@@ -1429,6 +1720,48 @@
         if (headlineEl) headlineEl.textContent = "Thank you for booking with us!";
         if (subtitleEl) subtitleEl.textContent = "Your trip has been confirmed and your ticket is ready.";
 
+        const payingBookingStr = localStorage.getItem('bc_paying_booking');
+        let payingBooking = null;
+        try { if (payingBookingStr) payingBooking = JSON.parse(payingBookingStr); } catch(e){}
+
+        if (payingBooking && payingBooking.ref) {
+           if (payingBooking.duffelOrderId) {
+               try {
+                   await fetch('/api/duffel-payments', {
+                       method: 'POST',
+                       headers: { 'Content-Type': 'application/json' },
+                       body: JSON.stringify({
+                           orderId: payingBooking.duffelOrderId,
+                           amount: payingBooking.amount,
+                           currency: payingBooking.currency
+                       })
+                   });
+               } catch (e) { console.error('Duffel payment error', e); }
+           }
+
+           const bookingUpdate = {
+             ref: payingBooking.ref,
+             status: 'confirmed',
+             payment: {
+                provider: "stripe",
+                sessionId: stripeSession.id,
+                status: stripeSession.payment_status || stripeSession.status,
+                amountTotal: stripeSession.amount_total,
+                currency: stripeSession.currency
+             }
+           };
+
+           await fetch("/api/bookings", {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({ action: "save", booking: bookingUpdate })
+           });
+
+           localStorage.removeItem('bc_paying_booking');
+           if (refEl) setText(refEl, payingBooking.ref);
+           return;
+        }
+
         const recoveredBookingRef = stripeSession.client_reference_id || stripeSession.metadata?.bookingRef || state.bookingRef || "";
         const nextState = writeState({
           bookingRef: recoveredBookingRef || state.bookingRef || "",
@@ -1454,16 +1787,34 @@
             } catch (e) { }
           }
 
+          // ── Step 3: Create Duffel order with the real airline ─────────────────
+          let duffelOrderRef = null;
+          let duffelOrderId = null;
+          const duffelRes = await createDuffelOrder(nextState, totals, false);
+          if (duffelRes.ref) {
+            writeState({ bookingRef: duffelRes.ref, _duffelOrderId: duffelRes.id });
+            nextState.bookingRef = duffelRes.ref;
+            duffelOrderRef = duffelRes.ref;
+            duffelOrderId = duffelRes.id;
+            if (refEl) setText(refEl, duffelRes.ref);
+            console.log('✅ Duffel order created — PNR:', duffelOrderRef, 'Order ID:', duffelOrderId);
+          } else {
+            console.warn('Duffel order failed (non-fatal, booking will still be saved locally)');
+          }
+          // ─────────────────────────────────────────────────────────────────────
+
           const booking = {
             ref: nextState.bookingRef,
-            route: (s.from || "") + " → " + (s.to || ""),
-            dates: (s.depart || "") + (s.return ? " → " + s.return : ""),
-            flight: flight ? { airline: flight.airline.name, time: flight.departTime + " → " + flight.arriveTime } : null,
+            route: (s.from || "") + " \u2192 " + (s.to || ""),
+            dates: (s.depart || "") + (s.return ? " \u2192 " + s.return : ""),
+            flight: flight ? { airline: flight.airline.name, time: flight.departTime + " \u2192 " + flight.arriveTime } : null,
             contact: contactObj,
             passengers: nextState.travelers || nextState.passengers || [],
             total: totals.total,
             extras: nextState.extras || {},
             status: "confirmed",
+            duffelOrderId: duffelOrderId || null,
+            duffelBookingReference: duffelOrderRef || null,
             payment: {
               provider: "stripe",
               sessionId: stripeSession.id,
@@ -1484,7 +1835,7 @@
           }
 
           writeState({ _bookingSaved: true, _stripeSessionId: stripeSession.id });
-          console.log("✅ Booking saved to server:", nextState.bookingRef);
+          console.log("\u2705 Booking saved to server:", nextState.bookingRef);
         }
       } catch (err) {
         console.error("Stripe confirmation error:", err);
@@ -1500,7 +1851,7 @@
 
     const totals = computeTotals(state);
     const totalEl = root.querySelector("[data-confirm-total]");
-    if (totalEl) setText(totalEl, money(totals.total));
+    if (totalEl) setText(totalEl, money(totals.total, totals.currency));
 
     const flight = (state.flights || []).find((f) => f.id === state.selectedFlightId) || (state.flights || [])[0];
     const flightEl = root.querySelector("[data-confirm-airline]");

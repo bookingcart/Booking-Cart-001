@@ -71,11 +71,10 @@ export default function PassengersPage() {
                         name="email" type="email" placeholder="you@example.com" required />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Phone Number
-                        (Optional)</label>
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Phone Number</label>
                       <input
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none"
-                        name="phone" placeholder="+1 555 000 000" />
+                        name="phone" placeholder="+1 555 000 000" required />
                     </div>
                   </div>
                 </div>

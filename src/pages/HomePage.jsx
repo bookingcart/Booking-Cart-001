@@ -176,7 +176,7 @@ export default function HomePage() {
                                 className="w-full bg-slate-50 border-none rounded-lg text-sm font-semibold p-2 focus:ring-2 focus:ring-green-500 control select"
                                 name="cabin">
                                 <option>Economy</option>
-                                <option>Premium</option>
+                                <option>Premium Economy</option>
                                 <option>Business</option>
                                 <option>First</option>
                               </select>
