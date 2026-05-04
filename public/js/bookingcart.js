@@ -1337,7 +1337,7 @@
                           if (element.type === 'seat' && element.available_services && element.available_services.length > 0) {
                              seatsArr.push({
                                designator: element.designator,
-                               service: element.available_services[0]
+                               services: element.available_services
                              });
                           }
                        })
@@ -1349,22 +1349,32 @@
             const seatMapContainer = document.getElementById('dynamic-seat-map');
             if (seatMapContainer) {
                 if (seatsArr.length > 0) {
-                    const pax = state.passengers || { adults: 1, children: 0, infants: 0 };
-                    const paxCount = pax.adults + pax.children; // infants don't usually get seats
+                    const duffelPax = state.duffelPassengers || [];
+                    const paxCount = duffelPax.length;
                     
                     let html = '';
                     for (let i = 0; i < paxCount; i++) {
+                        const dPax = duffelPax[i];
+                        if (dPax.type === 'infant_without_seat') continue;
+
+                        const validSeatsForPax = seatsArr.map(s => {
+                            const matchingService = s.services.find(srv => srv.passenger_id === dPax.id);
+                            return matchingService ? { designator: s.designator, service: matchingService } : null;
+                        }).filter(Boolean);
+
+                        if (validSeatsForPax.length === 0) continue;
+
                         html += `
                         <div class="mb-3">
                             <label class="block text-sm font-bold text-slate-700 mb-1">Passenger ${i + 1}</label>
-                            <select class="seat-select-dynamic w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none" data-pax-index="${i}">
+                            <select class="seat-select-dynamic w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none" data-pax-id="${dPax.id}">
                                 <option value="none">No specific seat preference</option>
-                                ${seatsArr.map(s => `<option value="${s.service.id}" data-price="${s.service.total_amount}">${s.designator} - ${money(s.service.total_amount, s.service.total_currency)}</option>`).join('')}
+                                ${validSeatsForPax.map(s => `<option value="${s.service.id}" data-price="${s.service.total_amount}">${s.designator} - ${money(s.service.total_amount, s.service.total_currency)}</option>`).join('')}
                             </select>
                         </div>
                         `;
                     }
-                    seatMapContainer.innerHTML = html;
+                    seatMapContainer.innerHTML = html || '<div class="text-sm text-slate-500">No seats available for selection.</div>';
 
                     seatMapContainer.querySelectorAll('select').forEach(sel => {
                         sel.addEventListener('change', () => {
@@ -1372,7 +1382,7 @@
                             let seatCost = 0;
                             seatMapContainer.querySelectorAll('select').forEach(s => {
                                 if (s.value !== 'none') {
-                                    selections.push({ id: s.value, index: parseInt(s.dataset.paxIndex) });
+                                    selections.push({ id: s.value, passenger_id: s.dataset.paxId });
                                     const opt = s.options[s.selectedIndex];
                                     seatCost += parseFloat(opt.dataset.price || 0);
                                 }
@@ -1385,8 +1395,15 @@
                     seatMapContainer.innerHTML = '<div class="text-sm text-slate-500">No seats available for selection.</div>';
                 }
             }
+          } else {
+            const smc = document.getElementById('dynamic-seat-map');
+            if (smc) smc.innerHTML = '<div class="text-sm text-slate-500">Seat maps not available for this flight.</div>';
           }
-        } catch(e){}
+        } catch(e){
+            console.error(e);
+            const smc = document.getElementById('dynamic-seat-map');
+            if (smc) smc.innerHTML = '<div class="text-sm text-slate-500">Unable to load seats.</div>';
+        }
       })();
     }
 
@@ -1478,14 +1495,11 @@
 
     if (state._selectedSeats && state._selectedSeats.length > 0) {
       state._selectedSeats.forEach(sel => {
-        const paxId = adultPaxIds[sel.index];
-        if (paxId) {
-          services.push({
-            id: sel.id,
-            quantity: 1,
-            passengers: [paxId]
-          });
-        }
+        services.push({
+          id: sel.id,
+          quantity: 1,
+          passengers: [sel.passenger_id]
+        });
       });
     }
 
@@ -1618,7 +1632,13 @@
 
         const s = nextState.search || {};
         const flight = (nextState.flights || []).find(f => f.id === nextState.selectedFlightId) || (nextState.flights || [])[0];
-        const contactObj = nextState.contact || {};
+        let contactObj = nextState.contact || {};
+        if (!contactObj.email) {
+            try {
+                const gu = JSON.parse(localStorage.getItem('bookingcart_user') || '{}');
+                if (gu.email) contactObj = { ...contactObj, email: gu.email };
+            } catch(e) {}
+        }
 
         const booking = {
           ref: nextState.bookingRef,

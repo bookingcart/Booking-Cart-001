@@ -68,7 +68,7 @@ module.exports = async (req, res) => {
         const exists = global.__bookings.find((b) => b.ref === booking.ref);
         if (!exists) {
           booking.createdAt = new Date().toISOString();
-          booking.status = 'new';
+          booking.status = booking.status || 'new';
           global.__bookings.unshift(booking);
         }
       }
