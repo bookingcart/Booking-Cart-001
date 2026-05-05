@@ -58,10 +58,10 @@ export default function PaymentPage() {
       
               <form data-payment-form className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
                 <h2 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
-                  <i className="ph-duotone ph-shield-check text-green-600 text-xl"></i> Stripe Checkout
+                  <i className="ph-duotone ph-shield-check text-green-600 text-xl"></i> Checkout
                 </h2>
                 <p className="text-sm text-slate-500 leading-6">
-                  BookingCart will redirect you to Stripe's secure hosted checkout page to complete payment.
+                  BookingCart will redirect you to secure hosted checkout page to complete payment.
                   Card details are never entered on this site.
                 </p>
       
@@ -89,7 +89,7 @@ export default function PaymentPage() {
                   <button
                     className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-green-600/20 transition-all flex items-center justify-center gap-2"
                     type="submit">
-                    Continue to Stripe Checkout <span data-pay-total-btn></span> <i className="ph-bold ph-lock-key"></i>
+                    Continue to Checkout <span data-pay-total-btn></span> <i className="ph-bold ph-lock-key"></i>
                   </button>
                 </div>
                 <p className="text-xs text-slate-400 mt-3">
