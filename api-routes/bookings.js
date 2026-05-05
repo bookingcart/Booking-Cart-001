@@ -65,11 +65,19 @@ module.exports = async (req, res) => {
         };
         await collection.updateOne({ ref: booking.ref }, safeUpdate, { upsert: true });
       } else {
-        const exists = global.__bookings.find((b) => b.ref === booking.ref);
-        if (!exists) {
+        const existsIdx = global.__bookings.findIndex((b) => b.ref === booking.ref);
+        if (existsIdx === -1) {
           booking.createdAt = new Date().toISOString();
           booking.status = booking.status || 'new';
           global.__bookings.unshift(booking);
+        } else {
+          const old = global.__bookings[existsIdx];
+          global.__bookings[existsIdx] = { 
+            ...old, 
+            ...booking, 
+            status: booking.status || old.status,
+            createdAt: old.createdAt
+          };
         }
       }
 
