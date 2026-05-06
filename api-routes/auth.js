@@ -208,8 +208,10 @@ module.exports = async (req, res) => {
       try {
         const resend = new Resend(process.env.RESEND_API_KEY);
         
+        const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'BookingCart <onboarding@resend.dev>';
+        
         const { data, error } = await resend.emails.send({
-          from: 'BookingCart <onboarding@resend.dev>',
+          from: fromAddress,
           to: [email],
           subject: 'Password Reset - BookingCart',
           text: `You requested a password reset. Click the following link to reset your password:\n\n${resetLink}\n\nThis link will expire in 15 minutes. If you did not request this, please ignore this email.`,

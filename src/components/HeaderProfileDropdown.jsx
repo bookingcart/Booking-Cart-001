@@ -36,7 +36,7 @@ export function HeaderProfileDropdown({ triggerClassName = BTN_CLASS }) {
     <div className="relative" data-profile-dropdown ref={rootRef}>
       <button
         type="button"
-        className="flex items-center gap-3 bg-[#003b95] hover:bg-[#00224f] transition-colors rounded-full px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#febb02]"
+        className="flex items-center gap-3 bg-green-600 hover:bg-green-700 transition-colors rounded-full px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#febb02]"
         aria-expanded={open}
         aria-haspopup="true"
         onClick={(e) => {
