@@ -8,9 +8,13 @@ function userApiHeaders() {
   if (window.bookingcartAuth && typeof window.bookingcartAuth.authHeaders === "function") {
     return window.bookingcartAuth.authHeaders();
   }
-  const t = localStorage.getItem("bookingcart_google_id_token") || localStorage.getItem("bookingcart_jwt_token") || "";
+  // fallback - check for new JWT token first, then Google token
+  let token = "";
+  if (typeof localStorage !== "undefined") {
+    token = localStorage.getItem("bookingcart_token") || localStorage.getItem("bookingcart_google_id_token") || "";
+  }
   const h = { "Content-Type": "application/json" };
-  if (t) h.Authorization = "Bearer " + t;
+  if (token) h.Authorization = "Bearer " + token;
   return h;
 }
 
@@ -120,14 +124,32 @@ const AIRLINES = [
    DB SYNC
 ══════════════════════════════════════════════════ */
 async function saveStateToDB() {
-  if (!state.profile.email) return;
+  if (!state.profile.email) {
+    console.warn("[saveStateToDB] No profile email, skipping save");
+    return;
+  }
+  
+  const headers = userApiHeaders();
+  console.log("[saveStateToDB] Saving with headers:", { hasAuth: !!headers.Authorization });
+  
   try {
-    await fetch("/api/user", {
+    const resp = await fetch("/api/user", {
       method: "POST",
-      headers: userApiHeaders(),
+      headers: headers,
       body: JSON.stringify({ email: state.profile.email, state }),
     });
-  } catch (e) { console.error("Could not sync settings to DB:", e); }
+    
+    const data = await resp.json();
+    console.log("[saveStateToDB] Response:", data);
+    
+    if (!resp.ok || !data.ok) {
+      console.error("[saveStateToDB] Save failed:", data.error);
+    } else {
+      console.log("[saveStateToDB] Save successful");
+    }
+  } catch (e) { 
+    console.error("[saveStateToDB] Could not sync settings to DB:", e); 
+  }
 }
 
 async function loadStateFromDB() {

@@ -214,6 +214,11 @@
       accountLink.appendChild(ic);
       accountLink.appendChild(document.createTextNode(' ' + label));
     }
+
+    const nameLabels = document.querySelectorAll('[data-profile-name-label]');
+    nameLabels.forEach(el => {
+      el.textContent = label;
+    });
   }
 
   function loadScript(src) {

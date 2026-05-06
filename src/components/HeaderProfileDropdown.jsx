@@ -36,8 +36,7 @@ export function HeaderProfileDropdown({ triggerClassName = BTN_CLASS }) {
     <div className="relative" data-profile-dropdown ref={rootRef}>
       <button
         type="button"
-        data-header-profile-btn
-        className={triggerClassName}
+        className={`flex items-center gap-3 bg-[#003b95] hover:bg-[#00224f] transition-colors rounded-full px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#febb02] ${triggerClassName.includes('hidden') ? 'hidden' : ''}`}
         aria-expanded={open}
         aria-haspopup="true"
         onClick={(e) => {
@@ -45,7 +44,13 @@ export function HeaderProfileDropdown({ triggerClassName = BTN_CLASS }) {
           setOpen((v) => !v);
         }}
       >
-        <HeaderUserAvatarImg />
+        <div className="w-10 h-10 rounded-full border-2 border-[#febb02] bg-white flex items-center justify-center overflow-hidden shrink-0">
+          <HeaderUserAvatarImg className="w-full h-full object-cover rounded-full" />
+        </div>
+        <div className="flex flex-col items-start pr-2">
+          <span data-profile-name-label className="text-sm font-bold text-white leading-tight">{user?.name || user?.email?.split('@')[0] || 'User'}</span>
+          <span className="text-xs font-bold text-[#febb02] leading-tight mt-0.5">Genius Level 1</span>
+        </div>
       </button>
       <div
         data-profile-menu

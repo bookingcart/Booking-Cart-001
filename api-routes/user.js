@@ -4,6 +4,37 @@ const { getCollections } = require('../lib/mongo');
 const { getCorsHeaders } = require('../lib/cors');
 const { verifyRequestBearer } = require('../lib/google-verify');
 const { requireAdminEmail } = require('../lib/admin');
+const jwt = require('jsonwebtoken');
+
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+
+// Verify token (supports both JWT and Google)
+async function verifyAuthToken(req) {
+  const authHeader = req.headers.authorization || '';
+  const token = authHeader.replace('Bearer ', '');
+  
+  if (!token) {
+    return { ok: false, error: 'No token provided' };
+  }
+  
+  // Try JWT verification first (new auth system)
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    if (decoded && decoded.userId) {
+      // Get user email from database
+      const collections = await getCollections();
+      const user = await collections.users.findOne({ _id: new require('mongodb').ObjectId(decoded.userId) });
+      if (user) {
+        return { ok: true, email: user.email, userId: decoded.userId };
+      }
+    }
+  } catch (jwtErr) {
+    // JWT failed, try Google verification
+  }
+  
+  // Fall back to Google token verification
+  return await verifyRequestBearer(req);
+}
 
 function applyCors(req, res) {
   const h = getCorsHeaders(req);
@@ -50,7 +81,7 @@ module.exports = async (req, res) => {
         return res.status(503).json({ ok: false, error: 'Database is not configured (MONGODB_URI)' });
       }
 
-      const auth = await verifyRequestBearer(req);
+      const auth = await verifyAuthToken(req);
       if (!auth.ok) return res.status(auth.status).json({ ok: false, error: auth.error });
       if (auth.email !== email) {
         return res.status(403).json({ ok: false, error: 'Email does not match signed-in account' });
@@ -68,7 +99,7 @@ module.exports = async (req, res) => {
         return res.status(503).json({ ok: false, error: 'Database is not configured (MONGODB_URI)' });
       }
 
-      const auth = await verifyRequestBearer(req);
+      const auth = await verifyAuthToken(req);
       if (!auth.ok) return res.status(auth.status).json({ ok: false, error: auth.error });
 
       const body = req.body || {};
@@ -103,7 +134,7 @@ module.exports = async (req, res) => {
         return res.status(503).json({ ok: false, error: 'Database is not configured (MONGODB_URI)' });
       }
 
-      const auth = await verifyRequestBearer(req);
+      const auth = await verifyAuthToken(req);
       if (!auth.ok) return res.status(auth.status).json({ ok: false, error: auth.error });
 
       const email = String(req.body?.email || req.query?.email || '')
