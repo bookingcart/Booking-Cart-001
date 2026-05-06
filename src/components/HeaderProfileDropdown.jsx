@@ -36,7 +36,7 @@ export function HeaderProfileDropdown({ triggerClassName = BTN_CLASS }) {
     <div className="relative" data-profile-dropdown ref={rootRef}>
       <button
         type="button"
-        className="flex items-center gap-3 bg-green-600 hover:bg-green-700 transition-colors rounded-full px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#febb02]"
+        className="group flex items-center gap-3 pl-1 pr-4 py-1 bg-white border border-slate-200 hover:border-green-200 rounded-full shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-green-100/50"
         aria-expanded={open}
         aria-haspopup="true"
         onClick={(e) => {
@@ -44,13 +44,21 @@ export function HeaderProfileDropdown({ triggerClassName = BTN_CLASS }) {
           setOpen((v) => !v);
         }}
       >
-        <div className="w-10 h-10 rounded-full border-2 border-[#febb02] bg-white flex items-center justify-center overflow-hidden shrink-0">
-          <HeaderUserAvatarImg className="w-full h-full object-cover rounded-full" />
+        <div className="relative w-10 h-10 rounded-full bg-gradient-to-tr from-green-500 to-emerald-300 p-[2px] shrink-0 shadow-sm group-hover:scale-105 transition-transform duration-300">
+          <div className="w-full h-full bg-white rounded-full overflow-hidden border-[1.5px] border-white">
+            <HeaderUserAvatarImg className="w-full h-full object-cover" />
+          </div>
         </div>
-        <div className="flex flex-col items-start pr-2">
-          <span data-profile-name-label className="text-sm font-bold text-white leading-tight">{user?.name || user?.email?.split('@')[0] || 'User'}</span>
-          <span className="text-xs font-bold text-[#febb02] leading-tight mt-0.5">Genius Level 1</span>
+        <div className="flex flex-col items-start justify-center pr-1 h-full pt-0.5">
+          <span data-profile-name-label className="text-[13px] font-extrabold text-slate-800 group-hover:text-green-700 transition-colors leading-none tracking-tight">
+            {user?.name || user?.email?.split('@')[0] || 'User'}
+          </span>
+          <div className="flex items-center gap-1 mt-1 bg-green-50 px-1.5 py-0.5 rounded-md border border-green-100">
+            <i className="ph-fill ph-seal-check text-green-500 text-[10px]"></i>
+            <span className="text-[9px] font-bold uppercase tracking-widest text-green-700 leading-none mt-[1px]">Genius Lvl 1</span>
+          </div>
         </div>
+        <i className="ph-bold ph-caret-down text-slate-300 text-xs ml-1 group-hover:text-green-600 transition-colors duration-300 translate-y-[1px]"></i>
       </button>
       <div
         data-profile-menu
