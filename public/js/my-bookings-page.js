@@ -1,5 +1,5 @@
-        function bookingsAuthHeaders() {
-            const t = localStorage.getItem('bookingcart_google_id_token') || '';
+function bookingsAuthHeaders() {
+            const t = localStorage.getItem('bookingcart_google_id_token') || localStorage.getItem('bookingcart_jwt_token') || '';
             const h = { 'Content-Type': 'application/json' };
             if (t) h.Authorization = 'Bearer ' + t;
             return h;
@@ -31,7 +31,8 @@
                 emailInput.value = user.email || '';
                 if (user.email) {
                     setTimeout(() => {
-                        if (localStorage.getItem('bookingcart_google_id_token')) lookup();
+                        const hasToken = localStorage.getItem('bookingcart_google_id_token') || localStorage.getItem('bookingcart_jwt_token');
+                        if (hasToken) lookup();
                     }, 600);
                 }
             } catch (e) { }
@@ -90,7 +91,7 @@
 
         async function lookup() {
             let email = emailInput.value.trim();
-            const token = localStorage.getItem('bookingcart_google_id_token') || '';
+            const token = localStorage.getItem('bookingcart_google_id_token') || localStorage.getItem('bookingcart_jwt_token') || '';
             const loadingUi = window.bookingcartLoading;
 
             await migrateLegacyBookings();
@@ -456,7 +457,7 @@
         async function cancelBooking(ref) {
             if (!confirm('Cancel this booking? This will cancel with the airline and process any refund.')) return;
             
-            const token = localStorage.getItem('bookingcart_google_id_token') || '';
+            const token = localStorage.getItem('bookingcart_google_id_token') || localStorage.getItem('bookingcart_jwt_token') || '';
             if (!token) {
                 alert('Please sign in with Google to cancel a booking.');
                 return;

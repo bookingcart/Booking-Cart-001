@@ -19,7 +19,7 @@
 
   function getGoogleIdToken() {
     try {
-      return localStorage.getItem(STORAGE_TOKEN) || '';
+      return localStorage.getItem(STORAGE_TOKEN) || localStorage.getItem('bookingcart_jwt_token') || '';
     } catch (e) {
       return '';
     }

@@ -8,7 +8,7 @@ function userApiHeaders() {
   if (window.bookingcartAuth && typeof window.bookingcartAuth.authHeaders === "function") {
     return window.bookingcartAuth.authHeaders();
   }
-  const t = localStorage.getItem("bookingcart_google_id_token") || "";
+  const t = localStorage.getItem("bookingcart_google_id_token") || localStorage.getItem("bookingcart_jwt_token") || "";
   const h = { "Content-Type": "application/json" };
   if (t) h.Authorization = "Bearer " + t;
   return h;
