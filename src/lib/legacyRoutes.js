@@ -21,7 +21,11 @@ export const LEGACY_HTML_TO_ROUTE = {
   'visa.html': '/visa',
   'admin-visa.html': '/admin/visa',
   'terms.html': '/terms',
-  'privacy.html': '/privacy'
+  'privacy.html': '/privacy',
+  'auth.html': '/auth',
+  'login.html': '/auth',
+  'register.html': '/auth?tab=register',
+  'signup.html': '/auth?tab=register',
 };
 
 /**

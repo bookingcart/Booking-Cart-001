@@ -22,6 +22,7 @@ const duffelOrderCancellationsHandler = require('./api-routes/duffel-order-cance
 const duffelOrderChangesHandler = require('./api-routes/duffel-order-changes');
 const duffelOrderServicesHandler = require('./api-routes/duffel-order-services');
 const flightDealsHandler = require('./api-routes/flight-deals');
+const authHandler = require('./api-routes/auth');
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || '';
 function getStripeConfigError() {
@@ -104,6 +105,24 @@ app.all('/api/duffel-order-cancellations', searchLimiter, run(duffelOrderCancell
 app.all('/api/duffel-order-changes', searchLimiter, run(duffelOrderChangesHandler));
 app.all('/api/duffel-order-services', searchLimiter, run(duffelOrderServicesHandler));
 app.all('/api/flight-deals', searchLimiter, run(flightDealsHandler));
+
+// Email + password auth endpoints
+app.post('/api/auth/register', apiLimiter, (req, res, next) => {
+  req.params = { action: 'register' };
+  return Promise.resolve(authHandler(req, res)).catch(next);
+});
+app.post('/api/auth/login', apiLimiter, (req, res, next) => {
+  req.params = { action: 'login' };
+  return Promise.resolve(authHandler(req, res)).catch(next);
+});
+app.post('/api/auth/logout', apiLimiter, (req, res, next) => {
+  req.params = { action: 'logout' };
+  return Promise.resolve(authHandler(req, res)).catch(next);
+});
+app.post('/api/auth/forgot-password', apiLimiter, (req, res, next) => {
+  req.params = { action: 'forgot-password' };
+  return Promise.resolve(authHandler(req, res)).catch(next);
+});
 
 function getRequestOrigin(req) {
   const proto = String(req.headers['x-forwarded-proto'] || req.protocol || 'https').split(',')[0].trim();

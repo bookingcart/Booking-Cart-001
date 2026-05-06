@@ -13,10 +13,10 @@ const BTN_CLASS =
 export function HeaderProfileDropdown({ triggerClassName = BTN_CLASS }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef(null);
-  const { user, refresh } = useAuth();
-  
+  const { user, logout } = useAuth();
+
   const adminEmails = (import.meta.env.VITE_ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase());
-  const isAdmin = user && adminEmails.includes(user.email.toLowerCase());
+  const isAdmin = user && adminEmails.includes(user.email?.toLowerCase());
 
   useEffect(() => {
     function onDocClick(e) {
@@ -27,15 +27,10 @@ export function HeaderProfileDropdown({ triggerClassName = BTN_CLASS }) {
     return () => document.removeEventListener('click', onDocClick);
   }, []);
 
-  const signOut = useCallback(() => {
-    try {
-      localStorage.removeItem('bookingcart_user');
-      localStorage.removeItem('bookingcart_google_id_token');
-      localStorage.removeItem('bc_user');
-    } catch (_) {}
-    refresh();
-    window.location.reload();
-  }, [refresh]);
+  const signOut = useCallback(async () => {
+    setOpen(false);
+    await logout();
+  }, [logout]);
 
   return (
     <div className="relative" data-profile-dropdown ref={rootRef}>

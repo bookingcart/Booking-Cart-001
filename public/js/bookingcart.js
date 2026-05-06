@@ -621,8 +621,8 @@
       }
 
       writeState({ search: payload, bookingRef: null, _bookingSaved: null, duffelPassengers: null });
-      if (typeof window.__bcNavigate === "function") window.__bcNavigate("results.html");
-      else window.location.href = "results.html";
+      if (typeof window.__bcNavigate === "function") window.__bcNavigate("/results");
+      else window.location.href = "/results";
     });
   }
 
@@ -1137,8 +1137,8 @@
         e.preventDefault();
         toast("Flight selected", "Next: traveler details.");
         window.setTimeout(() => {
-          if (typeof window.__bcNavigate === "function") window.__bcNavigate("passengers.html");
-          else window.location.href = "passengers.html";
+          if (typeof window.__bcNavigate === "function") window.__bcNavigate("/passengers");
+          else window.location.href = "/passengers";
         }, 450);
       });
   }
@@ -1236,8 +1236,8 @@
       }
 
       writeState({ travelers, contact: { email: contactEmail.trim(), phone: phoneClean } });
-      if (typeof window.__bcNavigate === "function") window.__bcNavigate("extras.html");
-      else window.location.href = "extras.html";
+      if (typeof window.__bcNavigate === "function") window.__bcNavigate("/extras");
+      else window.location.href = "/extras";
     });
   }
 
@@ -1430,8 +1430,8 @@
     if (form)
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-        if (typeof window.__bcNavigate === "function") window.__bcNavigate("payment.html");
-        else window.location.href = "payment.html";
+        if (typeof window.__bcNavigate === "function") window.__bcNavigate("/payment");
+        else window.location.href = "/payment";
       });
   }
 
@@ -1683,8 +1683,8 @@
           });
           if (saveResp.ok) {
             writeState({ _bookingSaved: true });
-            if (typeof window.__bcNavigate === "function") window.__bcNavigate("confirmation.html?held=1");
-            else window.location.href = "confirmation.html?held=1";
+            if (typeof window.__bcNavigate === "function") window.__bcNavigate("/confirmation?held=1");
+            else window.location.href = "/confirmation?held=1";
             return;
           }
         } catch (e) { }

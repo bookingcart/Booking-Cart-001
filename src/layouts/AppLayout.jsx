@@ -1,9 +1,23 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import BookingCartNavbar from '../components/BookingCartNavbar.jsx';
+import { useEffect } from 'react';
+import { legacyHrefToRoute } from '../lib/legacyRoutes.js';
 
 /** Shell for nested routes — shared navbar + page chrome. */
 export default function AppLayout() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  /* Upgrade the global legacy-navigation bridge to use React Router
+     so step transitions (Search→Results→…→Confirmation) are SPA navigations
+     with no full page reload, which preserves React state and avoids
+     re-executing all script tags. */
+  useEffect(() => {
+    window.__bcNavigate = (href) => {
+      const path = legacyHrefToRoute(String(href || ''));
+      navigate(path);
+    };
+  }, [navigate]);
 
   /* Derive which nav item to highlight */
   let activeNav = 'flights';
