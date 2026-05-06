@@ -8,6 +8,7 @@ require('dotenv').config();
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { Resend } = require('resend');
 const { getCollections } = require('../lib/mongo');
 const { getCorsHeaders } = require('../lib/cors');
 
@@ -188,7 +189,7 @@ module.exports = async (req, res) => {
   }
 
   // ════════════════════════════════════════════════════════════════════════════
-  // FORGOT PASSWORD  (mock flow — logs a reset link, real email needs provider)
+  // FORGOT PASSWORD
   // ════════════════════════════════════════════════════════════════════════════
   if (action === 'forgot-password') {
     const email = String(body.email || '').trim().toLowerCase();
@@ -200,11 +201,33 @@ module.exports = async (req, res) => {
     const resetToken = jwt.sign({ sub: email, purpose: 'reset' }, JWT_SECRET, { expiresIn: '15m' });
     const resetLink = `${process.env.APP_URL || 'http://localhost:3000'}/auth?reset=${resetToken}`;
 
-    // In production, send this via email provider.
-    // For now, log to server console and return success regardless (prevents enumeration).
     console.log(`[AUTH] Password reset link for ${email}: ${resetLink}`);
 
-    // TODO: integrate with email provider (SendGrid, Resend, etc.)
+    // If Resend is configured, send the email
+    if (process.env.RESEND_API_KEY && !process.env.RESEND_API_KEY.includes('put_your_api_key_here')) {
+      try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        
+        const { data, error } = await resend.emails.send({
+          from: 'BookingCart <onboarding@resend.dev>',
+          to: [email],
+          subject: 'Password Reset - BookingCart',
+          text: `You requested a password reset. Click the following link to reset your password:\n\n${resetLink}\n\nThis link will expire in 15 minutes. If you did not request this, please ignore this email.`,
+          html: `<p>You requested a password reset.</p><p>Click the link below to reset your password:</p><p><a href="${resetLink}">${resetLink}</a></p><p>This link will expire in 15 minutes. If you did not request this, please ignore this email.</p>`
+        });
+
+        if (error) {
+          console.error(`[AUTH] Failed to send reset email via Resend to ${email}:`, error);
+        } else {
+          console.log(`[AUTH] Reset email sent successfully to ${email} (ID: ${data.id})`);
+        }
+      } catch (err) {
+        console.error(`[AUTH] Error sending reset email via Resend:`, err);
+        // We still return success to prevent email enumeration, but log the error
+      }
+    } else {
+      console.warn('[AUTH] RESEND_API_KEY not configured in .env. Email was not sent.');
+    }
 
     return res.json({
       ok: true,
