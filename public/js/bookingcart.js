@@ -2027,7 +2027,7 @@
     // are legacy functions kept below for backward compatibility but initResults handles everything.
     initPassengers();
     initExtras();
-    initPayment();
+    // initPayment(); // Disabled for React-based Duffel Component
     initConfirmation();
     console.log("✅ BookingCart initialization complete");
   }

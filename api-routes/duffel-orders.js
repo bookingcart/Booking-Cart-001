@@ -88,7 +88,7 @@ module.exports = async (req, res) => {
   }
 
   const body = req.body || {};
-  const { offerId, totalAmount, currency, passengers, hold, services } = body;
+  const { offerId, totalAmount, currency, passengers, hold, services, payment } = body;
 
   // ── Validation ──────────────────────────────────────────────────────────────
   if (!offerId || typeof offerId !== 'string' || !offerId.trim()) {
@@ -169,6 +169,8 @@ module.exports = async (req, res) => {
 
   if (hold) {
     orderPayload.data.type = 'hold';
+  } else if (payment) {
+    orderPayload.data.payments = [payment];
   } else {
     orderPayload.data.payments = [
       {
