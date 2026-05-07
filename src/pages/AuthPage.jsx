@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-import { BookingCartNavbar } from '../components/BookingCartNavbar.jsx';
+import BookingCartNavbar from '../components/BookingCartNavbar.jsx';
 import { FlightFooter } from '../components/FlightFooter.jsx';
 
 /* ─── Helpers ────────────────────────────────────────────────────────────── */
