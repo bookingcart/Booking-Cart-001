@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-import { FlightHeader } from '../components/FlightHeader';
-import { FlightFooter } from '../components/FlightFooter';
+import { BookingCartNavbar } from '../components/BookingCartNavbar.jsx';
+import { FlightFooter } from '../components/FlightFooter.jsx';
 
 /* ─── Helpers ────────────────────────────────────────────────────────────── */
 function isValidEmail(e) {
