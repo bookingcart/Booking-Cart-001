@@ -144,6 +144,7 @@ function bookingsAuthHeaders() {
                 allBookings = data.ok ? (data.bookings || []) : [];
 
                 renderBookings();
+                checkForIssuedTickets();
             } catch (err) {
                 loadingEl.style.display = 'none';
                 if (loadingUi && typeof loadingUi.setBusy === 'function') {
@@ -154,6 +155,45 @@ function bookingsAuthHeaders() {
                 emptyEl.style.display = 'block';
                 listEl.innerHTML = '';
             }
+        }
+
+        async function checkForIssuedTickets() {
+            let updated = false;
+            for (let i = 0; i < allBookings.length; i++) {
+                const b = allBookings[i];
+                if (b.status === 'confirmed' && b.duffelOrderId) {
+                    try {
+                        const r = await fetch(`/api/duffel-orders?id=${b.duffelOrderId}`);
+                        const d = await r.json();
+                        if (d.ok && d.order && Array.isArray(d.order.documents) && d.order.documents.length > 0) {
+                            const eTicket = d.order.documents.find(doc => doc.type === 'e_ticket_receipt') || d.order.documents[0];
+                            if (eTicket && eTicket.url) {
+                                b.status = 'issued';
+                                b.ticket = b.ticket || {};
+                                b.ticket.fileData = eTicket.url;
+                                b.ticket.fileName = `ticket-${b.ref}.pdf`;
+                                updated = true;
+                                
+                                await fetch('/api/bookings', {
+                                    method: 'POST',
+                                    headers: bookingsAuthHeaders(),
+                                    body: JSON.stringify({
+                                        action: 'save',
+                                        booking: {
+                                            ref: b.ref,
+                                            status: 'issued',
+                                            ticket: b.ticket
+                                        }
+                                    })
+                                });
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Failed to fetch on-demand ticket for', b.ref, e);
+                    }
+                }
+            }
+            if (updated) renderBookings();
         }
 
         function renderBookings() {

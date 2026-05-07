@@ -42,6 +42,30 @@ export function AuthProvider({ children }) {
     }
   }, [tick]);
 
+  /** Login: stores user and token, updates UI */
+  const login = useCallback(async ({ email, token, user: userData, rememberMe = false }) => {
+    try {
+      localStorage.setItem(STORAGE_USER, JSON.stringify(userData || { email }));
+      if (token) {
+        localStorage.setItem(STORAGE_JWT_TOKEN, token);
+      }
+      // Set expiry if not remembering
+      if (!rememberMe) {
+        localStorage.setItem('bookingcart_session_only', 'true');
+      } else {
+        localStorage.removeItem('bookingcart_session_only');
+      }
+    } catch {}
+    refresh();
+    if (typeof window.applyAuthUI === 'function') window.applyAuthUI();
+    return userData;
+  }, [refresh]);
+
+  /** Register: stores user and token, updates UI */
+  const register = useCallback(async ({ email, token, user: userData }) => {
+    return login({ email, token, user: userData, rememberMe: false });
+  }, [login]);
+
   /** Sign out: clears all tokens and user data, updates UI */
   const logout = useCallback(async () => {
     try {
@@ -52,14 +76,17 @@ export function AuthProvider({ children }) {
       localStorage.removeItem(STORAGE_GOOGLE_TOKEN);
       localStorage.removeItem(STORAGE_JWT_TOKEN);
       localStorage.removeItem('bc_user');
+      localStorage.removeItem('bookingcart_session_only');
     } catch {}
     refresh();
     if (typeof window.applyAuthUI === 'function') window.applyAuthUI();
   }, [refresh]);
 
+  const isAuthenticated = useMemo(() => !!getToken(), [getToken, tick]);
+
   const value = useMemo(
-    () => ({ getGoogleIdToken, getToken, authHeaders, user, refresh, logout }),
-    [getGoogleIdToken, getToken, authHeaders, user, refresh, logout]
+    () => ({ getGoogleIdToken, getToken, authHeaders, user, refresh, logout, login, register, isAuthenticated }),
+    [getGoogleIdToken, getToken, authHeaders, user, refresh, logout, login, register, isAuthenticated]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

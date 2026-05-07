@@ -54,10 +54,37 @@ module.exports = async (req, res) => {
   applyCors(req, res);
 
   if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed' });
+  if (req.method !== 'POST' && req.method !== 'GET') return res.status(405).json({ ok: false, error: 'Method not allowed' });
 
   if (!DUFFEL_API_KEY) {
     return res.status(503).json({ ok: false, error: 'Duffel is not configured (missing DUFFEL_API_KEY)' });
+  }
+
+  // ── GET Logic (Fetch Order) ─────────────────────────────────────────────────
+  if (req.method === 'GET') {
+    const orderId = req.query.id;
+    if (!orderId || typeof orderId !== 'string') {
+      return res.status(400).json({ ok: false, error: 'Missing order ID (id parameter)' });
+    }
+
+    try {
+      const duffelRes = await fetch(`${DUFFEL_BASE_URL}/air/orders/${orderId}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Duffel-Version': 'v2',
+          'Authorization': `Bearer ${DUFFEL_API_KEY}`
+        }
+      });
+      const data = await duffelRes.json().catch(() => null);
+      if (!duffelRes.ok || !data || !data.data) {
+        return res.status(duffelRes.status >= 500 ? 502 : 400).json({ ok: false, error: 'Failed to fetch order from Duffel' });
+      }
+      return res.json({ ok: true, order: data.data });
+    } catch (err) {
+      console.error('Error fetching Duffel order:', err);
+      return res.status(500).json({ ok: false, error: 'Internal server error' });
+    }
   }
 
   const body = req.body || {};

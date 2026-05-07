@@ -1,10 +1,8 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-
-/* ─── Storage keys (same as legacy auth.js) ──────────────────────────────── */
-const STORAGE_USER  = 'bookingcart_user';
-const STORAGE_TOKEN = 'bookingcart_jwt_token'; // separate from Google token
+import { FlightHeader } from '../components/FlightHeader';
+import { FlightFooter } from '../components/FlightFooter';
 
 /* ─── Helpers ────────────────────────────────────────────────────────────── */
 function isValidEmail(e) {
@@ -87,10 +85,7 @@ function Field({ id, label, type = 'text', value, onChange, error, icon, placeho
 export default function AuthPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { refresh } = useAuth();
-  const googleBtnRef = useRef(null);
-
-  // Detect if arriving with reset token
+  const { login, register, googleLogin, forgotPassword, isAuthenticated, loading: authLoading, user } = useAuth();
   const resetToken = searchParams.get('reset') || '';
   const defaultTab = searchParams.get('tab') === 'register' ? 'register' : 'signin';
 
@@ -188,8 +183,11 @@ export default function AuthPage() {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw new Error(data.error || 'Login failed.');
-      persistSession(data.token, data.user);
-      navigate(searchParams.get('redirect') || '/');
+      // Use AuthContext login function which handles storage and state
+      await login({ email: form.email, token: data.token, user: data.user, rememberMe: form.remember });
+      // Immediate redirect to home page
+      navigate(searchParams.get('redirect') || '/', { replace: true });
+      return;
     } catch (err) {
       setGlobalError(err.message);
     } finally {
@@ -213,8 +211,11 @@ export default function AuthPage() {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw new Error(data.error || 'Registration failed.');
-      persistSession(data.token, data.user);
-      navigate(searchParams.get('redirect') || '/');
+      // Use AuthContext register function which handles storage and state
+      await register({ email: form.email, token: data.token, user: data.user });
+      // Immediate redirect to home page
+      navigate(searchParams.get('redirect') || '/', { replace: true });
+      return;
     } catch (err) {
       setGlobalError(err.message);
     } finally {

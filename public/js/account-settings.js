@@ -256,7 +256,7 @@ async function bootAccountSettingsPage() {
   try {
     await loadStateFromDB();
 
-    loadProfile();
+    await loadProfile();
     renderCards();
     renderLoginActivity();
     renderNotifications();
@@ -329,7 +329,24 @@ function showToast(message, type = "success") {
 /* ══════════════════════════════════════════════════
    PROFILE
 ══════════════════════════════════════════════════ */
-function loadProfile() {
+async function loadProfile() {
+  // First try to load from MongoDB
+  try {
+    const headers = userApiHeaders();
+    if (headers.Authorization) {
+      const resp = await fetch('/api/user', { headers });
+      const data = await resp.json();
+      if (resp.ok && data.ok && data.state && data.state.profile) {
+        // Merge database profile with local state
+        state.profile = { ...state.profile, ...data.state.profile };
+        console.log('[loadProfile] Loaded from MongoDB:', state.profile);
+      }
+    }
+  } catch (err) {
+    console.error('[loadProfile] Failed to load from MongoDB:', err);
+  }
+  
+  // Populate form fields from state
   const p = state.profile;
   setVal("firstName", p.firstName);
   setVal("lastName", p.lastName);
@@ -433,8 +450,8 @@ function saveProfile(e) {
   showToast("Profile updated successfully!");
 }
 
-function resetProfile() {
-  loadProfile();
+async function resetProfile() {
+  await loadProfile();
   showToast("Changes discarded", "error");
 }
 
