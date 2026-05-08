@@ -70,7 +70,8 @@ module.exports = async (req, res) => {
       const isAdmin = adminGate.ok;
       
       const emailRaw = String(email || '').trim().toLowerCase();
-      if (!isAdmin) {
+      const isGuest = emailRaw === 'guest@anonymous' || emailRaw === '';
+      if (!isAdmin && !isGuest) {
         if (!emailRaw) return res.status(400).json({ ok: false, error: 'Missing email' });
         const auth = await verifyRequestBearer(req);
         if (!auth.ok) return res.status(auth.status).json({ ok: false, error: auth.error });
@@ -81,7 +82,7 @@ module.exports = async (req, res) => {
 
       const ts = Date.now();
       const newMessage = {
-        from: isAdmin ? 'bot' : 'user', // We use 'bot' or 'admin' for admin replies
+        from: isAdmin ? 'admin' : 'user',
         text: message,
         ts
       };

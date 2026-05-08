@@ -132,15 +132,15 @@ export default function ExtrasPage() {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-slate-500">Base Fare</span>
-                    <span className="font-bold text-slate-900" data-sum-base>â€”</span>
+                    <span className="font-bold text-slate-900" data-sum-base>-</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-slate-500">Extras</span>
-                    <span className="font-bold text-slate-900" data-sum-extras>â€”</span>
+                    <span className="font-bold text-slate-900" data-sum-extras>-</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-slate-500">Taxes & Fees</span>
-                    <span className="font-bold text-slate-900" data-sum-taxes>â€”</span>
+                    <span className="font-bold text-slate-900" data-sum-taxes>-</span>
                   </div>
                 </div>
       
@@ -148,7 +148,7 @@ export default function ExtrasPage() {
       
                 <div className="flex justify-between items-end mb-2">
                   <span className="font-bold text-slate-700">Total Due</span>
-                  <span className="text-2xl font-extrabold text-green-600" data-sum-total>â€”</span>
+                  <span className="text-2xl font-extrabold text-green-600" data-sum-total>-</span>
                 </div>
                 <div className="text-xs text-right text-slate-400">Updates automatically</div>
       

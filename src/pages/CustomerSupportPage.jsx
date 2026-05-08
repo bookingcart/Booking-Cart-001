@@ -109,7 +109,7 @@ async function appendMessage(threadId, email, topic, text) {
         'Content-Type': 'application/json',
         ...(t ? { 'Authorization': `Bearer ${t}` } : {})
       },
-      body: JSON.stringify({ threadId, email, topic, message: text })
+      body: JSON.stringify({ threadId, email: email || 'guest@anonymous', topic, message: text })
     });
   } catch {}
 }
@@ -154,13 +154,10 @@ function ChatWidget({ open, onClose, initialMessage }) {
   }, [messages, typing]);
 
   async function persistMessage(msg, reply) {
-    if (currentEmail === 'Guest') {
-      // Just local interaction for guests
-      return;
-    }
-    await appendMessage(threadIdRef.current, currentEmail, msg.slice(0, 60), msg);
-    // Note: bot replies are just UI smoke and mirrors here, but we could persist them if we wanted.
-    // For now we just let the admin reply.
+    // Persist for all users, including guests (with fallback email)
+    const email = currentEmail === 'Guest' ? 'guest@anonymous' : currentEmail;
+    await appendMessage(threadIdRef.current, email, msg.slice(0, 60), msg);
+    // Note: bot auto-replies are UI only. Real admin replies come from the admin panel.
   }
 
   function sendMessage(text) {
