@@ -1032,7 +1032,7 @@
       return;
     }
 
-    writeState({ selectedFlightId: flight.id });
+    writeState({ selectedFlightId: flight.id, selectedFlight: flight });
 
     // Sidebar Info
     const priceVal = typeof flight.price === "object" ? parseFloat(flight.price.amount || 0) : flight.price;
@@ -1252,7 +1252,9 @@
   function computeTotals(state) {
     const pax = state.passengers || { adults: 1, children: 0, infants: 0 };
     const totalPax = pax.adults + pax.children + pax.infants;
-    const flight = (state.flights || []).find((f) => f.id === state.selectedFlightId) || (state.flights || [])[0];
+    const flight = (state.flights || []).find((f) => f.id === state.selectedFlightId)
+      || state.selectedFlight
+      || (state.flights || [])[0];
     const base = flight ? flightPriceAmount(flight) * totalPax : 0;
 
     const extras = state.extras || {};

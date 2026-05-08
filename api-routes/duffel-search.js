@@ -243,7 +243,8 @@ function transformDuffelData(data) {
           arriveTime: arriveTimeStr,
           durationMin,
           stops: Math.max(0, (slice.segments?.length || 1) - 1),
-          price: Math.round(price),
+          price: price,
+          currency: offer.total_currency || 'USD',
           cabin: offer.cabin_class || mapCabinClass('economy'),
           segments: slice.segments.map((s) => {
             const sDep = new Date(s.departing_at);
