@@ -24,6 +24,8 @@ const duffelOrderServicesHandler = require('./api-routes/duffel-order-services')
 const flightDealsHandler = require('./api-routes/flight-deals');
 const authHandler = require('./api-routes/auth');
 const supportHandler = require('./api-routes/support');
+const duffelClientKeyHandler = require('./api-routes/duffel-client-key');
+const ticketDownloadHandler = require('./api-routes/ticket-download');
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || '';
 function getStripeConfigError() {
@@ -107,6 +109,8 @@ app.all('/api/duffel-order-changes', searchLimiter, run(duffelOrderChangesHandle
 app.all('/api/duffel-order-services', searchLimiter, run(duffelOrderServicesHandler));
 app.all('/api/flight-deals', searchLimiter, run(flightDealsHandler));
 app.all('/api/support', apiLimiter, run(supportHandler));
+app.post('/api/duffel-client-key', searchLimiter, run(duffelClientKeyHandler));
+app.get('/api/ticket-download', apiLimiter, run(ticketDownloadHandler));
 
 // Email + password auth endpoints
 app.post('/api/auth/register', apiLimiter, (req, res, next) => {

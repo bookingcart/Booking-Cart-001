@@ -310,7 +310,7 @@ function bookingsAuthHeaders() {
                 <div class="text-xl font-extrabold text-green-600">${total}</div>
                 <div class="flex flex-col gap-2 mt-6">
                   ${(b.status === 'held') ? `<button onclick="payForBooking('${b.ref}')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap shadow-green-600/20"><i class="ph-bold ph-credit-card"></i> Pay Now</button>` : ''}
-                  ${(b.status === 'issued' && b.ticket && b.ticket.fileData) ? `<button onclick="downloadRealTicket('${b.ref}')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap shadow-green-600/20"><i class="ph-bold ph-download"></i> Download E-Ticket</button>` : (b.status !== 'cancelled' && b.status !== 'held' ? `<div class="px-4 py-2 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl text-center flex items-center justify-center gap-2"><i class="ph-bold ph-circle-notch animate-spin"></i> Ticket Processing...</div>` : '')}
+                  ${(b.status === 'issued') ? `<button onclick="downloadRealTicket('${b.ref}')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap shadow-green-600/20"><i class="ph-bold ph-download"></i> Download E-Ticket</button>` : (b.status !== 'cancelled' && b.status !== 'held' ? `<div class="px-4 py-2 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl text-center flex items-center justify-center gap-2"><i class="ph-bold ph-circle-notch animate-spin"></i> Ticket Processing...</div>` : '')}
                   ${b.status !== 'cancelled' ? `<button onclick="downloadTicket('${b.ref}')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap"><i class="ph-bold ph-receipt"></i> Download Invoice</button>` : ''}
                   ${(b.status !== 'cancelled' && b.status !== 'held' && b.duffelOrderId) ? `<button onclick="addServicesToBooking('${b.ref}')" class="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap"><i class="ph-bold ph-suitcase-rolling"></i> Add Bags/Seats</button>` : ''}
                   ${(b.status !== 'cancelled' && b.status !== 'held' && b.duffelOrderId) ? `<button onclick="changeBooking('${b.ref}')" class="px-4 py-2 bg-orange-50 hover:bg-orange-100 text-orange-600 text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm whitespace-nowrap"><i class="ph-bold ph-calendar-blank"></i> Change Flight</button>` : ''}
@@ -365,7 +365,7 @@ function bookingsAuthHeaders() {
 
         async function downloadRealTicket(ref) {
             const b = allBookings.find(x => x.ref === ref);
-            if (!b || !b.ticket || !b.ticket.fileData) return;
+            if (!b) return;
 
             // Track download
             fetch('/api/bookings', {
@@ -374,13 +374,43 @@ function bookingsAuthHeaders() {
                 body: JSON.stringify({ action: 'track_download', id: ref })
             }).catch(e => console.error(e));
 
-            // Trigger download of Base64
-            const a = document.createElement("a");
-            a.href = b.ticket.fileData;
-            a.download = b.ticket.fileName || `ticket-${ref}.pdf`;
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
+            try {
+                // Fetch PDF from our new generator
+                const btn = document.activeElement;
+                const oldHtml = btn.innerHTML;
+                if (btn && btn.tagName === 'BUTTON') {
+                    btn.innerHTML = '<i class="ph-bold ph-circle-notch animate-spin"></i> Generating...';
+                    btn.disabled = true;
+                }
+
+                const response = await fetch(`/api/ticket-download?ref=${ref}`, {
+                    headers: bookingsAuthHeaders()
+                });
+                
+                if (btn && btn.tagName === 'BUTTON') {
+                    btn.innerHTML = oldHtml;
+                    btn.disabled = false;
+                }
+                
+                if (!response.ok) {
+                    alert('Could not generate the E-Ticket.');
+                    return;
+                }
+                
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `ETicket-${ref}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                
+                setTimeout(() => window.URL.revokeObjectURL(url), 100);
+            } catch (e) {
+                console.error('Download error:', e);
+                alert('Error downloading ticket.');
+            }
         }
 
         function downloadTicket(ref) {

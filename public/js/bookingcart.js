@@ -1306,6 +1306,7 @@
       if (summary.extras) setText(summary.extras, money(extrasCost, ccy));
       if (summary.taxes) setText(summary.taxes, money(totals.taxes, ccy));
       if (summary.total) setText(summary.total, money(totals.total, ccy));
+      window.dispatchEvent(new CustomEvent("bookingcart_totals_updated"));
     };
 
     if (state.selectedFlightId && state.selectedFlightId.startsWith("off_")) {

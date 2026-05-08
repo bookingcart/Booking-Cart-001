@@ -59,9 +59,10 @@ export default function PassengersPage() {
       
                 
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-                  <h2 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2"><i
-                      className="ph-duotone ph-envelope-simple text-green-600 text-xl"></i> Contact Information</h2>
-                  <hr className="border-slate-100 my-4" />
+                  <h2 className="font-bold text-lg text-slate-900 mb-2 flex items-center gap-2"><i
+                      className="ph-duotone ph-envelope-simple text-green-600 text-xl"></i> Booking Delivery & Contact</h2>
+                  <p className="text-sm text-slate-500 mb-4">This information is used by BookingCart to email your e-tickets and notify you of flight changes.</p>
+                  <hr className="border-slate-100 mb-4" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email

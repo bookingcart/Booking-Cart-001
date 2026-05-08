@@ -283,7 +283,7 @@ export default function PaymentPage() {
                   Airline Flight Payment
                 </h2>
                 <p className="text-sm text-slate-500 mb-6">
-                  You will be charged {money(totals.flightCost, totals.currency)} directly by the airline.
+                  Please enter your <strong>Billing Information</strong> below. This must match the cardholder details associated with your payment method. You will be charged {money(totals.flightCost, totals.currency)} directly by the airline.
                 </p>
 
                 {clientKey ? (
@@ -291,6 +291,7 @@ export default function PaymentPage() {
                     <DuffelCardForm
                       ref={ref}
                       clientKey={clientKey}
+                      intent="to-create-card-for-temporary-use"
                       onValidateSuccess={() => setCardValid(true)}
                       onValidateFailure={() => setCardValid(false)}
                       onCreateCardForTemporaryUseSuccess={handleCardSuccess}
