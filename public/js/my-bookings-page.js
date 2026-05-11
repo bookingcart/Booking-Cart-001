@@ -178,7 +178,7 @@ function bookingsAuthHeaders() {
                         ? 'tab-active flex-1 py-2.5 rounded-xl text-sm font-bold transition-all'
                         : 'flex-1 py-2.5 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-50 transition-all';
                 });
-                renderBookings();
+                renderBookings(currentTab);
             });
         });
 
@@ -289,16 +289,137 @@ function bookingsAuthHeaders() {
             if (updated) renderBookings();
         }
 
-        function renderBookings() {
-            const loadingUi = window.bookingcartLoading;
-            const filtered = currentTab === 'all'
-                ? allBookings
-                : allBookings.filter(b => b.status === currentTab);
+        // Saved Flights functionality
+        const SAVED_FLIGHTS_KEY = 'bookingcart_saved_flights';
 
-            countEl.textContent = filtered.length + ' booking' + (filtered.length !== 1 ? 's' : '');
+        function getSavedFlights() {
+            try {
+                return JSON.parse(localStorage.getItem(SAVED_FLIGHTS_KEY)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
 
-            if (!filtered.length) {
-                listEl.innerHTML = '';
+        function renderSavedFlights() {
+            const savedContainer = document.getElementById('saved-flights-list');
+            const savedSection = document.getElementById('saved-flights-section');
+            const bookingsList = document.getElementById('bookings-list');
+
+            if (!savedContainer) return;
+
+            const saved = getSavedFlights();
+
+            // Hide bookings list, show saved section
+            if (bookingsList) bookingsList.classList.add('hidden');
+            if (savedSection) savedSection.classList.remove('hidden');
+
+            if (saved.length === 0) {
+                savedContainer.innerHTML = `
+                    <div class="text-center py-12 bg-white rounded-2xl border border-slate-200">
+                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="ph ph-heart text-2xl text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-1">No saved flights</h3>
+                        <p class="text-sm text-slate-400 mb-6">Save flights for later to compare and book them anytime.</p>
+                        <a href="/" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-xl transition-all text-sm">
+                            <i class="ph ph-magnifying-glass"></i> Search Flights
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            savedContainer.innerHTML = saved.map(f => `
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md transition-shadow">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                ${f.airline?.logo ? `<img src="${f.airline.logo}" alt="" class="w-8 h-8 object-contain">` : ''}
+                                <div>
+                                    <div class="font-bold text-slate-900">${f.airline?.name || 'Airline'}</div>
+                                    <div class="text-sm text-slate-500">${f.flightNumber || ''}</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 mt-3">
+                                <div class="text-center">
+                                    <div class="font-bold text-lg text-slate-900">${f.departTime || '--:--'}</div>
+                                    <div class="text-sm text-slate-500">${f.origin || 'Origin'}</div>
+                                </div>
+                                <div class="flex-1 flex items-center justify-center">
+                                    <div class="border-t border-slate-300 flex-1"></div>
+                                    <i class="ph ph-airplane text-slate-400 mx-2"></i>
+                                    <div class="border-t border-slate-300 flex-1"></div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-bold text-lg text-slate-900">${f.arriveTime || '--:--'}</div>
+                                    <div class="text-sm text-slate-500">${f.destination || 'Destination'}</div>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-sm text-slate-500">
+                                <i class="ph ph-calendar mr-1"></i> Saved on ${new Date(f.savedAt).toLocaleDateString()}
+                            </div>
+                        </div>
+                        <div class="w-full md:w-48 border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-4 flex flex-col justify-center items-end">
+                            <div class="text-2xl font-bold text-green-600">$${f.price?.amount || f.price || '0.00'}</div>
+                            <div class="text-xs text-slate-400 mb-3">per adult</div>
+                            <a href="/details?flight=${encodeURIComponent(f.id)}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded text-sm w-full text-center transition-colors mb-2">
+                                Select
+                            </a>
+                            <button onclick="removeSavedFlightAndRefresh('${f.id}')" class="text-slate-500 hover:text-red-600 text-sm font-medium flex items-center justify-center gap-1 transition-colors">
+                                <i class="ph ph-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.removeSavedFlightAndRefresh = function(flightId) {
+            const saved = getSavedFlights();
+            const filtered = saved.filter(f => f.id !== flightId);
+            localStorage.setItem(SAVED_FLIGHTS_KEY, JSON.stringify(filtered));
+            renderSavedFlights();
+            if (window.showToast) window.showToast('Flight removed from saved', 'success');
+        };
+
+        // Render bookings
+        function renderBookings(filter = 'all') {
+            const container = document.getElementById('bookings-list');
+            const savedSection = document.getElementById('saved-flights-section');
+
+            if (!container) return;
+
+            // Hide saved section, show bookings list
+            if (savedSection) savedSection.classList.add('hidden');
+            container.classList.remove('hidden');
+
+            // Handle saved flights tab
+            if (filter === 'saved') {
+                renderSavedFlights();
+                return;
+            }
+
+            let bookingsToRender = [];
+            if (filter === 'all') {
+                bookingsToRender = allBookings;
+            } else if (filter === 'new') {
+                bookingsToRender = allBookings.filter(b => b.status === 'new' || b.status === 'pending' || !b.status);
+            } else if (filter === 'confirmed') {
+                bookingsToRender = allBookings.filter(b => b.status === 'confirmed' || b.status === 'paid');
+            } else if (filter === 'cancelled') {
+                bookingsToRender = allBookings.filter(b => b.status === 'cancelled');
+            }
+
+            container.innerHTML = '';block';
+                if (loadingUi && typeof loadingUi.setBusy === 'function') {
+                    loadingUi.setBusy(listEl, false);
+                }
+                return;
+            }
+            countEl.textContent = bookingsToRender.length + ' booking' + (bookingsToRender.length !== 1 ? 's' : '');
+
+            if (!bookingsToRender.length) {
+                container.innerHTML = '';
                 emptyEl.style.display = 'block';
                 if (loadingUi && typeof loadingUi.setBusy === 'function') {
                     loadingUi.setBusy(listEl, false);
