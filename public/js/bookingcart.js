@@ -58,24 +58,35 @@
   }
 
   function saveFlightForLater(flight) {
+    console.log('[SaveFlight] Saving flight:', flight);
     const saved = getSavedFlights();
+    console.log('[SaveFlight] Current saved flights:', saved);
     // Check if already saved
     if (saved.some(f => f.id === flight.id)) {
+      console.log('[SaveFlight] Flight already saved');
       showToast('Flight already saved!', 'error');
       return;
     }
-    // Add savedAt timestamp
+    // Slim down flight data for storage
     const flightToSave = {
-      ...slimFlightForStorage(flight),
+      id: flight.id,
+      airline: flight.airline,
+      origin: flight.origin,
+      destination: flight.destination,
+      departTime: flight.departTime,
+      arriveTime: flight.arriveTime,
+      price: flight.price,
       savedAt: new Date().toISOString()
     };
     saved.push(flightToSave);
     localStorage.setItem(SAVED_FLIGHTS_KEY, JSON.stringify(saved));
+    console.log('[SaveFlight] Flight saved successfully. Total saved:', saved.length);
     showToast('Flight saved for later!', 'success');
   }
 
   function removeSavedFlight(flightId) {
     const saved = getSavedFlights();
+    console.log('[RemoveSavedFlight] Removing flight:', flightId);
     const filtered = saved.filter(f => f.id !== flightId);
     localStorage.setItem(SAVED_FLIGHTS_KEY, JSON.stringify(filtered));
   }
