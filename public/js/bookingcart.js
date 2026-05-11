@@ -46,6 +46,45 @@
     return Array.isArray(flights) ? flights.map(slimFlightForStorage) : [];
   }
 
+  // Saved flights for later functionality
+  const SAVED_FLIGHTS_KEY = 'bookingcart_saved_flights';
+
+  function getSavedFlights() {
+    try {
+      return JSON.parse(localStorage.getItem(SAVED_FLIGHTS_KEY)) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveFlightForLater(flight) {
+    const saved = getSavedFlights();
+    // Check if already saved
+    if (saved.some(f => f.id === flight.id)) {
+      showToast('Flight already saved!', 'error');
+      return;
+    }
+    // Add savedAt timestamp
+    const flightToSave = {
+      ...slimFlightForStorage(flight),
+      savedAt: new Date().toISOString()
+    };
+    saved.push(flightToSave);
+    localStorage.setItem(SAVED_FLIGHTS_KEY, JSON.stringify(saved));
+    showToast('Flight saved for later!', 'success');
+  }
+
+  function removeSavedFlight(flightId) {
+    const saved = getSavedFlights();
+    const filtered = saved.filter(f => f.id !== flightId);
+    localStorage.setItem(SAVED_FLIGHTS_KEY, JSON.stringify(filtered));
+  }
+
+  // Make functions available globally for other scripts
+  window.saveFlightForLater = saveFlightForLater;
+  window.getSavedFlights = getSavedFlights;
+  window.removeSavedFlight = removeSavedFlight;
+
   function readFlightCache(signature) {
     try {
       const raw = localStorage.getItem(FLIGHT_RESULTS_CACHE_KEY);
@@ -897,10 +936,23 @@
             '<a href="#" data-flight-link class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded text-sm w-full text-center flex items-center justify-center gap-1 transition-colors">' +
               'Select <i class="ph-bold ph-caret-right"></i>' +
             '</a>' +
+            '<button data-save-flight class="mt-2 text-slate-500 hover:text-green-600 text-sm font-medium flex items-center justify-center gap-1 transition-colors w-full py-2">' +
+              '<i class="ph ph-heart"></i> Save for later' +
+            '</button>' +
           '</div>';
 
         const link = card.querySelector("[data-flight-link]");
         if (link) link.setAttribute("href", "/details?flight=" + encodeURIComponent(f.id));
+
+        // Add save functionality
+        const saveBtn = card.querySelector("[data-save-flight]");
+        if (saveBtn) {
+          saveBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            saveFlightForLater(f);
+          });
+        }
 
         listEl.appendChild(card);
       });

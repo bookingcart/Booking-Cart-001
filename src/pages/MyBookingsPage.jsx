@@ -90,6 +90,8 @@ export default function MyBookingsPage() {
                           className="flex-1 py-2.5 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-50 transition-all">Confirmed</button>
                       <button data-tab="cancelled"
                           className="flex-1 py-2.5 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-50 transition-all">Cancelled</button>
+                      <button data-tab="saved"
+                          className="flex-1 py-2.5 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-50 transition-all">Saved</button>
                   </div>
       
                   
@@ -113,6 +115,11 @@ export default function MyBookingsPage() {
       
                   
                   <div id="bookings-list" className="space-y-4"></div>
+
+                  {/* Saved Flights Section */}
+                  <div id="saved-flights-section" className="hidden">
+                      <div id="saved-flights-list" className="space-y-4"></div>
+                  </div>
               </main>
       
       
