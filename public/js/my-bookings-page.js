@@ -289,18 +289,8 @@ function bookingsAuthHeaders() {
             if (updated) renderBookings();
         }
 
-        // Saved Flights functionality
-        const SAVED_FLIGHTS_KEY = 'bookingcart_saved_flights';
-
-        function getSavedFlights() {
-            try {
-                return JSON.parse(localStorage.getItem(SAVED_FLIGHTS_KEY)) || [];
-            } catch (e) {
-                return [];
-            }
-        }
-
-        function renderSavedFlights() {
+        // Render bookings
+        function renderBookings(filter = 'all') {
             const savedContainer = document.getElementById('saved-flights-list');
             const savedSection = document.getElementById('saved-flights-section');
             const bookingsList = document.getElementById('bookings-list');
@@ -395,6 +385,7 @@ function bookingsAuthHeaders() {
 
             // Handle saved flights tab
             if (filter === 'saved') {
+                console.log('[MyBookings] Rendering saved flights tab');
                 renderSavedFlights();
                 return;
             }
@@ -410,7 +401,21 @@ function bookingsAuthHeaders() {
                 bookingsToRender = allBookings.filter(b => b.status === 'cancelled');
             }
 
-            container.innerHTML = '';block';
+            container.innerHTML = '';
+
+            if (bookingsToRender.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 bg-white rounded-2xl border border-slate-200">
+                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="ph ph-ticket text-2xl text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-1">No bookings found</h3>
+                        <p class="text-sm text-slate-400 mb-6">You don't have any ${filter === 'all' ? '' : filter} bookings yet.</p>
+                        <a href="/" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-xl transition-all text-sm">
+                            <i class="ph ph-magnifying-glass"></i> Search Flights
+                        </a>
+                    </div>
+                `;
                 if (loadingUi && typeof loadingUi.setBusy === 'function') {
                     loadingUi.setBusy(listEl, false);
                 }
