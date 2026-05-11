@@ -1,26 +1,12 @@
 require('dotenv').config();
 
 const fetch = require('node-fetch');
-const { getCorsHeaders } = require('../lib/cors');
+const { applyCors } = require('../lib/cors');
 
 const DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';
 const DUFFEL_BASE_URL = 'https://api.duffel.com';
 
-function applyCors(req, res) {
-  const h = getCorsHeaders(req);
-  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));
-}
 
-/**
- * GET /api/duffel-seat-maps?offer_id=off_...
- *
- * Fetches the seat maps for an offer.
- *
- * Returns:
- * {
- *   ok: true,
- *   seatMaps: [...]
- * }
  */
 module.exports = async (req, res) => {
   applyCors(req, res);

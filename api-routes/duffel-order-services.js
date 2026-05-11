@@ -1,30 +1,12 @@
 require('dotenv').config();
 
 const fetch = require('node-fetch');
-const { getCorsHeaders } = require('../lib/cors');
+const { applyCors } = require('../lib/cors');
 
 const DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';
 const DUFFEL_BASE_URL = 'https://api.duffel.com';
 
-function applyCors(req, res) {
-  const h = getCorsHeaders(req);
-  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));
-}
-
-/**
- * Post-Booking Services API
- * 
- * GET  /api/duffel-order-services?orderId=... - Get available services (bags, seats, meals)
- * POST /api/duffel-order-services - Add services to order
- */
-
-module.exports = async (req, res) => {
-  applyCors(req, res);
-
-  if (req.method === 'OPTIONS') return res.status(200).end();
-
-  if (!DUFFEL_API_KEY) {
-    return res.status(503).json({ ok: false, error: 'Duffel is not configured (missing DUFFEL_API_KEY)' });
+);
   }
 
   try {

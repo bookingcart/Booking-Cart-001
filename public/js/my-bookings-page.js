@@ -235,7 +235,8 @@ function bookingsAuthHeaders() {
                     loadingUi.setBusy(listEl, false);
                 }
                 allBookings = data.ok ? (data.bookings || []) : [];
-
+                console.log('[MyBookings] Loaded', allBookings.length, 'bookings for', email);
+                
                 renderBookings();
                 checkForIssuedTickets();
             } catch (err) {
@@ -287,81 +288,6 @@ function bookingsAuthHeaders() {
                 }
             }
             if (updated) renderBookings();
-        }
-
-        // Render bookings
-        function renderBookings(filter = 'all') {
-            const savedContainer = document.getElementById('saved-flights-list');
-            const savedSection = document.getElementById('saved-flights-section');
-            const bookingsList = document.getElementById('bookings-list');
-
-            if (!savedContainer) return;
-
-            const saved = getSavedFlights();
-
-            // Hide bookings list, show saved section
-            if (bookingsList) bookingsList.classList.add('hidden');
-            if (savedSection) savedSection.classList.remove('hidden');
-
-            if (saved.length === 0) {
-                savedContainer.innerHTML = `
-                    <div class="text-center py-12 bg-white rounded-2xl border border-slate-200">
-                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="ph ph-heart text-2xl text-slate-400"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-slate-700 mb-1">No saved flights</h3>
-                        <p class="text-sm text-slate-400 mb-6">Save flights for later to compare and book them anytime.</p>
-                        <a href="/" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-xl transition-all text-sm">
-                            <i class="ph ph-magnifying-glass"></i> Search Flights
-                        </a>
-                    </div>
-                `;
-                return;
-            }
-
-            savedContainer.innerHTML = saved.map(f => `
-                <div class="bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-md transition-shadow">
-                    <div class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-1">
-                            <div class="flex items-center gap-3 mb-2">
-                                ${f.airline?.logo ? `<img src="${f.airline.logo}" alt="" class="w-8 h-8 object-contain">` : ''}
-                                <div>
-                                    <div class="font-bold text-slate-900">${f.airline?.name || 'Airline'}</div>
-                                    <div class="text-sm text-slate-500">${f.flightNumber || ''}</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4 mt-3">
-                                <div class="text-center">
-                                    <div class="font-bold text-lg text-slate-900">${f.departTime || '--:--'}</div>
-                                    <div class="text-sm text-slate-500">${f.origin || 'Origin'}</div>
-                                </div>
-                                <div class="flex-1 flex items-center justify-center">
-                                    <div class="border-t border-slate-300 flex-1"></div>
-                                    <i class="ph ph-airplane text-slate-400 mx-2"></i>
-                                    <div class="border-t border-slate-300 flex-1"></div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="font-bold text-lg text-slate-900">${f.arriveTime || '--:--'}</div>
-                                    <div class="text-sm text-slate-500">${f.destination || 'Destination'}</div>
-                                </div>
-                            </div>
-                            <div class="mt-3 text-sm text-slate-500">
-                                <i class="ph ph-calendar mr-1"></i> Saved on ${new Date(f.savedAt).toLocaleDateString()}
-                            </div>
-                        </div>
-                        <div class="w-full md:w-48 border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-4 flex flex-col justify-center items-end">
-                            <div class="text-2xl font-bold text-green-600">$${f.price?.amount || f.price || '0.00'}</div>
-                            <div class="text-xs text-slate-400 mb-3">per adult</div>
-                            <a href="/details?flight=${encodeURIComponent(f.id)}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded text-sm w-full text-center transition-colors mb-2">
-                                Select
-                            </a>
-                            <button onclick="removeSavedFlightAndRefresh('${f.id}')" class="text-slate-500 hover:text-red-600 text-sm font-medium flex items-center justify-center gap-1 transition-colors">
-                                <i class="ph ph-trash"></i> Remove
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
         }
 
         window.removeSavedFlightAndRefresh = function(flightId) {
@@ -436,11 +362,13 @@ function bookingsAuthHeaders() {
                 loadingUi.setBusy(listEl, false);
             }
 
-            listEl.innerHTML = filtered.map(b => {
+            console.log('[MyBookings] Rendering', bookingsToRender.length, 'bookings');
+            container.innerHTML = bookingsToRender.map(b => {
                 const statusMap = {
                     held: { label: 'Payment Required', color: 'text-orange-600 bg-orange-50 border-orange-200' },
-                    new: { label: 'Processing', color: 'text-yellow-600 bg-yellow-50 border-yellow-200' },
-                    confirmed: { label: 'Pending Upload', color: 'text-blue-600 bg-blue-50 border-blue-200' },
+                    pending: { label: 'Pending', color: 'text-yellow-600 bg-yellow-50 border-yellow-200' },
+                    confirmed: { label: 'Confirmed', color: 'text-blue-600 bg-blue-50 border-blue-200' },
+                    paid: { label: 'Paid', color: 'text-green-600 bg-green-50 border-green-200' },
                     issued: { label: 'Ticket Issued', color: 'text-green-600 bg-green-50 border-green-200' },
                     cancelled: { label: 'Cancelled', color: 'text-red-500 bg-red-50 border-red-200' }
                 };
@@ -964,22 +892,296 @@ function bookingsAuthHeaders() {
                 alert('Booking not found or not eligible for changes.');
                 return;
             }
-            
-            // Prompt for new dates
-            const newDate = prompt('Enter new departure date (YYYY-MM-DD):');
-            if (!newDate || !/^\d{4}-\d{2}-\d{2}$/.test(newDate)) {
-                alert('Invalid date format. Please use YYYY-MM-DD.');
+
+            // Parse current route to get origin/destination
+            const routeParts = (booking.route || '').split(' → ');
+            if (routeParts.length < 2) {
+                alert('Unable to determine flight route for change.');
                 return;
             }
+
+            const originCode = routeParts[0].trim();
+            const destinationCode = routeParts[routeParts.length - 1].trim();
+
+            // Create modal for date selection
+            const modal = document.createElement('div');
+            modal.id = 'change-flight-modal';
+            modal.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-lg w-full max-h-[90vh] overflow-auto">
+                    <h3 class="text-xl font-bold mb-4">Change Flight</h3>
+                    <p class="text-sm text-gray-600 mb-4">Current route: ${booking.route}</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">New Departure Date</label>
+                            <input type="date" id="new-departure-date" class="w-full px-3 py-2 border rounded" required>
+                        </div>
+                        
+                        <div id="change-flight-results" class="hidden">
+                            <h4 class="font-bold mb-2">Available Flights</h4>
+                            <div id="change-flight-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
+                        </div>
+                        
+                        <div id="change-offers-section" class="hidden">
+                            <h4 class="font-bold mb-2">Change Options</h4>
+                            <div id="change-offers-list" class="space-y-2"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-3 mt-6">
+                        <button onclick="closeChangeModal()" class="flex-1 px-4 py-2 bg-gray-200 rounded">Cancel</button>
+                        <button id="search-flights-btn" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded">Search Flights</button>
+                    </div>
+                </div>
+            `;
+            modal.dataset.bookingRef = ref;
+            document.body.appendChild(modal);
+
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('new-departure-date').min = today;
+
+            // Handle search
+            document.getElementById('search-flights-btn').onclick = async () => {
+                const newDate = document.getElementById('new-departure-date').value;
+                if (!newDate) {
+                    alert('Please select a departure date.');
+                    return;
+                }
+
+                const btn = document.getElementById('search-flights-btn');
+                btn.disabled = true;
+                btn.textContent = 'Searching...';
+
+                try {
+                    // Search for alternative flights
+                    const searchResp = await fetch('/api/duffel-search', {
+                        method: 'POST',
+                        headers: bookingsAuthHeaders(),
+                        body: JSON.stringify({
+                            originLocationCode: originCode,
+                            destinationLocationCode: destinationCode,
+                            departureDate: newDate,
+                            adults: booking.passengers?.length || 1,
+                            travelClass: 'economy',
+                            max: 10
+                        })
+                    });
+
+                    const searchData = await searchResp.json();
+                    if (!searchResp.ok || !searchData.ok) {
+                        alert((searchData && searchData.error) || 'No flights available for this date.');
+                        return;
+                    }
+
+                    // Display flight options
+                    displayChangeFlightOptions(searchData.offers || [], booking, newDate);
+
+                } catch (e) {
+                    console.error('Search error:', e);
+                    alert('Error searching for flights. Please try again.');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Search Flights';
+                }
+            };
+        }
+
+        // Display available flights for change
+        function displayChangeFlightOptions(flights, booking, newDate) {
+            const resultsDiv = document.getElementById('change-flight-results');
+            const listDiv = document.getElementById('change-flight-list');
             
-            try {
-                // For simplicity, we'll just create a change request
-                // In a real implementation, you'd need to search for new flights first
-                alert('Flight change feature: This would search for new flights and create a change request. Coming soon!');
+            if (flights.length === 0) {
+                listDiv.innerHTML = '<p class="text-gray-500">No flights available for this date.</p>';
+                resultsDiv.classList.remove('hidden');
+                return;
+            }
+
+            listDiv.innerHTML = flights.map(flight => {
+                const price = flight.price ? `$${flight.price.toFixed(2)}` : 'Price unavailable';
+                const stops = flight.stops === 0 ? 'Non-stop' : `${flight.stops} stop${flight.stops > 1 ? 's' : ''}`;
+                const airline = flight.airline?.name || flight.airline?.code || 'Airline';
                 
+                return `
+                    <div class="p-3 border rounded hover:bg-gray-50 cursor-pointer" onclick="selectFlightForChange('${flight.id}', '${newDate}', ${JSON.stringify(flight).replace(/"/g, '&quot;')})">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="font-bold">${airline}</p>
+                                <p class="text-sm text-gray-600">${flight.from?.code} → ${flight.to?.code}</p>
+                                <p class="text-sm">${flight.departTime} - ${flight.arriveTime} (${flight.durationMin} min)</p>
+                                <p class="text-sm text-gray-500">${stops}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-green-600">${price}</p>
+                                <p class="text-xs text-gray-500">${flight.cabin || 'Economy'}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            resultsDiv.classList.remove('hidden');
+        }
+
+        // Select a flight and create change request
+        async function selectFlightForChange(offerId, newDate, flightData) {
+            const modal = document.getElementById('change-flight-modal');
+            if (!modal) return;
+
+            // Get the booking reference from the modal context
+            const ref = modal.dataset.bookingRef;
+            const booking = allBookings.find(b => b.ref === ref);
+            if (!booking) {
+                alert('Booking not found.');
+                return;
+            }
+
+            // Show loading
+            const resultsDiv = document.getElementById('change-flight-results');
+            resultsDiv.innerHTML = '<p class="text-center py-4">Creating change request...</p>';
+
+            try {
+                // Get current order details to find slice ID
+                const orderResp = await fetch(`/api/duffel-orders?id=${encodeURIComponent(booking.duffelOrderId)}`, {
+                    headers: bookingsAuthHeaders()
+                });
+                
+                let slices = [];
+                if (orderResp.ok) {
+                    const orderData = await orderResp.json();
+                    // Extract slice IDs from the order response
+                    slices = orderData.order?.slices || [];
+                }
+                
+                // Fallback: try to parse from booking data
+                if (slices.length === 0 && booking.flight?.segments) {
+                    // For single slice changes, we can work without exact slice IDs
+                    // Duffel API will match based on origin/destination/date
+                    console.log('No slices found in order, proceeding with route-based matching');
+                }
+
+                // Create change request
+                const changeResp = await fetch('/api/duffel-order-changes', {
+                    method: 'POST',
+                    headers: bookingsAuthHeaders(),
+                    body: JSON.stringify({
+                        action: 'create',
+                        orderId: booking.duffelOrderId,
+                        slices: {
+                            remove: slices.map(s => s.id),
+                            add: [{
+                                origin: flightData.from?.code,
+                                destination: flightData.to?.code,
+                                departure_date: newDate,
+                                offer_id: offerId
+                            }]
+                        }
+                    })
+                });
+
+                const changeData = await changeResp.json();
+                if (!changeResp.ok || !changeData.ok) {
+                    throw new Error((changeData && changeData.error) || 'Failed to create change request');
+                }
+
+                // Display change offers
+                displayChangeOffers(changeData.changeRequest, booking);
+
             } catch (e) {
-                console.error('Change booking error:', e);
-                alert('Error processing change request.');
+                console.error('Change request error:', e);
+                alert('Error: ' + e.message);
+                resultsDiv.innerHTML = '<p class="text-red-500">Failed to create change request. Please try again.</p>';
+            }
+        }
+
+        // Display change offers for confirmation
+        function displayChangeOffers(changeRequest, booking) {
+            const offersSection = document.getElementById('change-offers-section');
+            const offersList = document.getElementById('change-offers-list');
+            const offers = changeRequest.offers || [];
+
+            if (offers.length === 0) {
+                offersList.innerHTML = '<p class="text-gray-500">No change options available.</p>';
+                offersSection.classList.remove('hidden');
+                return;
+            }
+
+            offersList.innerHTML = offers.map((offer, index) => {
+                const changeCost = offer.changeTotalAmount > 0 
+                    ? `+${offer.changeTotalCurrency} ${offer.changeTotalAmount}` 
+                    : offer.refundAmount > 0 
+                        ? `Refund: ${offer.refundCurrency} ${offer.refundAmount}`
+                        : 'No additional cost';
+                
+                const penalty = offer.penaltyTotalAmount > 0 
+                    ? `<p class="text-xs text-red-500">Penalty: ${offer.penaltyTotalCurrency} ${offer.penaltyTotalAmount}</p>` 
+                    : '';
+
+                return `
+                    <div class="p-3 border rounded border-green-300 bg-green-50">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <p class="font-bold text-green-700">Option ${index + 1}</p>
+                                <p class="text-sm">New Total: ${offer.newTotalCurrency} ${offer.newTotalAmount}</p>
+                                ${penalty}
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold ${offer.changeTotalAmount > 0 ? 'text-red-600' : 'text-green-600'}">${changeCost}</p>
+                            </div>
+                        </div>
+                        <button onclick="confirmFlightChange('${offer.id}', '${changeRequest.id}')" 
+                            class="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                            Select This Option
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            offersSection.classList.remove('hidden');
+            
+            // Scroll to offers
+            offersSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Confirm the flight change
+        async function confirmFlightChange(offerId, changeRequestId) {
+            if (!confirm('Confirm this flight change? You will be charged/refunded the difference.')) {
+                return;
+            }
+
+            try {
+                const resp = await fetch('/api/duffel-order-changes', {
+                    method: 'POST',
+                    headers: bookingsAuthHeaders(),
+                    body: JSON.stringify({
+                        action: 'confirm',
+                        orderChangeOfferId: offerId
+                    })
+                });
+
+                const data = await resp.json();
+                if (!resp.ok || !data.ok) {
+                    throw new Error((data && data.error) || 'Failed to confirm change');
+                }
+
+                alert(`Flight change confirmed!\nReference: ${data.orderChange.id}\nNew total: ${data.orderChange.newTotalCurrency} ${data.orderChange.newTotalAmount}`);
+                
+                closeChangeModal();
+                lookup(); // Refresh bookings
+
+            } catch (e) {
+                console.error('Confirm change error:', e);
+                alert('Error confirming change: ' + e.message);
+            }
+        }
+
+        // Close the change modal
+        function closeChangeModal() {
+            const modal = document.getElementById('change-flight-modal');
+            if (modal) {
+                modal.remove();
             }
         }
 

@@ -1,7 +1,7 @@
 // api/user.js – persist Account Settings (MongoDB or local fallback)
 
 const { getCollections } = require('../lib/mongo');
-const { getCorsHeaders } = require('../lib/cors');
+const { applyCors } = require('../lib/cors');
 const { verifyRequestBearer } = require('../lib/google-verify');
 const { requireAdminEmail } = require('../lib/admin');
 const jwt = require('jsonwebtoken');
@@ -36,22 +36,7 @@ async function verifyAuthToken(req) {
   return await verifyRequestBearer(req);
 }
 
-function applyCors(req, res) {
-  const h = getCorsHeaders(req);
-  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));
-}
-
-module.exports = async (req, res) => {
-  applyCors(req, res);
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  if (req.method === 'OPTIONS') return res.status(200).end();
-
-  try {
-    let collections;
-    try {
-      collections = await getCollections();
-    } catch (err) {
+ catch (err) {
       if (process.env.NODE_ENV === 'production') throw err;
       if (!global.__users) global.__users = {};
     }

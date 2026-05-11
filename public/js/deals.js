@@ -67,9 +67,7 @@
     };
 
     // ── Helpers ────────────────────────────────────────────────────────
-    function money(amount, currency) {
-        return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency || 'USD', maximumFractionDigits: 0 }).format(amount);
-    }
+    
 
     function getHistory() {
         try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch { return []; }
@@ -170,7 +168,7 @@
 
     // ── Card HTML ──────────────────────────────────────────────────────────
     function renderCard(deal, originCode) {
-        const price = money(deal.price, deal.currency);
+        const price = window.money(deal.price, deal.currency);
         const stops = deal.stops === 0 ? 'Direct' : `${deal.stops} stop${deal.stops > 1 ? 's' : ''}`;
         const stopsIcon = deal.stops === 0 ? 'ph-check-circle' : 'ph-arrow-bend-right-down';
         const stopsColor = deal.stops === 0 ? 'text-emerald-600 bg-emerald-50' : 'text-amber-600 bg-amber-50';

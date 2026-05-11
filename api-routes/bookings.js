@@ -1,7 +1,7 @@
 // api/bookings.js – persist flight bookings (MongoDB or local fallback)
 
 const { getCollections } = require('../lib/mongo');
-const { getCorsHeaders } = require('../lib/cors');
+const { applyCors } = require('../lib/cors');
 const { requireAdminEmail } = require('../lib/admin');
 const { verifyRequestBearer } = require('../lib/google-verify');
 
@@ -19,17 +19,7 @@ async function connectToDatabase() {
   }
 }
 
-function applyCors(req, res) {
-  const h = getCorsHeaders(req);
-  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));
-}
-
-module.exports = async (req, res) => {
-  applyCors(req, res);
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'POST only' });
+);
 
   const { action, booking, email, id, status, pin } = req.body || {};
 

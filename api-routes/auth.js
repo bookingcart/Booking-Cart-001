@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Resend } = require('resend');
 const { getCollections } = require('../lib/mongo');
-const { getCorsHeaders } = require('../lib/cors');
+const { applyCors } = require('../lib/cors');
 
 const SALT_ROUNDS = 12;
 const JWT_SECRET = process.env.JWT_SECRET || 'bc_jwt_dev_secret_change_in_prod';
@@ -30,15 +30,7 @@ function checkRateLimit(key, maxReq, windowMs) {
   return entry.count <= maxReq;
 }
 
-function applyCors(req, res) {
-  const h = getCorsHeaders(req);
-  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));
-}
 
-/** Validate email format */
-function isValidEmail(e) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || '').trim());
-}
 
 /** Validate password: min 8 chars, 1 number, 1 special char */
 function isStrongPassword(p) {

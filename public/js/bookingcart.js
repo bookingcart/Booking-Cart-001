@@ -4,21 +4,12 @@
   const FLIGHT_RESULTS_CACHE_KEY = "bookingcart_flight_results_cache_v1";
   const FLIGHT_RESULTS_CACHE_TTL_MS = 30 * 60 * 1000;
 
-  function readState() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : {};
-    } catch (e) {
+   catch (e) {
       return {};
     }
   }
 
-  function writeState(patch) {
-    const current = readState();
-    const next = Object.assign({}, current, patch);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    return next;
-  }
+  
 
   function flightStorageKey(search, state) {
     const pax = state.passengers || { adults: 1, children: 0, infants: 0 };
@@ -149,44 +140,17 @@
     }
   }
 
-  function getQuery() {
-    const params = new URLSearchParams(window.location.search);
-    const obj = {};
-    params.forEach((v, k) => {
-      obj[k] = v;
-    });
+  );
     return obj;
   }
 
-  function setText(el, text) {
-    if (!el) return;
-    el.textContent = text;
-  }
+  
 
-  function clamp(n, min, max) {
-    return Math.max(min, Math.min(max, n));
-  }
+  
 
-  function ensureToast() {
-    let toast = document.querySelector(".toast");
-    if (toast) return toast;
-    toast = document.createElement("div");
-    toast.className = "toast";
-    toast.innerHTML =
-      '<p class="toast__title" id="toastTitle"></p><p class="toast__desc" id="toastDesc"></p>';
-    document.body.appendChild(toast);
-    return toast;
-  }
+  
 
-  function toast(title, desc) {
-    const t = ensureToast();
-    setText(document.getElementById("toastTitle"), title);
-    setText(document.getElementById("toastDesc"), desc);
-    t.setAttribute("data-open", "true");
-    window.clearTimeout(toast._timer);
-    toast._timer = window.setTimeout(() => {
-      t.setAttribute("data-open", "false");
-    }, 2600);
+  , 2600);
   }
 
   function initStepper() {
@@ -381,14 +345,14 @@
       if (multi) {
         multi.style.display = mode === "multi" ? "block" : "none";
       }
-      writeState({ tripType: mode });
+      window.writeState({ tripType: mode });
     }
 
     tabs.forEach((t) => {
       t.addEventListener("click", () => setMode(t.getAttribute("data-trip")));
     });
 
-    const st = readState();
+    const st = window.readState();
     setMode(st.tripType || "round");
   }
 
@@ -405,24 +369,24 @@
     const hidden = document.querySelector("input[name='passengers']");
 
     function readCounts() {
-      const st = readState();
+      const st = window.readState();
       const c = st.passengers || { adults: 1, children: 0, infants: 0 };
-      c.adults = clamp(Number(c.adults || 1), 1, 9);
-      c.children = clamp(Number(c.children || 0), 0, 9);
-      c.infants = clamp(Number(c.infants || 0), 0, c.adults);
+      c.adults = window.clamp(Number(c.adults || 1), 1, 9);
+      c.children = window.clamp(Number(c.children || 0), 0, 9);
+      c.infants = window.clamp(Number(c.infants || 0), 0, c.adults);
       return c;
     }
 
     function writeCounts(c) {
-      writeState({ passengers: c });
-      if (adultsEl) setText(adultsEl, String(c.adults));
-      if (childrenEl) setText(childrenEl, String(c.children));
-      if (infantsEl) setText(infantsEl, String(c.infants));
+      window.writeState({ passengers: c });
+      if (adultsEl) window.setText(adultsEl, String(c.adults));
+      if (childrenEl) window.setText(childrenEl, String(c.children));
+      if (infantsEl) window.setText(infantsEl, String(c.infants));
 
       const total = c.adults + c.children + c.infants;
       const label = total === 1 ? "1 traveler" : total + " travelers";
-      if (triggerSummary) setText(triggerSummary, label);
-      else if (trigger) setText(trigger, label);
+      if (triggerSummary) window.setText(triggerSummary, label);
+      else if (trigger) window.setText(trigger, label);
       if (hidden) hidden.value = JSON.stringify(c);
     }
 
@@ -434,9 +398,9 @@
           e.preventDefault();
           const c = readCounts();
           c[kind] = c[kind] - 1;
-          if (kind === "adults") c.adults = clamp(c.adults, 1, 9);
-          if (kind === "children") c.children = clamp(c.children, 0, 9);
-          if (kind === "infants") c.infants = clamp(c.infants, 0, c.adults);
+          if (kind === "adults") c.adults = window.clamp(c.adults, 1, 9);
+          if (kind === "children") c.children = window.clamp(c.children, 0, 9);
+          if (kind === "infants") c.infants = window.clamp(c.infants, 0, c.adults);
           if (c.infants > c.adults) c.infants = c.adults;
           writeCounts(c);
         });
@@ -445,9 +409,9 @@
           e.preventDefault();
           const c = readCounts();
           c[kind] = c[kind] + 1;
-          if (kind === "adults") c.adults = clamp(c.adults, 1, 9);
-          if (kind === "children") c.children = clamp(c.children, 0, 9);
-          if (kind === "infants") c.infants = clamp(c.infants, 0, c.adults);
+          if (kind === "adults") c.adults = window.clamp(c.adults, 1, 9);
+          if (kind === "children") c.children = window.clamp(c.children, 0, 9);
+          if (kind === "infants") c.infants = window.clamp(c.infants, 0, c.adults);
           writeCounts(c);
         });
     }
@@ -636,7 +600,7 @@
     });
 
     // Restore labels from state
-    const st = readState();
+    const st = window.readState();
     if (st.search) {
       if (st.search.depart) {
         const lbl = document.querySelector("[data-cal-label='depart']");
@@ -653,7 +617,7 @@
     const form = document.querySelector("form[data-search-form]");
     if (!form) return;
 
-    const st = readState();
+    const st = window.readState();
     const from = form.querySelector("input[name='from']");
     const to = form.querySelector("input[name='to']");
     const depart = form.querySelector("input[name='depart']");
@@ -669,7 +633,7 @@
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const mode = (readState().tripType || "round").toString();
+      const mode = (window.readState().tripType || "round").toString();
       const payload = {
         tripType: mode,
         from: from ? from.value.trim() : "",
@@ -680,30 +644,27 @@
       };
 
       if (!payload.from || !payload.to) {
-        toast("Missing route", "Please choose a departure and destination airport.");
+        window.toast("Missing route", "Please choose a departure and destination airport.");
         return;
       }
 
       if (!payload.depart) {
-        toast("Missing date", "Please select a departure date.");
+        window.toast("Missing date", "Please select a departure date.");
         return;
       }
 
       if (payload.tripType === "round" && !payload.return) {
-        toast("Missing return date", "Select a return date or switch to one-way.");
+        window.toast("Missing return date", "Select a return date or switch to one-way.");
         return;
       }
 
-      writeState({ search: payload, bookingRef: null, _bookingSaved: null, duffelPassengers: null });
+      window.writeState({ search: payload, bookingRef: null, _bookingSaved: null, duffelPassengers: null });
       if (typeof window.__bcNavigate === "function") window.__bcNavigate("/results");
       else window.location.href = "/results";
     });
   }
 
-  function money(n, currency = "USD") {
-    try {
-      return new Intl.NumberFormat(undefined, { style: "currency", currency: currency, maximumFractionDigits: 0 }).format(n);
-    } catch (e) {
+   catch (e) {
       const sym = currency === "GBP" ? "£" : currency === "EUR" ? "€" : "$";
       return sym + n;
     }
@@ -749,7 +710,7 @@
         console.log(`Duffel search successful: ${data.flights.length} flights`);
         // Persist Duffel passenger IDs — needed by /api/duffel-orders (Step 3)
         if (Array.isArray(data.duffelPassengers) && data.duffelPassengers.length > 0) {
-          writeState({ duffelPassengers: data.duffelPassengers });
+          window.writeState({ duffelPassengers: data.duffelPassengers });
         }
         return data.flights;
       } else if (data && !data.ok) {
@@ -793,10 +754,10 @@
       const mx = Number(p ? p.max : 2000);
 
       if (maxLbl) {
-        maxLbl.textContent = money(mx, ccy) + "+";
+        maxLbl.textContent = window.money(mx, ccy) + "+";
       }
       if (chipP && p) {
-        chipP.textContent = v >= mx - 1 ? "No max" : "≤ " + money(v, ccy);
+        chipP.textContent = v >= mx - 1 ? "No max" : "≤ " + window.money(v, ccy);
       }
       if (chipS && s) {
         const map = { any: "Any", "0": "Nonstop", "1": "≤1 stop" };
@@ -814,14 +775,14 @@
       }
     }
 
-    const state = readState();
+    const state = window.readState();
     const search = state.search || {};
     const searchSignature = flightStorageKey(search, state);
     const cachedFlights = readFlightCache(searchSignature);
 
     // Update header
     const headerRouteDest = document.querySelector("[data-route-dest]");
-    if (headerRouteDest) setText(headerRouteDest, search.to || "Destination");
+    if (headerRouteDest) window.setText(headerRouteDest, search.to || "Destination");
 
     const headerSearchFrom = document.querySelector("#search-from");
     const headerSearchTo = document.querySelector("#search-to");
@@ -966,7 +927,7 @@
             '</div>' +
           '</div>' +
           '<div class="w-full md:w-48 border-t md:border-t-0 md:border-l border-slate-100 p-5 flex flex-col justify-center items-end bg-slate-50/30">' +
-            '<div class="text-2xl font-bold text-green-600">' + money(priceVal, f.currency) + '</div>' +
+            '<div class="text-2xl font-bold text-green-600">' + window.money(priceVal, f.currency) + '</div>' +
             '<div class="text-[10px] text-slate-400 font-medium mb-3">per adult</div>' +
             '<a href="#" data-flight-link class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded text-sm w-full text-center flex items-center justify-center gap-1 transition-colors">' +
               'Select <i class="ph-bold ph-caret-right"></i>' +
@@ -995,7 +956,7 @@
 
     function hydrateResults(flights) {
       currentFlights = Array.isArray(flights) ? flights : [];
-      writeState({ flights: slimFlightsForStorage(currentFlights) });
+      window.writeState({ flights: slimFlightsForStorage(currentFlights) });
       if (currentFlights.length) {
         writeFlightCache(searchSignature, search, currentFlights);
       }
@@ -1030,14 +991,14 @@
                 ${label}
               </span>
             </div>
-            <span class="text-xs text-slate-400 font-medium">${money(minPrice, currentFlights[0].currency)}</span>
+            <span class="text-xs text-slate-400 font-medium">${window.money(minPrice, currentFlights[0].currency)}</span>
           `;
           airlineList.appendChild(lbl);
         });
       }
 
       const flightCountEl = document.querySelector("[data-flight-count]");
-      if (flightCountEl) setText(flightCountEl, currentFlights.length);
+      if (flightCountEl) window.setText(flightCountEl, currentFlights.length);
 
       const priceTrend = document.getElementById("price-trend-graph");
       if (priceTrend) priceTrend.style.display = "block";
@@ -1086,7 +1047,7 @@
             }
             listEl.innerHTML = '<div class="bg-white rounded-2xl p-8 text-center border border-slate-100 shadow-sm"><div class="text-lg font-medium text-slate-900 mb-2">No flights found</div><div class="text-slate-500">No flights available for this route and dates. Try different airports or dates.</div></div>';
           }
-          writeState({ flights: [] });
+          window.writeState({ flights: [] });
           return;
         }
 
@@ -1099,7 +1060,7 @@
           }
           listEl.innerHTML = '<div class="bg-white rounded-2xl p-8 text-center border border-slate-100 shadow-sm"><div class="text-red-500">Error loading flights. Please try again.</div></div>';
         }
-        writeState({ flights: [] });
+        window.writeState({ flights: [] });
       }
     })();
   }
@@ -1108,18 +1069,18 @@
     const root = document.querySelector("[data-details]");
     if (!root) return;
 
-    const q = getQuery();
-    const state = readState();
+    const q = window.getQuery();
+    const state = window.readState();
     const flights = state.flights || [];
     const id = (q.flight || "").toString();
 
     const flight = flights.find((f) => f.id === id) || flights[0];
     if (!flight) {
-      toast("No selection", "Go back to results and pick a flight.");
+      window.toast("No selection", "Go back to results and pick a flight.");
       return;
     }
 
-    writeState({ selectedFlightId: flight.id, selectedFlight: flight });
+    window.writeState({ selectedFlightId: flight.id, selectedFlight: flight });
 
     // Sidebar Info
     const priceVal = typeof flight.price === "object" ? parseFloat(flight.price.amount || 0) : flight.price;
@@ -1129,11 +1090,11 @@
     const duration = root.querySelector("[data-duration]");
     const price = root.querySelector("[data-price]");
 
-    if (airline) setText(airline, flight.airline.name);
+    if (airline) window.setText(airline, flight.airline.name);
     if (airlineLogo) airlineLogo.innerHTML = '<div class="w-full h-full flex items-center justify-center text-slate-900 font-medium">' + flight.airline.logo + '</div>';
-    if (times) setText(times, (flight.departTime || "--:--") + " → " + (flight.arriveTime || "--:--"));
-    if (duration) setText(duration, durationLabel(flight.durationMin || 0) + " • " + (flight.stops === 0 ? "Non-stop" : flight.stops + " stop" + (flight.stops > 1 ? "s" : "")));
-    if (price) setText(price, money(priceVal, flight.currency));
+    if (times) window.setText(times, (flight.departTime || "--:--") + " → " + (flight.arriveTime || "--:--"));
+    if (duration) window.setText(duration, durationLabel(flight.durationMin || 0) + " • " + (flight.stops === 0 ? "Non-stop" : flight.stops + " stop" + (flight.stops > 1 ? "s" : "")));
+    if (price) window.setText(price, window.money(priceVal, flight.currency));
 
     // Dynamic Trip Breakdown
     const segmentsContainer = document.getElementById("flight-segments-container");
@@ -1222,7 +1183,7 @@
     if (cta)
       cta.addEventListener("click", (e) => {
         e.preventDefault();
-        toast("Flight selected", "Next: traveler details.");
+        window.toast("Flight selected", "Next: traveler details.");
         window.setTimeout(() => {
           if (typeof window.__bcNavigate === "function") window.__bcNavigate("/passengers");
           else window.location.href = "/passengers";
@@ -1234,7 +1195,7 @@
     const root = document.querySelector("[data-passenger-page]");
     if (!root) return;
 
-    const state = readState();
+    const state = window.readState();
     const pax = state.passengers || { adults: 1, children: 0, infants: 0 };
     const total = pax.adults + pax.children + pax.infants;
 
@@ -1302,71 +1263,43 @@
       const phone = (form.querySelector("input[name='phone']") || {}).value || "";
 
       if (!contactEmail.trim()) {
-        toast("Contact required", "Please enter an email for ticket delivery.");
+        window.toast("Contact required", "Please enter an email for ticket delivery.");
         return;
       }
 
       // Phone is required — Duffel orders.create needs a valid E.164 phone number
       const phoneClean = (phone || "").trim();
       if (!phoneClean) {
-        toast("Phone required", "Please enter a phone number for your booking (e.g. +14155550100).");
+        window.toast("Phone required", "Please enter a phone number for your booking (e.g. +14155550100).");
         return;
       }
       if (!/^\+[1-9]\d{6,14}$/.test(phoneClean)) {
-        toast("Invalid phone", "Phone must be in international format, e.g. +14155550100.");
+        window.toast("Invalid phone", "Phone must be in international format, e.g. +14155550100.");
         return;
       }
 
       if (travelers.some((t) => !t.title || !t.gender || !t.firstName || !t.lastName || !t.dob || !t.doc)) {
-        toast("Missing traveler info", "Fill all required traveler fields including title and gender.");
+        window.toast("Missing traveler info", "Fill all required traveler fields including title and gender.");
         return;
       }
 
-      writeState({ travelers, contact: { email: contactEmail.trim(), phone: phoneClean } });
+      window.writeState({ travelers, contact: { email: contactEmail.trim(), phone: phoneClean } });
       if (typeof window.__bcNavigate === "function") window.__bcNavigate("/extras");
       else window.location.href = "/extras";
     });
   }
 
-  function flightPriceAmount(flight) {
-    if (!flight || flight.price == null) return 0;
-    if (typeof flight.price === "object") {
-      return parseFloat(flight.price.amount || 0) || 0;
-    }
+  
     return Number(flight.price) || 0;
   }
 
-  function computeTotals(state) {
-    const pax = state.passengers || { adults: 1, children: 0, infants: 0 };
-    const totalPax = pax.adults + pax.children + pax.infants;
-    const flight = (state.flights || []).find((f) => f.id === state.selectedFlightId)
-      || state.selectedFlight
-      || (state.flights || [])[0];
-    const base = flight ? flightPriceAmount(flight) * totalPax : 0;
-
-    const extras = state.extras || {};
-    const baggagePrice = state._baggagePrice || 45;
-    const seatPrice = state._seatPrice || 14;
-
-    const baggage = Number(extras.baggage || 0) * baggagePrice;
-    const seats = typeof state._seatCost === 'number' ? state._seatCost : 
-                  (extras.seat === "standard" ? seatPrice * totalPax : extras.seat === "extra" ? (seatPrice * 2) * totalPax : 0);
-    const insurance = extras.insurance ? 19 * totalPax : 0;
-    const meals = extras.meal === "premium" ? 12 * totalPax : extras.meal === "standard" ? 7 * totalPax : 0;
-
-    const subtotal = base + baggage + seats + insurance + meals;
-    const taxes = Math.round(subtotal * 0.11);
-    const total = subtotal + taxes;
-    const currency = flight ? (flight.currency || "USD") : "USD";
-
-    return { totalPax, base, baggage, seats, insurance, meals, taxes, total, currency };
-  }
+  
 
   function initExtras() {
     const root = document.querySelector("[data-extras]");
     if (!root) return;
 
-    const state = readState();
+    const state = window.readState();
     const extras = state.extras || { baggage: 0, seat: "none", insurance: false, meal: "none" };
 
     const baggage = root.querySelector("input[name='baggage']");
@@ -1387,14 +1320,14 @@
     };
 
     const updateSummary = () => {
-      const stateNow = readState();
-      const totals = computeTotals(stateNow);
+      const stateNow = window.readState();
+      const totals = window.computeTotals(stateNow);
       const ccy = totals.currency;
       const extrasCost = totals.baggage + totals.seats + totals.insurance + totals.meals;
-      if (summary.base) setText(summary.base, money(totals.base, ccy));
-      if (summary.extras) setText(summary.extras, money(extrasCost, ccy));
-      if (summary.taxes) setText(summary.taxes, money(totals.taxes, ccy));
-      if (summary.total) setText(summary.total, money(totals.total, ccy));
+      if (summary.base) window.setText(summary.base, window.money(totals.base, ccy));
+      if (summary.extras) window.setText(summary.extras, window.money(extrasCost, ccy));
+      if (summary.taxes) window.setText(summary.taxes, window.money(totals.taxes, ccy));
+      if (summary.total) window.setText(summary.total, window.money(totals.total, ccy));
       window.dispatchEvent(new CustomEvent("bookingcart_totals_updated"));
     };
 
@@ -1406,7 +1339,7 @@
           if (data && data.ok && data.offer && data.offer.available_services) {
             const bags = data.offer.available_services.filter(s => s.type === 'baggage');
             if (bags.length > 0) {
-              writeState({ _baggageServiceId: bags[0].id, _baggagePrice: parseFloat(bags[0].total_amount) });
+              window.writeState({ _baggageServiceId: bags[0].id, _baggagePrice: parseFloat(bags[0].total_amount) });
               updateSummary();
             }
           }
@@ -1459,7 +1392,7 @@
                             <label class="block text-sm font-bold text-slate-700 mb-1">Passenger ${i + 1}</label>
                             <select class="seat-select-dynamic w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-green-500 outline-none" data-pax-id="${dPax.id}">
                                 <option value="none">No specific seat preference</option>
-                                ${validSeatsForPax.map(s => `<option value="${s.service.id}" data-price="${s.service.total_amount}">${s.designator} - ${money(s.service.total_amount, s.service.total_currency)}</option>`).join('')}
+                                ${validSeatsForPax.map(s => `<option value="${s.service.id}" data-price="${s.service.total_amount}">${s.designator} - ${window.money(s.service.total_amount, s.service.total_currency)}</option>`).join('')}
                             </select>
                         </div>
                         `;
@@ -1477,7 +1410,7 @@
                                     seatCost += parseFloat(opt.dataset.price || 0);
                                 }
                             });
-                            writeState({ _selectedSeats: selections, _seatCost: seatCost });
+                            window.writeState({ _selectedSeats: selections, _seatCost: seatCost });
                             updateSummary();
                         });
                     });
@@ -1504,7 +1437,7 @@
         insurance: insurance ? Boolean(insurance.checked) : false,
         meal: meal ? meal.value : "none"
       };
-      writeState({ extras: next });
+      window.writeState({ extras: next });
       updateSummary();
     }
 
@@ -1635,30 +1568,30 @@
     }
     console.log("[initPayment] Found data-payment root");
 
-    const query = getQuery();
+    const query = window.getQuery();
     if (query.canceled === "1") {
-      toast("Checkout canceled", "Your Stripe payment was canceled. You can try again whenever you're ready.");
+      window.toast("Checkout canceled", "Your Stripe payment was canceled. You can try again whenever you're ready.");
     }
 
-    const currentState = readState();
+    const currentState = window.readState();
     if (!currentState.bookingRef) {
-      writeState({ bookingRef: "BC" + Math.random().toString(36).slice(2, 8).toUpperCase() });
+      window.writeState({ bookingRef: "BC" + Math.random().toString(36).slice(2, 8).toUpperCase() });
     }
 
-    const totals = computeTotals(readState());
+    const totals = window.computeTotals(window.readState());
     const ccy = totals.currency;
 
     const totalEl = document.querySelector("[data-pay-total]");
-    if (totalEl) setText(totalEl, money(totals.total, ccy));
+    if (totalEl) window.setText(totalEl, window.money(totals.total, ccy));
     const totalInlineEl = document.querySelector("[data-pay-total-inline]");
-    if (totalInlineEl) setText(totalInlineEl, money(totals.total, ccy));
+    if (totalInlineEl) window.setText(totalInlineEl, window.money(totals.total, ccy));
     const totalBtnEl = document.querySelector("[data-pay-total-btn]");
-    if (totalBtnEl) setText(totalBtnEl, money(totals.total, ccy));
+    if (totalBtnEl) window.setText(totalBtnEl, window.money(totals.total, ccy));
 
     const bookingRefEl = root.querySelector("[data-stripe-booking-ref]");
-    if (bookingRefEl) setText(bookingRefEl, readState().bookingRef || "—");
+    if (bookingRefEl) window.setText(bookingRefEl, window.readState().bookingRef || "—");
     const amountEl = document.querySelector("[data-stripe-amount]");
-    if (amountEl) setText(amountEl, money(totals.total, ccy));
+    if (amountEl) window.setText(amountEl, window.money(totals.total, ccy));
 
     const form = root.querySelector("form[data-payment-form]");
     if (!form) {
@@ -1672,15 +1605,15 @@
     const submitBtn = form.querySelector("button[type='submit']");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const state = readState();
+      const state = window.readState();
       const bookingRef = state.bookingRef || "BC" + Math.random().toString(36).slice(2, 8).toUpperCase();
       const contactEmail = (state.contact && state.contact.email) || "";
 
-      writeState({ bookingRef, _bookingSaved: null, _stripeSessionId: null, payment: null });
+      window.writeState({ bookingRef, _bookingSaved: null, _stripeSessionId: null, payment: null });
 
       const amountCents = Math.round(Number(totals.total) * 100);
       if (!Number.isFinite(amountCents) || amountCents < 50) {
-        toast(
+        window.toast(
           "Invalid payment amount",
           "We could not calculate a valid total. Go back to results and pick a flight again, or refresh this page."
         );
@@ -1715,12 +1648,12 @@
         window.location.href = data.url;
       } catch (err) {
         console.error("Stripe checkout error:", err);
-        toast("Stripe checkout unavailable", err.message || "Unable to start checkout.");
+        window.toast("Stripe checkout unavailable", err.message || "Unable to start checkout.");
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = 'Continue to Stripe Checkout <span data-pay-total-btn></span> <i class="ph-bold ph-lock-key"></i>';
           const totalBtnInner = submitBtn.querySelector("[data-pay-total-btn]");
-          if (totalBtnInner) setText(totalBtnInner, money(totals.total, ccy));
+          if (totalBtnInner) window.setText(totalBtnInner, window.money(totals.total, ccy));
         }
       }
     });
@@ -1731,9 +1664,9 @@
       holdBtn.addEventListener("click", async (e) => {
         console.log("[holdBtn] Hold order button clicked");
         e.preventDefault();
-        const state = readState();
+        const state = window.readState();
         const bookingRef = state.bookingRef || "BC" + Math.random().toString(36).slice(2, 8).toUpperCase();
-        writeState({ bookingRef, _bookingSaved: null, _stripeSessionId: null, payment: null });
+        window.writeState({ bookingRef, _bookingSaved: null, _stripeSessionId: null, payment: null });
 
         if (submitBtn) submitBtn.disabled = true;
         holdBtn.disabled = true;
@@ -1748,7 +1681,7 @@
           return;
         }
 
-        const nextState = writeState({
+        const nextState = window.writeState({
           bookingRef: duffelRes.ref || bookingRef,
           _duffelOrderId: duffelRes.id
         });
@@ -1785,14 +1718,14 @@
             body: JSON.stringify({ action: "save", booking })
           });
           if (saveResp.ok) {
-            writeState({ _bookingSaved: true });
+            window.writeState({ _bookingSaved: true });
             if (typeof window.__bcNavigate === "function") window.__bcNavigate("/confirmation?held=1");
             else window.location.href = "/confirmation?held=1";
             return;
           }
         } catch (e) { }
 
-        toast("Error", "Could not hold order. Please try again.");
+        window.toast("Error", "Could not hold order. Please try again.");
         holdBtn.disabled = false;
         holdBtn.innerHTML = 'Hold Order (Pay Later)';
         if (submitBtn) submitBtn.disabled = false;
@@ -1806,11 +1739,11 @@
     const root = document.querySelector("[data-confirmation]");
     if (!root) return;
 
-    const state = readState();
-    const query = getQuery();
+    const state = window.readState();
+    const query = window.getQuery();
     const sessionId = String(query.session_id || "").trim();
     const refEl = root.querySelector("[data-booking-ref]");
-    if (refEl) setText(refEl, state.bookingRef || "—");
+    if (refEl) window.setText(refEl, state.bookingRef || "—");
     const statusEl = root.querySelector("[data-payment-status]");
     const headlineEl = document.querySelector('main[data-step="confirmation"] h1');
     const subtitleEl = document.querySelector('main[data-step="confirmation"] p');
@@ -1903,12 +1836,12 @@
            });
 
            localStorage.removeItem('bc_paying_booking');
-           if (refEl) setText(refEl, payingBooking.ref);
+           if (refEl) window.setText(refEl, payingBooking.ref);
            return;
         }
 
         const recoveredBookingRef = stripeSession.client_reference_id || stripeSession.metadata?.bookingRef || state.bookingRef || "";
-        const nextState = writeState({
+        const nextState = window.writeState({
           bookingRef: recoveredBookingRef || state.bookingRef || "",
           payment: {
             provider: "stripe",
@@ -1922,7 +1855,7 @@
         if (nextState.bookingRef && !nextState._bookingSaved) {
           const s = nextState.search || {};
           const flight = (nextState.flights || []).find(f => f.id === nextState.selectedFlightId) || (nextState.flights || [])[0];
-          const totals = computeTotals(nextState);
+          const totals = window.computeTotals(nextState);
 
           let contactObj = nextState.contact || {};
           if (!contactObj.email) {
@@ -1937,11 +1870,11 @@
           let duffelOrderId = null;
           const duffelRes = await createDuffelOrder(nextState, totals, false);
           if (duffelRes.ref) {
-            writeState({ bookingRef: duffelRes.ref, _duffelOrderId: duffelRes.id });
+            window.writeState({ bookingRef: duffelRes.ref, _duffelOrderId: duffelRes.id });
             nextState.bookingRef = duffelRes.ref;
             duffelOrderRef = duffelRes.ref;
             duffelOrderId = duffelRes.id;
-            if (refEl) setText(refEl, duffelRes.ref);
+            if (refEl) window.setText(refEl, duffelRes.ref);
             console.log('✅ Duffel order created — PNR:', duffelOrderRef, 'Order ID:', duffelOrderId);
           } else {
             console.warn('Duffel order failed (non-fatal, booking will still be saved locally)');
@@ -1979,7 +1912,7 @@
             throw new Error((saveData && saveData.error) || "Booking save failed");
           }
 
-          writeState({ _bookingSaved: true, _stripeSessionId: stripeSession.id });
+          window.writeState({ _bookingSaved: true, _stripeSessionId: stripeSession.id });
           console.log("\u2705 Booking saved to server:", nextState.bookingRef);
         }
       } catch (err) {
@@ -1994,9 +1927,9 @@
       })();
     }
 
-    const totals = computeTotals(state);
+    const totals = window.computeTotals(state);
     const totalEl = root.querySelector("[data-confirm-total]");
-    if (totalEl) setText(totalEl, money(totals.total, totals.currency));
+    if (totalEl) window.setText(totalEl, window.money(totals.total, totals.currency));
 
     const flight = (state.flights || []).find((f) => f.id === state.selectedFlightId) || (state.flights || [])[0];
     const flightEl = root.querySelector("[data-confirm-airline]");
@@ -2012,11 +1945,11 @@
       const elSeats = root.querySelector("[data-confirm-seats]");
       const elPlatform = root.querySelector("[data-confirm-platform]");
 
-      if (elAirline) setText(elAirline, flight.airline.name);
-      if (elOriginCity) setText(elOriginCity, s.from || "Origin");
-      if (elOriginTime) setText(elOriginTime, (s.depart || "") + (s.depart && flight.departTime ? " • " : "") + (flight.departTime || ""));
-      if (elDestCity) setText(elDestCity, s.to || "Destination");
-      if (elDestTime) setText(elDestTime, (s.return || s.depart || "") + ((s.return || s.depart) && flight.arriveTime ? " • " : "") + (flight.arriveTime || ""));
+      if (elAirline) window.setText(elAirline, flight.airline.name);
+      if (elOriginCity) window.setText(elOriginCity, s.from || "Origin");
+      if (elOriginTime) window.setText(elOriginTime, (s.depart || "") + (s.depart && flight.departTime ? " • " : "") + (flight.departTime || ""));
+      if (elDestCity) window.setText(elDestCity, s.to || "Destination");
+      if (elDestTime) window.setText(elDestTime, (s.return || s.depart || "") + ((s.return || s.depart) && flight.arriveTime ? " • " : "") + (flight.arriveTime || ""));
 
       if (elDuration) {
         const directText = "Direct";
@@ -2029,8 +1962,8 @@
       const ranSeat = flight.id ? flight.id.slice(-2).replace(/[^0-9]/g, '4') : '42';
       const ranGate = flight.id ? flight.id.slice(0, 2).toUpperCase() : 'B';
 
-      if (elSeats) setText(elSeats, passCount > 1 ? passCount + " Seats" : ranSeat + "A");
-      if (elPlatform) setText(elPlatform, ranGate + "12");
+      if (elSeats) window.setText(elSeats, passCount > 1 ? passCount + " Seats" : ranSeat + "A");
+      if (elPlatform) window.setText(elPlatform, ranGate + "12");
     }
 
     const downloadBtn = root.querySelector("[data-download]");
@@ -2043,7 +1976,7 @@
         lines.push("Route: " + (s.from || "") + " -> " + (s.to || ""));
         lines.push("Dates: " + (s.depart || "") + (s.return ? " -> " + s.return : ""));
         if (flight) lines.push("Flight: " + flight.airline.name + " (" + flight.id + ") " + flight.departTime + " -> " + flight.arriveTime);
-        lines.push("Total Paid: " + money(totals.total));
+        lines.push("Total Paid: " + window.money(totals.total));
         lines.push("Contact: " + ((state.contact || {}).email || ""));
 
         const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
@@ -2063,10 +1996,10 @@
         e.preventDefault();
         const email = ((state.contact || {}).email || "").trim();
         if (!email) {
-          toast("No email", "Go back and add a contact email.");
+          window.toast("No email", "Go back and add a contact email.");
           return;
         }
-        toast("Ticket queued", "Demo: ticket would be emailed to " + email + ".");
+        window.toast("Ticket queued", "Demo: ticket would be emailed to " + email + ".");
       });
   }
 

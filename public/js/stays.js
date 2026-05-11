@@ -1,64 +1,26 @@
 (function () {
   const STORAGE_KEY = "bookingcart_stays_v1";
 
-  function readState() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : {};
-    } catch {
+   catch {
       return {};
     }
   }
 
-  function writeState(patch) {
-    const current = readState();
-    const next = Object.assign({}, current, patch);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    return next;
-  }
+  
 
-  function setText(el, text) {
-    if (!el) return;
-    el.textContent = text;
-  }
+  
 
-  function money(n) {
-    const v = Number(n || 0);
-    return v.toLocaleString(undefined, { style: "currency", currency: "USD" });
-  }
+  
 
-  function clamp(n, min, max) {
-    return Math.max(min, Math.min(max, n));
-  }
+  
 
-  function getQuery() {
-    const params = new URLSearchParams(window.location.search);
-    const obj = {};
-    params.forEach((v, k) => {
-      obj[k] = v;
-    });
+  );
     return obj;
   }
 
-  function ensureToast() {
-    let toast = document.querySelector(".toast");
-    if (toast) return toast;
-    toast = document.createElement("div");
-    toast.className = "toast";
-    toast.innerHTML = '<p class="toast__title" id="toastTitle"></p><p class="toast__desc" id="toastDesc"></p>';
-    document.body.appendChild(toast);
-    return toast;
-  }
+  
 
-  function toast(title, desc) {
-    const t = ensureToast();
-    setText(document.getElementById("toastTitle"), title);
-    setText(document.getElementById("toastDesc"), desc);
-    t.setAttribute("data-open", "true");
-    window.clearTimeout(toast._timer);
-    toast._timer = window.setTimeout(() => {
-      t.setAttribute("data-open", "false");
-    }, 2800);
+  , 2800);
   }
 
   function nightsBetween(checkIn, checkOut) {
@@ -239,17 +201,17 @@
     const panel = root.querySelector("[data-guests-panel]");
     if (!wrap || !trigger || !panel) return;
 
-    const state = readState();
+    const state = window.readState();
     const current = state.guests || { adults: 2, children: 0, rooms: 1 };
 
     function setCounts(next) {
-      const a = clamp(Number(next.adults || 0), 1, 12);
-      const c = clamp(Number(next.children || 0), 0, 10);
-      const r = clamp(Number(next.rooms || 0), 1, 8);
-      writeState({ guests: { adults: a, children: c, rooms: r } });
-      setText(panel.querySelector("[data-count='adults']"), String(a));
-      setText(panel.querySelector("[data-count='children']"), String(c));
-      setText(panel.querySelector("[data-count='rooms']"), String(r));
+      const a = window.clamp(Number(next.adults || 0), 1, 12);
+      const c = window.clamp(Number(next.children || 0), 0, 10);
+      const r = window.clamp(Number(next.rooms || 0), 1, 8);
+      window.writeState({ guests: { adults: a, children: c, rooms: r } });
+      window.setText(panel.querySelector("[data-count='adults']"), String(a));
+      window.setText(panel.querySelector("[data-count='children']"), String(c));
+      window.setText(panel.querySelector("[data-count='rooms']"), String(r));
       trigger.textContent = `${a} adult${a === 1 ? "" : "s"} • ${c} child${c === 1 ? "" : "ren"} • ${r} room${r === 1 ? "" : "s"}`;
     }
 
@@ -265,7 +227,7 @@
       if (!btn) return;
       const kind = btn.getAttribute("data-plus") || btn.getAttribute("data-minus");
       const delta = btn.hasAttribute("data-plus") ? 1 : -1;
-      const st = readState();
+      const st = window.readState();
       const g = st.guests || { adults: 2, children: 0, rooms: 1 };
       const next = Object.assign({}, g);
       next[kind] = Number(next[kind] || 0) + delta;
@@ -326,23 +288,23 @@
       e.preventDefault();
       const d = String(dest ? dest.value : "").trim();
       if (!d) {
-        toast("Destination required", "Enter a city, hotel name, or landmark.");
+        window.toast("Destination required", "Enter a city, hotel name, or landmark.");
         return;
       }
       const inVal = String(checkIn ? checkIn.value : "");
       const outVal = String(checkOut ? checkOut.value : "");
       if (!inVal || !outVal) {
-        toast("Dates required", "Choose check-in and check-out dates.");
+        window.toast("Dates required", "Choose check-in and check-out dates.");
         return;
       }
       const v = validateDates();
       if (!v.ok) {
-        toast("Invalid dates", v.msg);
+        window.toast("Invalid dates", v.msg);
         return;
       }
-      const st = readState();
+      const st = window.readState();
       const guests = st.guests || { adults: 2, children: 0, rooms: 1 };
-      writeState({
+      window.writeState({
         search: { destination: d, checkIn: inVal, checkOut: outVal },
         guests,
         selectedHotelId: "",
@@ -435,7 +397,7 @@
            </div>
            <div class='suggest-card__body'>
              <div class='kpi suggest-card__title'>${h.name}</div>
-             <div class='suggest-card__hint'>${h.city} • ${renderStars(h.stars)} • From ${money(from)} / night</div>
+             <div class='suggest-card__hint'>${h.city} • ${renderStars(h.stars)} • From ${window.money(from)} / night</div>
              <div class='small'>${h.reviews} reviews</div>
            </div>`;
 
@@ -482,7 +444,7 @@
           if (destInput) destInput.value = d.name;
           if (checkIn && !String(checkIn.value || "")) checkIn.focus();
           else if (checkOut && !String(checkOut.value || "")) checkOut.focus();
-          else toast("Destination selected", `Search stays in ${d.name} when you're ready.`);
+          else window.toast("Destination selected", `Search stays in ${d.name} when you're ready.`);
           if (searchRoot) searchRoot.scrollIntoView({ behavior: "smooth", block: "start" });
         });
 
@@ -492,7 +454,7 @@
   }
 
   function renderStars(n) {
-    const count = clamp(Number(n || 0), 0, 5);
+    const count = window.clamp(Number(n || 0), 0, 5);
     return "★".repeat(count) + "☆".repeat(Math.max(0, 5 - count));
   }
 
@@ -500,15 +462,15 @@
     const root = document.querySelector("[data-stays-results]");
     if (!root) return;
 
-    const state = readState();
+    const state = window.readState();
     const search = state.search || {};
     const guests = state.guests || { adults: 2, children: 0, rooms: 1 };
     const nights = nightsBetween(search.checkIn, search.checkOut);
 
     const routeEl = root.querySelector("[data-stays-route]");
     const metaEl = root.querySelector("[data-stays-meta]");
-    if (routeEl) setText(routeEl, search.destination ? `${search.destination}` : "Stays");
-    if (metaEl) setText(metaEl, nights ? `${search.checkIn} → ${search.checkOut} • ${nights} night${nights === 1 ? "" : "s"} • ${guests.rooms} room${guests.rooms === 1 ? "" : "s"}` : "Choose dates to continue");
+    if (routeEl) window.setText(routeEl, search.destination ? `${search.destination}` : "Stays");
+    if (metaEl) window.setText(metaEl, nights ? `${search.checkIn} → ${search.checkOut} • ${nights} night${nights === 1 ? "" : "s"} • ${guests.rooms} room${guests.rooms === 1 ? "" : "s"}` : "Choose dates to continue");
 
     const listEl = root.querySelector("[data-hotel-list]");
     if (!listEl) return;
@@ -660,8 +622,8 @@
           <div class='row space hotel-card__footer'>
             <div>
               <div class='small'>From</div>
-              <div class='price hotel-card__price'>${money(prices.nightly)} <span class='small'>/ night</span></div>
-              <div class='muted hotel-card__total'>Total: ${money(prices.total)}</div>
+              <div class='price hotel-card__price'>${window.money(prices.nightly)} <span class='small'>/ night</span></div>
+              <div class='muted hotel-card__total'>Total: ${window.money(prices.total)}</div>
             </div>
             <div class='row hotel-card__actions'>
               <a class='btn btn-secondary' href='/stays/details?hotel=${encodeURIComponent(h.id)}'>View details</a>
@@ -720,12 +682,12 @@
     const root = document.querySelector("[data-stays-details]");
     if (!root) return;
 
-    const q = getQuery();
+    const q = window.getQuery();
     const id = String(q.hotel || "").trim();
     const hotel = HOTELS.find((h) => h.id === id) || HOTELS[0];
     if (!hotel) return;
 
-    writeState({ selectedHotelId: hotel.id, selectedRoomId: "" });
+    window.writeState({ selectedHotelId: hotel.id, selectedRoomId: "" });
 
     const titleEl = root.querySelector("[data-hotel-name]");
     const subEl = root.querySelector("[data-hotel-sub]");
@@ -738,10 +700,10 @@
     const polEl = root.querySelector("[data-hotel-policies]");
     const roomEl = root.querySelector("[data-room-list]");
 
-    if (titleEl) setText(titleEl, hotel.name);
-    if (subEl) setText(subEl, `${renderStars(hotel.stars)} • ${hotel.propertyType}`);
-    if (ratingEl) setText(ratingEl, `${hotel.rating.toFixed(1)} • ${hotel.reviews} reviews`);
-    if (addrEl) setText(addrEl, `${hotel.address} • ${hotel.distanceKm.toFixed(1)} km from center`);
+    if (titleEl) window.setText(titleEl, hotel.name);
+    if (subEl) window.setText(subEl, `${renderStars(hotel.stars)} • ${hotel.propertyType}`);
+    if (ratingEl) window.setText(ratingEl, `${hotel.rating.toFixed(1)} • ${hotel.reviews} reviews`);
+    if (addrEl) window.setText(addrEl, `${hotel.address} • ${hotel.distanceKm.toFixed(1)} km from center`);
 
     if (gallery) {
       gallery.innerHTML = "";
@@ -767,7 +729,7 @@
       amenityEl.innerHTML = (hotel.amenities || []).map((a) => `<span class='pill'>${amenityLabel(a)}</span>`).join("");
     }
 
-    if (descEl) setText(descEl, hotel.description || "");
+    if (descEl) window.setText(descEl, hotel.description || "");
 
     if (rulesEl) {
       rulesEl.innerHTML = (hotel.houseRules || []).map((r) => `<div class='row space' style='flex-wrap:wrap'><div class='muted' style='font-weight:850'>Rule</div><div class='kpi'>${r}</div></div>`).join("<div class='hr'></div>");
@@ -783,7 +745,7 @@
          <div class='row space' style='flex-wrap:wrap'><div class='muted' style='font-weight:850'>Cancellation</div><div class='kpi'>${p.cancellation || "—"}</div></div>`;
     }
 
-    const st = readState();
+    const st = window.readState();
     const search = st.search || {};
     const guests = st.guests || { adults: 2, children: 0, rooms: 1 };
     const nights = nightsBetween(search.checkIn, search.checkOut);
@@ -813,8 +775,8 @@
               </div>
               <div style='text-align:right'>
                 <div class='small'>From</div>
-                <div class='price' style='font-size:20px'>${money(p.nightly)} <span class='small'>/ night</span></div>
-                <div class='muted' style='margin-top:6px'>Total: ${money(p.total)}</div>
+                <div class='price' style='font-size:20px'>${window.money(p.nightly)} <span class='small'>/ night</span></div>
+                <div class='muted' style='margin-top:6px'>Total: ${window.money(p.total)}</div>
                 <div style='margin-top:10px'>
                   <a class='btn btn-primary' href='#' data-select-room='${r.id}' style='display:inline-flex;align-items:center;justify-content:center'>Select room</a>
                 </div>
@@ -823,7 +785,7 @@
           </div>`;
         card.querySelector("[data-select-room]").addEventListener("click", (e) => {
           e.preventDefault();
-          writeState({ selectedHotelId: hotel.id, selectedRoomId: r.id });
+          window.writeState({ selectedHotelId: hotel.id, selectedRoomId: r.id });
           if (typeof window.__bcNavigate === "function") window.__bcNavigate("stays-checkout.html");
           else window.location.href = "stays-checkout.html";
         });
@@ -845,21 +807,21 @@
     const root = document.querySelector("[data-stays-checkout]");
     if (!root) return;
 
-    const st = readState();
+    const st = window.readState();
     const search = st.search || {};
     const guests = st.guests || { adults: 2, children: 0, rooms: 1 };
     const nights = nightsBetween(search.checkIn, search.checkOut);
 
     const hotel = HOTELS.find((h) => h.id === st.selectedHotelId);
     if (!hotel) {
-      toast("Missing selection", "Select a hotel first.");
+      window.toast("Missing selection", "Select a hotel first.");
       if (typeof window.__bcNavigate === "function") window.__bcNavigate("stays-results.html");
       else window.location.href = "stays-results.html";
       return;
     }
     const room = (hotel.rooms || []).find((r) => r.id === st.selectedRoomId) || (hotel.rooms || [])[0];
     if (!room) {
-      toast("Missing room", "Select a room to continue.");
+      window.toast("Missing room", "Select a room to continue.");
       if (typeof window.__bcNavigate === "function") window.__bcNavigate(`stays-details.html?hotel=${encodeURIComponent(hotel.id)}`);
       else window.location.href = `stays-details.html?hotel=${encodeURIComponent(hotel.id)}`;
       return;
@@ -870,14 +832,14 @@
     const taxes = Math.round(subtotal * 0.12);
     const total = subtotal + taxes;
 
-    setText(root.querySelector("[data-sum-hotel]"), hotel.name);
-    setText(root.querySelector("[data-sum-room]"), room.name);
-    setText(root.querySelector("[data-sum-dates]"), `${search.checkIn} → ${search.checkOut} (${Math.max(1, nights)} night${nights === 1 ? "" : "s"})`);
-    setText(root.querySelector("[data-sum-guests]"), `${guests.adults} adult${guests.adults === 1 ? "" : "s"}, ${guests.children} child${guests.children === 1 ? "" : "ren"} • ${guests.rooms} room${guests.rooms === 1 ? "" : "s"}`);
+    window.setText(root.querySelector("[data-sum-hotel]"), hotel.name);
+    window.setText(root.querySelector("[data-sum-room]"), room.name);
+    window.setText(root.querySelector("[data-sum-dates]"), `${search.checkIn} → ${search.checkOut} (${Math.max(1, nights)} night${nights === 1 ? "" : "s"})`);
+    window.setText(root.querySelector("[data-sum-guests]"), `${guests.adults} adult${guests.adults === 1 ? "" : "s"}, ${guests.children} child${guests.children === 1 ? "" : "ren"} • ${guests.rooms} room${guests.rooms === 1 ? "" : "s"}`);
 
-    setText(root.querySelector("[data-sum-nightly]"), money(nightly));
-    setText(root.querySelector("[data-sum-taxes]"), money(taxes));
-    setText(root.querySelector("[data-sum-total]"), money(total));
+    window.setText(root.querySelector("[data-sum-nightly]"), window.money(nightly));
+    window.setText(root.querySelector("[data-sum-taxes]"), window.money(taxes));
+    window.setText(root.querySelector("[data-sum-total]"), window.money(total));
 
     const payEl = root.querySelector("[data-pay-options]");
     if (payEl) {
@@ -927,15 +889,15 @@
       const method = methodEl ? String(methodEl.value || "card") : "card";
 
       if (!fullName) {
-        toast("Guest details", "Enter your full name.");
+        window.toast("Guest details", "Enter your full name.");
         return;
       }
       if (!email) {
-        toast("Guest details", "Enter a valid email.");
+        window.toast("Guest details", "Enter a valid email.");
         return;
       }
       if (!terms) {
-        toast("Terms required", "Please accept Terms & Conditions to continue.");
+        window.toast("Terms required", "Please accept Terms & Conditions to continue.");
         return;
       }
 
@@ -954,7 +916,7 @@
         cancellation: room.cancellation
       };
 
-      writeState({ booking });
+      window.writeState({ booking });
       if (typeof window.__bcNavigate === "function") window.__bcNavigate("stays-confirmation.html");
       else window.location.href = "stays-confirmation.html";
     });
@@ -964,10 +926,10 @@
     const root = document.querySelector("[data-stays-confirmation]");
     if (!root) return;
 
-    const st = readState();
+    const st = window.readState();
     const booking = st.booking;
     if (!booking) {
-      toast("No booking", "Start a new stay search to continue.");
+      window.toast("No booking", "Start a new stay search to continue.");
       if (typeof window.__bcNavigate === "function") window.__bcNavigate("stays.html");
       else window.location.href = "stays.html";
       return;
@@ -976,13 +938,13 @@
     const hotel = HOTELS.find((h) => h.id === booking.hotelId);
     const room = hotel ? (hotel.rooms || []).find((r) => r.id === booking.roomId) : null;
 
-    setText(root.querySelector("[data-confirm-ref]"), booking.ref);
-    setText(root.querySelector("[data-confirm-hotel]"), hotel ? hotel.name : "—");
-    setText(root.querySelector("[data-confirm-room]"), room ? room.name : "—");
-    setText(root.querySelector("[data-confirm-dates]"), `${booking.search.checkIn} → ${booking.search.checkOut}`);
-    setText(root.querySelector("[data-confirm-payment]"), booking.payment.status);
-    setText(root.querySelector("[data-confirm-policy]"), booking.cancellation);
-    setText(root.querySelector("[data-confirm-total]"), money(booking.totals.total));
+    window.setText(root.querySelector("[data-confirm-ref]"), booking.ref);
+    window.setText(root.querySelector("[data-confirm-hotel]"), hotel ? hotel.name : "—");
+    window.setText(root.querySelector("[data-confirm-room]"), room ? room.name : "—");
+    window.setText(root.querySelector("[data-confirm-dates]"), `${booking.search.checkIn} → ${booking.search.checkOut}`);
+    window.setText(root.querySelector("[data-confirm-payment]"), booking.payment.status);
+    window.setText(root.querySelector("[data-confirm-policy]"), booking.cancellation);
+    window.setText(root.querySelector("[data-confirm-total]"), window.money(booking.totals.total));
 
     const download = root.querySelector("[data-download-receipt]");
     if (download)
@@ -995,7 +957,7 @@
         lines.push("Room: " + (room ? room.name : ""));
         lines.push("Dates: " + booking.search.checkIn + " -> " + booking.search.checkOut);
         lines.push("Payment: " + booking.payment.status);
-        lines.push("Total: " + money(booking.totals.total));
+        lines.push("Total: " + window.money(booking.totals.total));
         lines.push("Guest: " + booking.guest.fullName + " (" + booking.guest.email + ")");
         lines.push("Cancellation: " + booking.cancellation);
 
@@ -1014,7 +976,7 @@
     if (support)
       support.addEventListener("click", (e) => {
         e.preventDefault();
-        toast("Support", "Demo: support contact flow can be added next.");
+        window.toast("Support", "Demo: support contact flow can be added next.");
       });
   }
 

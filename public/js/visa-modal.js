@@ -3,15 +3,7 @@
  * Shows detailed visa information when clicking on a country
  */
 
-function showCountryDetails(passportCountry, destinationCountry, destinationIso2) {
-  // Get ISO2 codes
-  const passportIso2 = COUNTRY_TO_ISO2[passportCountry];
-  const destIso2 = destinationIso2 || COUNTRY_TO_ISO2[destinationCountry];
-  
-  if (!passportIso2 || !destIso2) {
-    alert('Country data not available');
-    return;
-  }
+
 
   // Get visa requirement
   const requirement = getVisaRequirement(passportIso2, destIso2);
@@ -61,7 +53,7 @@ function showCountryDetails(passportCountry, destinationCountry, destinationIso2
                 For ${flagEmojiFromIso2(passportIso2)} ${passportCountry} passport holders
               </p>
             </div>
-            <button onclick="closeVisaModal()" style="
+            <button onclick="window.closeVisaModal()" style="
               background: none;
               border: none;
               font-size: 24px;
@@ -86,7 +78,7 @@ function showCountryDetails(passportCountry, destinationCountry, destinationIso2
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 20px;
-            ${getVisaTypeStyle(visaType)}
+            ${window.getVisaTypeStyle(visaType)}
           ">
             ${details.visaType}
           </div>
@@ -164,7 +156,7 @@ function showCountryDetails(passportCountry, destinationCountry, destinationIso2
                   Apply for Visa
                 </button>
               `}
-              <button class="btn" style="flex: 1;" onclick="closeVisaModal()">
+              <button class="btn" style="flex: 1;" onclick="window.closeVisaModal()">
                 Close
               </button>
             </div>
@@ -182,39 +174,28 @@ function showCountryDetails(passportCountry, destinationCountry, destinationIso2
   // Close on backdrop click
   document.getElementById('visaModal').addEventListener('click', function(e) {
     if (e.target.id === 'visaModal') {
-      closeVisaModal();
+      window.closeVisaModal();
     }
   });
 
   // Close on ESC key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-      closeVisaModal();
+      window.closeVisaModal();
     }
   });
 }
 
-function closeVisaModal() {
-  const modal = document.getElementById('visaModal');
-  if (modal) {
-    modal.remove();
-  }
+
   document.removeEventListener('keydown', closeVisaModal);
 }
 
-function getVisaTypeStyle(visaType) {
-  const styles = {
-    'Visa-free': 'background: #dcfce7; color: #166534;',
-    'eVisa': 'background: #fef3c7; color: #92400e;',
-    'eTA': 'background: #fef3c7; color: #92400e;',
-    'Visa on arrival': 'background: #fed7aa; color: #9a3412;',
-    'Visa required': 'background: #fee2e2; color: #991b1b;'
-  };
+;
   return styles[visaType] || 'background: #f3f4f6; color: #374151;';
 }
 
 function startVisaApplication(passportCountry, destinationCountry) {
-  closeVisaModal();
+  window.closeVisaModal();
   // Redirect to visa application form or scroll to it
   const visaForm = document.querySelector('[data-visa-form]');
   if (visaForm) {

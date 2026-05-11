@@ -241,7 +241,7 @@ function updateCountryList(listId, countries, category) {
     const flag = iso2 ? flagEmojiFromIso2(iso2) : '';
     
     return `
-      <div class="country-item" onclick="showCountryDetails('${country}', '${category}')" title="Click for details">
+      <div class="country-item" onclick="window.showCountryDetails('${country}', '${category}')" title="Click for details">
         <span class="country-flag">${flag}</span>
         <span>${country}</span>
       </div>
@@ -251,23 +251,7 @@ function updateCountryList(listId, countries, category) {
   listElement.innerHTML = listItems;
 }
 
-function showCountryDetails(country, category) {
-  // Get passport country
-  const passportCountry = document.getElementById('passportSelect').value;
-  const passportIso2 = COUNTRY_TO_ISO2[passportCountry];
-  const countryIso2 = COUNTRY_TO_ISO2[country];
-  
-  if (!passportIso2 || !countryIso2) return;
-  
-  // Get visa requirement
-  const requirement = getVisaRequirement(passportIso2, countryIso2);
-  const visaType = normalizeDatasetRequirement(requirement);
-  
-  // Get detailed information
-  let details = getVisaDetails(passportIso2, countryIso2);
-  if (!details) {
-    details = generateDefaultDetails(requirement);
-  }
+
   
   // Create modal
   createVisaModal(country, passportCountry, visaType, details);
@@ -325,7 +309,7 @@ function createVisaModal(country, passportCountry, visaType, details) {
               For ${passportFlag} ${passportCountry} passport holders
             </p>
           </div>
-          <button onclick="closeVisaModal()" style="
+          <button onclick="window.closeVisaModal()" style="
             background: none;
             border: none;
             font-size: 24px;
@@ -350,7 +334,7 @@ function createVisaModal(country, passportCountry, visaType, details) {
           font-size: 14px;
           font-weight: 500;
           margin-bottom: 20px;
-          ${getVisaTypeStyle(visaType)}
+          ${window.getVisaTypeStyle(visaType)}
         ">
           ${visaType}
         </div>
@@ -409,7 +393,7 @@ function createVisaModal(country, passportCountry, visaType, details) {
             Visa requirements are subject to change. Always verify with the official embassy or consulate before travel.
           </div>
           <div style="display: flex; gap: 12px;">
-            <button class="btn btn-primary" style="flex: 1;" onclick="closeVisaModal()">
+            <button class="btn btn-primary" style="flex: 1;" onclick="window.closeVisaModal()">
               Close
             </button>
           </div>
@@ -424,33 +408,22 @@ function createVisaModal(country, passportCountry, visaType, details) {
   // Close on backdrop click
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
-      closeVisaModal();
+      window.closeVisaModal();
     }
   });
   
   // Close on ESC key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-      closeVisaModal();
+      window.closeVisaModal();
     }
   });
 }
 
-function closeVisaModal() {
-  const modal = document.getElementById('visaModal');
-  if (modal) {
-    modal.remove();
-  }
+
 }
 
-function getVisaTypeStyle(visaType) {
-  const styles = {
-    'Visa-free': 'background: #dcfce7; color: #166534;',
-    'eVisa': 'background: #fef3c7; color: #92400e;',
-    'eTA': 'background: #fef3c7; color: #92400e;',
-    'Visa on arrival': 'background: #fed7aa; color: #9a3412;',
-    'Visa required': 'background: #fee2e2; color: #991b1b;'
-  };
+;
   return styles[visaType] || 'background: #f3f4f6; color: #374151;';
 }
 

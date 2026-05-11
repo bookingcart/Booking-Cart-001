@@ -47,10 +47,7 @@
       .replace(/'/g, "&#39;");
   }
 
-  function money(n) {
-    const v = Number(n || 0);
-    return v.toLocaleString(undefined, { style: "currency", currency: "USD" });
-  }
+  
 
   function badge(text) {
     return `<span class="pill" style="padding:6px 10px;font-size:12px">${escapeHtml(text)}</span>`;
@@ -745,7 +742,7 @@
     const procHtml = proc
       .map((p) => {
         const label = `${p.label} (${p.daysMin}-${p.daysMax} days)`;
-        const fees = `${money(p.governmentFee)} + ${money(p.serviceFee)} service`;
+        const fees = `${window.money(p.governmentFee)} + ${window.money(p.serviceFee)} service`;
         return `<div class="row space" style="gap:12px;align-items:flex-start;flex-wrap:wrap">
           <div>
             <div class="kpi">${escapeHtml(label)}</div>
@@ -753,7 +750,7 @@
           </div>
           <div style="text-align:right">
             <div class="kpi">${escapeHtml(fees)}</div>
-            <div class="muted" style="margin-top:6px">Total: ${money((p.governmentFee || 0) + (p.serviceFee || 0))}</div>
+            <div class="muted" style="margin-top:6px">Total: ${window.money((p.governmentFee || 0) + (p.serviceFee || 0))}</div>
           </div>
         </div>`;
       })

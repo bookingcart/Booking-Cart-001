@@ -1,22 +1,12 @@
 require('dotenv').config();
 
 const fetch = require('node-fetch');
-const { getCorsHeaders } = require('../lib/cors');
+const { applyCors } = require('../lib/cors');
 
 const DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';
 const DUFFEL_BASE_URL = 'https://api.duffel.com';
 
-function applyCors(req, res) {
-  const h = getCorsHeaders(req);
-  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));
-}
-
-/**
- * Validate a YYYY-MM-DD date string.
- */
-function isValidDate(str) {
-  if (!str || typeof str !== 'string') return false;
-  return /^\d{4}-\d{2}-\d{2}$/.test(str.trim());
+-\d{2}-\d{2}$/.test(str.trim());
 }
 
 /**

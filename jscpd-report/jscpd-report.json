@@ -1,0 +1,4625 @@
+{
+  "statistics": {
+    "detectionDate": "2026-05-11T21:26:21.859Z",
+    "formats": {
+      "css": {
+        "sources": {
+          "src/styles/app.css": {
+            "lines": 675,
+            "tokens": 3761,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 675,
+          "tokens": 3761,
+          "sources": 1,
+          "clones": 0,
+          "duplicatedLines": 0,
+          "duplicatedTokens": 0,
+          "percentage": 0,
+          "percentageTokens": 0,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "jsx": {
+        "sources": {
+          "src/pages/VisaNewPage.jsx": {
+            "lines": 13,
+            "tokens": 117,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/VisaDashboardPage.jsx": {
+            "lines": 13,
+            "tokens": 109,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/TermsPage.jsx": {
+            "lines": 101,
+            "tokens": 1502,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 5,
+            "duplicatedTokens": 83,
+            "percentage": 4.95,
+            "percentageTokens": 5.53,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/StaysResultsPage.jsx": {
+            "lines": 128,
+            "tokens": 2133,
+            "sources": 1,
+            "clones": 8,
+            "duplicatedLines": 96,
+            "duplicatedTokens": 1248,
+            "percentage": 75,
+            "percentageTokens": 58.51,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/StaysPage.jsx": {
+            "lines": 204,
+            "tokens": 2664,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 105,
+            "duplicatedTokens": 1236,
+            "percentage": 51.47,
+            "percentageTokens": 46.4,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/StaysDetailsPage.jsx": {
+            "lines": 140,
+            "tokens": 1879,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 69,
+            "duplicatedTokens": 832,
+            "percentage": 49.29,
+            "percentageTokens": 44.28,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/StaysConfirmationPage.jsx": {
+            "lines": 92,
+            "tokens": 1395,
+            "sources": 1,
+            "clones": 3,
+            "duplicatedLines": 41,
+            "duplicatedTokens": 538,
+            "percentage": 44.57,
+            "percentageTokens": 38.57,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/StaysCheckoutPage.jsx": {
+            "lines": 144,
+            "tokens": 2131,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 34,
+            "duplicatedTokens": 420,
+            "percentage": 23.61,
+            "percentageTokens": 19.71,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/ResultsPage.jsx": {
+            "lines": 331,
+            "tokens": 4238,
+            "sources": 1,
+            "clones": 9,
+            "duplicatedLines": 59,
+            "duplicatedTokens": 690,
+            "percentage": 17.82,
+            "percentageTokens": 16.28,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/PrivacyPage.jsx": {
+            "lines": 107,
+            "tokens": 1486,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/PaymentPage.jsx": {
+            "lines": 415,
+            "tokens": 4328,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/PassengersPage.jsx": {
+            "lines": 131,
+            "tokens": 1189,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 29,
+            "duplicatedTokens": 243,
+            "percentage": 22.14,
+            "percentageTokens": 20.44,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/MyBookingsPage.jsx": {
+            "lines": 128,
+            "tokens": 1185,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/HomePage.jsx": {
+            "lines": 322,
+            "tokens": 3194,
+            "sources": 1,
+            "clones": 3,
+            "duplicatedLines": 29,
+            "duplicatedTokens": 320,
+            "percentage": 9.01,
+            "percentageTokens": 10.02,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/ExtrasPage.jsx": {
+            "lines": 162,
+            "tokens": 1521,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 29,
+            "duplicatedTokens": 243,
+            "percentage": 17.9,
+            "percentageTokens": 15.98,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/EventsPage.jsx": {
+            "lines": 130,
+            "tokens": 1550,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 81,
+            "duplicatedTokens": 920,
+            "percentage": 62.31,
+            "percentageTokens": 59.35,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/DetailsPage.jsx": {
+            "lines": 148,
+            "tokens": 1433,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/CustomerSupportPage.jsx": {
+            "lines": 469,
+            "tokens": 5574,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 12,
+            "duplicatedTokens": 201,
+            "percentage": 2.56,
+            "percentageTokens": 3.61,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/ConfirmationPage.jsx": {
+            "lines": 135,
+            "tokens": 1029,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/BookingDetailsPage.jsx": {
+            "lines": 458,
+            "tokens": 4382,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/AuthPage.jsx": {
+            "lines": 537,
+            "tokens": 5879,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 24,
+            "duplicatedTokens": 176,
+            "percentage": 4.47,
+            "percentageTokens": 2.99,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/AdminVisaPage.jsx": {
+            "lines": 59,
+            "tokens": 701,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/AdminPage.jsx": {
+            "lines": 458,
+            "tokens": 5023,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 12,
+            "duplicatedTokens": 201,
+            "percentage": 2.62,
+            "percentageTokens": 4,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/AccountSettingsPage.jsx": {
+            "lines": 994,
+            "tokens": 7827,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 5,
+            "duplicatedTokens": 83,
+            "percentage": 0.5,
+            "percentageTokens": 1.06,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/layouts/AppLayout.jsx": {
+            "lines": 37,
+            "tokens": 238,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/context/AuthContext.jsx": {
+            "lines": 99,
+            "tokens": 819,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/PageLoading.jsx": {
+            "lines": 17,
+            "tokens": 91,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/HeaderUserAvatarImg.jsx": {
+            "lines": 29,
+            "tokens": 267,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/HeaderProfileDropdown.jsx": {
+            "lines": 111,
+            "tokens": 822,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/HeaderAuthCluster.jsx": {
+            "lines": 47,
+            "tokens": 325,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/FlightFooter.jsx": {
+            "lines": 126,
+            "tokens": 843,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/BookingCartNavbar.jsx": {
+            "lines": 97,
+            "tokens": 513,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/main.jsx": {
+            "lines": 18,
+            "tokens": 156,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/App.jsx": {
+            "lines": 69,
+            "tokens": 1250,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 6469,
+          "tokens": 67793,
+          "sources": 34,
+          "clones": 23,
+          "duplicatedLines": 315,
+          "duplicatedTokens": 3717,
+          "percentage": 4.87,
+          "percentageTokens": 5.48,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "javascript": {
+        "sources": {
+          "src/pages/StaysResultsPage.jsx": {
+            "lines": 78,
+            "tokens": 1485,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 102,
+            "duplicatedTokens": 2066,
+            "percentage": 130.77,
+            "percentageTokens": 139.12,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/StaysPage.jsx": {
+            "lines": 78,
+            "tokens": 1114,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/StaysDetailsPage.jsx": {
+            "lines": 88,
+            "tokens": 1209,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/StaysConfirmationPage.jsx": {
+            "lines": 42,
+            "tokens": 708,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 48,
+            "duplicatedTokens": 736,
+            "percentage": 114.29,
+            "percentageTokens": 103.95,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/StaysCheckoutPage.jsx": {
+            "lines": 91,
+            "tokens": 1422,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/ResultsPage.jsx": {
+            "lines": 145,
+            "tokens": 1773,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/PaymentPage.jsx": {
+            "lines": 87,
+            "tokens": 832,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/MyBookingsPage.jsx": {
+            "lines": 6,
+            "tokens": 77,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/HomePage.jsx": {
+            "lines": 178,
+            "tokens": 1800,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/EventsPage.jsx": {
+            "lines": 12,
+            "tokens": 149,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/CustomerSupportPage.jsx": {
+            "lines": 283,
+            "tokens": 3030,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/BookingDetailsPage.jsx": {
+            "lines": 413,
+            "tokens": 4059,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/AuthPage.jsx": {
+            "lines": 499,
+            "tokens": 5450,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 40,
+            "duplicatedTokens": 538,
+            "percentage": 8.02,
+            "percentageTokens": 9.87,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/AdminVisaPage.jsx": {
+            "lines": 36,
+            "tokens": 508,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/AdminPage.jsx": {
+            "lines": 339,
+            "tokens": 3548,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/AccountSettingsPage.jsx": {
+            "lines": 658,
+            "tokens": 5270,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/lib/legacyRoutes.js": {
+            "lines": 47,
+            "tokens": 403,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/legacy/loadScript.js": {
+            "lines": 20,
+            "tokens": 209,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/layouts/AppLayout.jsx": {
+            "lines": 0,
+            "tokens": 3,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/hooks/useLegacyScripts.js": {
+            "lines": 29,
+            "tokens": 254,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/context/AuthContext.jsx": {
+            "lines": 0,
+            "tokens": 3,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/HeaderUserAvatarImg.jsx": {
+            "lines": 0,
+            "tokens": 15,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/HeaderProfileDropdown.jsx": {
+            "lines": 68,
+            "tokens": 487,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/HeaderAuthCluster.jsx": {
+            "lines": 12,
+            "tokens": 91,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/BookingCartNavbar.jsx": {
+            "lines": 15,
+            "tokens": 96,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/world-map.js": {
+            "lines": 387,
+            "tokens": 7128,
+            "sources": 1,
+            "clones": 6,
+            "duplicatedLines": 44,
+            "duplicatedTokens": 1008,
+            "percentage": 11.37,
+            "percentageTokens": 14.14,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/visa-tool.js": {
+            "lines": 458,
+            "tokens": 2734,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 18,
+            "duplicatedTokens": 113,
+            "percentage": 3.93,
+            "percentageTokens": 4.13,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/visa-modal.js": {
+            "lines": 232,
+            "tokens": 894,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 18,
+            "duplicatedTokens": 113,
+            "percentage": 7.76,
+            "percentageTokens": 12.64,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/travelbuddy-visa-tool.js": {
+            "lines": 223,
+            "tokens": 2070,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/loading-ui.js": {
+            "lines": 252,
+            "tokens": 1688,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/flag-emoji.js": {
+            "lines": 20,
+            "tokens": 152,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/events.js": {
+            "lines": 214,
+            "tokens": 1949,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/deals.js": {
+            "lines": 457,
+            "tokens": 5024,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 13,
+            "duplicatedTokens": 89,
+            "percentage": 2.84,
+            "percentageTokens": 1.77,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/auth.js": {
+            "lines": 421,
+            "tokens": 3521,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/admin-page.js": {
+            "lines": 549,
+            "tokens": 7213,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 10,
+            "duplicatedTokens": 234,
+            "percentage": 1.82,
+            "percentageTokens": 3.24,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/js/account-settings.js": {
+            "lines": 917,
+            "tokens": 7673,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/data/visa-details.js": {
+            "lines": 128,
+            "tokens": 899,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "public/data/visa-dataset.js": {
+            "lines": 569,
+            "tokens": 2105,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "netlify/functions/api.js": {
+            "lines": 751,
+            "tokens": 8775,
+            "sources": 1,
+            "clones": 12,
+            "duplicatedLines": 76,
+            "duplicatedTokens": 1230,
+            "percentage": 10.12,
+            "percentageTokens": 14.02,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "test/cors.test.js": {
+            "lines": 21,
+            "tokens": 229,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "test/admin-pin.test.js": {
+            "lines": 101,
+            "tokens": 982,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/App.jsx": {
+            "lines": 32,
+            "tokens": 670,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "scripts/strip-headers.cjs": {
+            "lines": 36,
+            "tokens": 286,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "lib/mongo.js": {
+            "lines": 151,
+            "tokens": 1273,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "lib/google-verify.js": {
+            "lines": 72,
+            "tokens": 677,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "lib/cors.js": {
+            "lines": 47,
+            "tokens": 427,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "lib/admin.js": {
+            "lines": 37,
+            "tokens": 379,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/user.js": {
+            "lines": 160,
+            "tokens": 1925,
+            "sources": 1,
+            "clones": 7,
+            "duplicatedLines": 65,
+            "duplicatedTokens": 891,
+            "percentage": 40.63,
+            "percentageTokens": 46.29,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/ticket-download.js": {
+            "lines": 233,
+            "tokens": 1364,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 6,
+            "duplicatedTokens": 77,
+            "percentage": 2.58,
+            "percentageTokens": 5.65,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/support.js": {
+            "lines": 170,
+            "tokens": 1976,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 50,
+            "duplicatedTokens": 591,
+            "percentage": 29.41,
+            "percentageTokens": 29.91,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/flight-deals.js": {
+            "lines": 263,
+            "tokens": 3272,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 13,
+            "duplicatedTokens": 89,
+            "percentage": 4.94,
+            "percentageTokens": 2.72,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/events-status.js": {
+            "lines": 45,
+            "tokens": 331,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 22,
+            "duplicatedTokens": 200,
+            "percentage": 48.89,
+            "percentageTokens": 60.42,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/events-search.js": {
+            "lines": 123,
+            "tokens": 1197,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 11,
+            "duplicatedTokens": 100,
+            "percentage": 8.94,
+            "percentageTokens": 8.35,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/duffel-seat-maps.js": {
+            "lines": 66,
+            "tokens": 684,
+            "sources": 1,
+            "clones": 10,
+            "duplicatedLines": 171,
+            "duplicatedTokens": 1286,
+            "percentage": 259.09,
+            "percentageTokens": 188.01,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/duffel-search.js": {
+            "lines": 278,
+            "tokens": 2951,
+            "sources": 1,
+            "clones": 3,
+            "duplicatedLines": 21,
+            "duplicatedTokens": 266,
+            "percentage": 7.55,
+            "percentageTokens": 9.01,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/duffel-payments.js": {
+            "lines": 78,
+            "tokens": 760,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 30,
+            "duplicatedTokens": 225,
+            "percentage": 38.46,
+            "percentageTokens": 29.61,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/duffel-orders.js": {
+            "lines": 246,
+            "tokens": 2574,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 21,
+            "duplicatedTokens": 208,
+            "percentage": 8.54,
+            "percentageTokens": 8.08,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/duffel-order-services.js": {
+            "lines": 206,
+            "tokens": 1938,
+            "sources": 1,
+            "clones": 8,
+            "duplicatedLines": 73,
+            "duplicatedTokens": 715,
+            "percentage": 35.44,
+            "percentageTokens": 36.89,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/duffel-order-changes.js": {
+            "lines": 264,
+            "tokens": 2320,
+            "sources": 1,
+            "clones": 9,
+            "duplicatedLines": 133,
+            "duplicatedTokens": 1157,
+            "percentage": 50.38,
+            "percentageTokens": 49.87,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/duffel-order-cancellations.js": {
+            "lines": 210,
+            "tokens": 1830,
+            "sources": 1,
+            "clones": 10,
+            "duplicatedLines": 102,
+            "duplicatedTokens": 898,
+            "percentage": 48.57,
+            "percentageTokens": 49.07,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/duffel-offer.js": {
+            "lines": 99,
+            "tokens": 931,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 41,
+            "duplicatedTokens": 280,
+            "percentage": 41.41,
+            "percentageTokens": 30.08,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/duffel-client-key.js": {
+            "lines": 53,
+            "tokens": 559,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 30,
+            "duplicatedTokens": 330,
+            "percentage": 56.6,
+            "percentageTokens": 59.03,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/duffel-airports.js": {
+            "lines": 78,
+            "tokens": 810,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 16,
+            "duplicatedTokens": 168,
+            "percentage": 20.51,
+            "percentageTokens": 20.74,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/bookings.js": {
+            "lines": 231,
+            "tokens": 3265,
+            "sources": 1,
+            "clones": 5,
+            "duplicatedLines": 39,
+            "duplicatedTokens": 637,
+            "percentage": 16.88,
+            "percentageTokens": 19.51,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/auth.js": {
+            "lines": 240,
+            "tokens": 2537,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 10,
+            "duplicatedTokens": 177,
+            "percentage": 4.17,
+            "percentageTokens": 6.98,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "api-routes/amadeus-airports.js": {
+            "lines": 107,
+            "tokens": 1908,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 11,
+            "duplicatedTokens": 100,
+            "percentage": 10.28,
+            "percentageTokens": 5.24,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "vite.config.js": {
+            "lines": 28,
+            "tokens": 218,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "update-credentials.js": {
+            "lines": 63,
+            "tokens": 499,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "test-signin.js": {
+            "lines": 26,
+            "tokens": 297,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "test-profile.js": {
+            "lines": 71,
+            "tokens": 656,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "test-memory.js": {
+            "lines": 37,
+            "tokens": 338,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "test-google-oauth.js": {
+            "lines": 63,
+            "tokens": 451,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "test-db.js": {
+            "lines": 32,
+            "tokens": 270,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "test-auth-bypass.js": {
+            "lines": 43,
+            "tokens": 361,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "test-api.js": {
+            "lines": 127,
+            "tokens": 1000,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "test-api-logic.js": {
+            "lines": 59,
+            "tokens": 388,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "setup-api.js": {
+            "lines": 67,
+            "tokens": 494,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "server.js": {
+            "lines": 575,
+            "tokens": 6402,
+            "sources": 1,
+            "clones": 10,
+            "duplicatedLines": 72,
+            "duplicatedTokens": 720,
+            "percentage": 12.52,
+            "percentageTokens": 11.25,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "duffel-api.js": {
+            "lines": 301,
+            "tokens": 1964,
+            "sources": 1,
+            "clones": 3,
+            "duplicatedLines": 31,
+            "duplicatedTokens": 356,
+            "percentage": 10.3,
+            "percentageTokens": 18.13,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "debug-google-signin.js": {
+            "lines": 79,
+            "tokens": 567,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "debug-credentials.js": {
+            "lines": 47,
+            "tokens": 330,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "alternative-api.js": {
+            "lines": 134,
+            "tokens": 1009,
+            "sources": 1,
+            "clones": 3,
+            "duplicatedLines": 31,
+            "duplicatedTokens": 356,
+            "percentage": 23.13,
+            "percentageTokens": 35.28,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 14201,
+          "tokens": 139119,
+          "sources": 82,
+          "clones": 59,
+          "duplicatedLines": 684,
+          "duplicatedTokens": 7977,
+          "percentage": 4.82,
+          "percentageTokens": 5.73,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "yaml": {
+        "sources": {
+          ".github/workflows/ci.yml": {
+            "lines": 23,
+            "tokens": 149,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 23,
+          "tokens": 149,
+          "sources": 1,
+          "clones": 0,
+          "duplicatedLines": 0,
+          "duplicatedTokens": 0,
+          "percentage": 0,
+          "percentageTokens": 0,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "json": {
+        "sources": {
+          ".vscode/launch.json": {
+            "lines": 14,
+            "tokens": 67,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "vercel.json": {
+            "lines": 14,
+            "tokens": 71,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "package.json": {
+            "lines": 55,
+            "tokens": 342,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 83,
+          "tokens": 480,
+          "sources": 3,
+          "clones": 0,
+          "duplicatedLines": 0,
+          "duplicatedTokens": 0,
+          "percentage": 0,
+          "percentageTokens": 0,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "markup": {
+        "sources": {
+          "test-duffel-complete.html": {
+            "lines": 162,
+            "tokens": 1602,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "index.html": {
+            "lines": 71,
+            "tokens": 547,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 233,
+          "tokens": 2149,
+          "sources": 2,
+          "clones": 0,
+          "duplicatedLines": 0,
+          "duplicatedTokens": 0,
+          "percentage": 0,
+          "percentageTokens": 0,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "toml": {
+        "sources": {
+          "netlify.toml": {
+            "lines": 129,
+            "tokens": 718,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 129,
+          "tokens": 718,
+          "sources": 1,
+          "clones": 0,
+          "duplicatedLines": 0,
+          "duplicatedTokens": 0,
+          "percentage": 0,
+          "percentageTokens": 0,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "markdown": {
+        "sources": {
+          "README.md": {
+            "lines": 31,
+            "tokens": 366,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GOOGLE_SIGNIN_TROUBLESHOOTING.md": {
+            "lines": 102,
+            "tokens": 654,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "DEPLOYMENT_FIX.md": {
+            "lines": 57,
+            "tokens": 526,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 190,
+          "tokens": 1546,
+          "sources": 3,
+          "clones": 0,
+          "duplicatedLines": 0,
+          "duplicatedTokens": 0,
+          "percentage": 0,
+          "percentageTokens": 0,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      }
+    },
+    "total": {
+      "lines": 22003,
+      "tokens": 215715,
+      "sources": 127,
+      "clones": 82,
+      "duplicatedLines": 999,
+      "duplicatedTokens": 11694,
+      "percentage": 4.54,
+      "percentageTokens": 5.42,
+      "newDuplicatedLines": 0,
+      "newClones": 0
+    }
+  },
+  "duplicates": [
+    {
+      "format": "javascript",
+      "lines": 52,
+      "fragment": "}}><input type=\"checkbox\" name=\"stars\" value=\"5\" checked /> <span className=\"muted\">5 stars</span></label>\n                      <label className=\"row\" style={{\"gap\":\"10px\"}}><input type=\"checkbox\" name=\"stars\" value=\"4\" checked /> <span className=\"muted\">4 stars</span></label>\n                      <label className=\"row\" style={{\"gap\":\"10px\"}}><input type=\"checkbox\" name=\"stars\" value=\"3\" checked /> <span className=\"muted\">3 stars</span></label>\n                    </div>\n                  </div>\n      \n                  <div className=\"hr\"></div>\n      \n                  <div className=\"field\">\n                    <div className=\"label\">Guest rating (min)</div>\n                    <input className=\"control\" type=\"range\" name=\"minRating\" min=\"0\" max=\"10\" value=\"0\" step=\"0.5\" />\n                    <div className=\"small\">Higher rating = better reviews.</div>\n                  </div>\n      \n                  <div className=\"hr\"></div>\n      \n                  <div className=\"field\">\n                    <div className=\"label\">Amenities</div>\n                    <div className=\"checklist\">\n                      <label className=\"row\" style={{\"gap\":\"10px\"}}><input type=\"checkbox\" name=\"amenities\" value=\"wifi\" /> <span className=\"muted\">Wiâ€‘Fi</span></label>\n                      <label className=\"row\" style={{\"gap\":\"10px\"}}><input type=\"checkbox\" name=\"amenities\" value=\"breakfast\" /> <span className=\"muted\">Breakfast</span></label>\n                      <label className=\"row\" style={{\"gap\":\"10px\"}}><input type=\"checkbox\" name=\"amenities\" value=\"parking\" /> <span className=\"muted\">Parking</span></label>\n                      <label className=\"row\" style={{\"gap\":\"10px\"}}><input type=\"checkbox\" name=\"amenities\" value=\"pool\" /> <span className=\"muted\">Pool</span></label>\n                    </div>\n                  </div>\n      \n                  <div className=\"hr\"></div>\n      \n                  <div className=\"field\">\n                    <div className=\"label\">Property type</div>\n                    <div className=\"checklist\">\n                      <label className=\"row\" style={{\"gap\":\"10px\"}}><input type=\"checkbox\" name=\"type\" value=\"Hotel\" checked /> <span className=\"muted\">Hotel</span></label>\n                      <label className=\"row\" style={{\"gap\":\"10px\"}}><input type=\"checkbox\" name=\"type\" value=\"Apartment\" checked /> <span className=\"muted\">Apartment</span></label>\n                      <label className=\"row\" style={{\"gap\":\"10px\"}}><input type=\"checkbox\" name=\"type\" value=\"Lodge\" checked /> <span className=\"muted\">Lodge</span></label>\n                    </div>\n                  </div>\n      \n                  <div className=\"hr\"></div>\n      \n                  <div className=\"field\">\n                    <div className=\"label\">Sort</div>\n                    <select className=\"control select\" name=\"sort\">\n                      <option value=\"popularity\">Popularity</option>\n                      <option value=\"price\">Price (low to high)</option>\n                      <option value=\"rating\">Guest rating</option>\n                    </select>\n                  </div>\n                </div>\n              </aside>\n      \n              <section aria-label=\"Results\">\n                <div className=\"row space\" style={{\"marginBottom\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysResultsPage.jsx",
+        "start": 45,
+        "end": 96,
+        "startLoc": {
+          "line": 45,
+          "column": 66,
+          "position": 703
+        },
+        "endLoc": {
+          "line": 96,
+          "column": 66,
+          "position": 1736
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysResultsPage.jsx",
+        "start": 31,
+        "end": 67,
+        "startLoc": {
+          "line": 31,
+          "column": 78,
+          "position": 496
+        },
+        "endLoc": {
+          "line": 67,
+          "column": 59,
+          "position": 1264
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 6,
+      "fragment": "\"><span className=\"step__dot\">2</span> Results</span>\n              <span className=\"step\"><span className=\"step__dot\">3</span> Details</span>\n              <span className=\"step\"><span className=\"step__dot\">4</span> Checkout</span>\n              <span className=\"step\"><span className=\"step__dot\">5</span> Confirm</span>\n            </div>\n          </",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysPage.jsx",
+        "start": 96,
+        "end": 101,
+        "startLoc": {
+          "line": 96,
+          "column": 36,
+          "position": 1326
+        },
+        "endLoc": {
+          "line": 101,
+          "column": 13,
+          "position": 1440
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysResultsPage.jsx",
+        "start": 16,
+        "end": 22,
+        "startLoc": {
+          "line": 16,
+          "column": 55,
+          "position": 204
+        },
+        "endLoc": {
+          "line": 22,
+          "column": 14,
+          "position": 320
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 12,
+      "fragment": ">\n      \n        \n        <footer className=\"bg-white border-t border-slate-100 pt-16 pb-8\" aria-label=\"Footer\">\n          <div className=\"container mx-auto px-6\">\n            <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-16\">\n              \n              <div className=\"lg:col-span-2 space-y-4\">\n                <a href=\"#\" className=\"block text-2xl font-bold text-slate-900 tracking-tight\">BookingCart</a>\n                <p className=\"text-slate-500 text-sm\">Your Travel, Simplified. Book flights, hotels, and more with confidence and\n                  ease.</p>\n                <",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysPage.jsx",
+        "start": 126,
+        "end": 137,
+        "startLoc": {
+          "line": 126,
+          "column": 18,
+          "position": 1760
+        },
+        "endLoc": {
+          "line": 137,
+          "column": 18,
+          "position": 1883
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysResultsPage.jsx",
+        "start": 104,
+        "end": 112,
+        "startLoc": {
+          "line": 104,
+          "column": 15,
+          "position": 1835
+        },
+        "endLoc": {
+          "line": 112,
+          "column": 17,
+          "position": 1953
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 9,
+      "fragment": ">\n              </div>\n      \n              \n              <div>\n                <h3 className=\"font-bold text-slate-900 mb-4\">Navigate</h3>\n                <ul className=\"space-y-3 text-sm text-slate-500 font-medium\">\n                  <li><a href=\"/\" className=\"hover:text-green-600 transition-colors\">Flights</a></li>\n                  <li><a href=\"#",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysPage.jsx",
+        "start": 150,
+        "end": 158,
+        "startLoc": {
+          "line": 150,
+          "column": 22,
+          "position": 2024
+        },
+        "endLoc": {
+          "line": 158,
+          "column": 33,
+          "position": 2103
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysResultsPage.jsx",
+        "start": 111,
+        "end": 117,
+        "startLoc": {
+          "line": 111,
+          "column": 139,
+          "position": 1950
+        },
+        "endLoc": {
+          "line": 117,
+          "column": 38,
+          "position": 2025
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 6,
+      "fragment": "\"><span className=\"step__dot\">3</span> Details</span>\n              <span className=\"step\"><span className=\"step__dot\">4</span> Checkout</span>\n              <span className=\"step\"><span className=\"step__dot\">5</span> Confirm</span>\n            </div>\n      \n            <div className",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysDetailsPage.jsx",
+        "start": 17,
+        "end": 22,
+        "startLoc": {
+          "line": 17,
+          "column": 55,
+          "position": 239
+        },
+        "endLoc": {
+          "line": 22,
+          "column": 27,
+          "position": 329
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysResultsPage.jsx",
+        "start": 17,
+        "end": 22,
+        "startLoc": {
+          "line": 17,
+          "column": 36,
+          "position": 233
+        },
+        "endLoc": {
+          "line": 22,
+          "column": 23,
+          "position": 323
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 29,
+      "fragment": ">\n            </div>\n          </div>\n        </main>\n      \n        <footer className=\"bg-white border-t border-slate-100 pt-16 pb-8\" aria-label=\"Footer\">\n          <div className=\"container mx-auto px-6\">\n            <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-16\">\n              <div className=\"lg:col-span-2 space-y-4\">\n                <a href=\"#\" className=\"block text-2xl font-bold text-slate-900 tracking-tight\">BookingCart</a>\n                <p className=\"text-slate-500 text-sm\">Your Travel, Simplified. Book flights, hotels, and more with confidence and ease.</p>\n              </div>\n              <div>\n                <h3 className=\"font-bold text-slate-900 mb-4\">Navigate</h3>\n                <ul className=\"space-y-3 text-sm text-slate-500 font-medium\">\n                  <li><a href=\"/\" className=\"hover:text-green-600 transition-colors\">Flights</a></li>\n                  <li><a href=\"/stays\" className=\"hover:text-green-600 transition-colors\">Hotels</a></li>\n                  <li><a href=\"/events\" className=\"hover:text-green-600 transition-colors\">Events</a></li>\n                </ul>\n              </div>\n            </div>\n            <div className=\"border-t border-slate-100 pt-8 text-center text-xs text-slate-400\">\n              &copy; 2025 BookingCart. All rights reserved.\n            </div>\n          </div>\n        </footer>\n    </>\n  );\n}",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysDetailsPage.jsx",
+        "start": 113,
+        "end": 141,
+        "startLoc": {
+          "line": 113,
+          "column": 20,
+          "position": 1566
+        },
+        "endLoc": {
+          "line": 141,
+          "column": 2,
+          "position": 1879
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysResultsPage.jsx",
+        "start": 101,
+        "end": 129,
+        "startLoc": {
+          "line": 101,
+          "column": 24,
+          "position": 1820
+        },
+        "endLoc": {
+          "line": 129,
+          "column": 2,
+          "position": 2133
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 25,
+      "fragment": "}}>Hotel</div>\n                    <div className=\"kpi\" data-confirm-hotel>â€”</div>\n                  </div>\n                  <div className=\"row space\" style={{\"flexWrap\":\"wrap\"}}>\n                    <div className=\"muted\" style={{\"fontWeight\":850}}>Room</div>\n                    <div className=\"kpi\" data-confirm-room>â€”</div>\n                  </div>\n                  <div className=\"row space\" style={{\"flexWrap\":\"wrap\"}}>\n                    <div className=\"muted\" style={{\"fontWeight\":850}}>Dates</div>\n                    <div className=\"kpi\" data-confirm-dates>â€”</div>\n                  </div>\n                  <div className=\"row space\" style={{\"flexWrap\":\"wrap\"}}>\n                    <div className=\"muted\" style={{\"fontWeight\":850}}>Payment</div>\n                    <div className=\"kpi\" data-confirm-payment>â€”</div>\n                  </div>\n                  <div className=\"row space\" style={{\"flexWrap\":\"wrap\"}}>\n                    <div className=\"muted\" style={{\"fontWeight\":850}}>Cancellation</div>\n                    <div className=\"kpi\" data-confirm-policy>â€”</div>\n                  </div>\n                </div>\n      \n                <div className=\"hr\"></div>\n      \n                <div className=\"row\" style={{\"flexWrap\":\"wrap\"}}>\n                  <a className=\"btn btn-primary\" href=\"#\" data-download-receipt style={{\"display\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysConfirmationPage.jsx",
+        "start": 36,
+        "end": 60,
+        "startLoc": {
+          "line": 36,
+          "column": 68,
+          "position": 587
+        },
+        "endLoc": {
+          "line": 60,
+          "column": 98,
+          "position": 955
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysConfirmationPage.jsx",
+        "start": 34,
+        "end": 48,
+        "startLoc": {
+          "line": 34,
+          "column": 59,
+          "position": 545
+        },
+        "endLoc": {
+          "line": 48,
+          "column": 64,
+          "position": 788
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 6,
+      "fragment": ">\n          <div className=\"container\">\n            <div className=\"steps stays-steps\" aria-label=\"Stays steps\">\n              <a className=\"step\" href=\"/stays\"><span className=\"step__dot\">1</span> Search</a>\n              <a className=\"step\" href=\"/stays/results\"><span className=\"step__dot\">2</span> Results</a>\n              <span className=\"step\">",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysConfirmationPage.jsx",
+        "start": 12,
+        "end": 17,
+        "startLoc": {
+          "line": 12,
+          "column": 57,
+          "position": 125
+        },
+        "endLoc": {
+          "line": 17,
+          "column": 38,
+          "position": 234
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysResultsPage.jsx",
+        "start": 12,
+        "end": 17,
+        "startLoc": {
+          "line": 12,
+          "column": 52,
+          "position": 125
+        },
+        "endLoc": {
+          "line": 17,
+          "column": 38,
+          "position": 234
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 8,
+      "fragment": "\"><span className=\"step__dot\">5</span> Confirm</span>\n            </div>\n      \n            <div className=\"card\" style={{\"marginTop\":\"14px\"}}>\n              <div className=\"card__body\">\n                <div className=\"row space\" style={{\"flexWrap\":\"wrap\",\"gap\":\"12px\"}}>\n                  <div>\n                    <div className=\"kpi\" style={{\"fontSize\":\"22px\"}}>",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysConfirmationPage.jsx",
+        "start": 19,
+        "end": 26,
+        "startLoc": {
+          "line": 19,
+          "column": 55,
+          "position": 297
+        },
+        "endLoc": {
+          "line": 26,
+          "column": 70,
+          "position": 406
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysDetailsPage.jsx",
+        "start": 19,
+        "end": 26,
+        "startLoc": {
+          "line": 19,
+          "column": 36,
+          "position": 297
+        },
+        "endLoc": {
+          "line": 26,
+          "column": 70,
+          "position": 406
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 30,
+      "fragment": "</div>\n              </div>\n            </div>\n          </div>\n        </main>\n      \n        <footer className=\"bg-white border-t border-slate-100 pt-16 pb-8\" aria-label=\"Footer\">\n          <div className=\"container mx-auto px-6\">\n            <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-16\">\n              <div className=\"lg:col-span-2 space-y-4\">\n                <a href=\"#\" className=\"block text-2xl font-bold text-slate-900 tracking-tight\">BookingCart</a>\n                <p className=\"text-slate-500 text-sm\">Your Travel, Simplified. Book flights, hotels, and more with confidence and ease.</p>\n              </div>\n              <div>\n                <h3 className=\"font-bold text-slate-900 mb-4\">Navigate</h3>\n                <ul className=\"space-y-3 text-sm text-slate-500 font-medium\">\n                  <li><a href=\"/\" className=\"hover:text-green-600 transition-colors\">Flights</a></li>\n                  <li><a href=\"/stays\" className=\"hover:text-green-600 transition-colors\">Hotels</a></li>\n                  <li><a href=\"/events\" className=\"hover:text-green-600 transition-colors\">Events</a></li>\n                </ul>\n              </div>\n            </div>\n            <div className=\"border-t border-slate-100 pt-8 text-center text-xs text-slate-400\">\n              &copy; 2025 BookingCart. All rights reserved.\n            </div>\n          </div>\n        </footer>\n    </>\n  );\n}",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysConfirmationPage.jsx",
+        "start": 64,
+        "end": 93,
+        "startLoc": {
+          "line": 64,
+          "column": 138,
+          "position": 1075
+        },
+        "endLoc": {
+          "line": 93,
+          "column": 2,
+          "position": 1395
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysDetailsPage.jsx",
+        "start": 112,
+        "end": 129,
+        "startLoc": {
+          "line": 112,
+          "column": 17,
+          "position": 1559
+        },
+        "endLoc": {
+          "line": 129,
+          "column": 2,
+          "position": 2133
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 6,
+      "fragment": ">\n          <div className=\"container\">\n            <div className=\"steps stays-steps\" aria-label=\"Stays steps\">\n              <a className=\"step\" href=\"/stays\"><span className=\"step__dot\">1</span> Search</a>\n              <a className=\"step\" href=\"/stays/results\"><span className=\"step__dot\">2</span> Results</a>\n              <a",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysCheckoutPage.jsx",
+        "start": 12,
+        "end": 17,
+        "startLoc": {
+          "line": 12,
+          "column": 53,
+          "position": 125
+        },
+        "endLoc": {
+          "line": 17,
+          "column": 17,
+          "position": 227
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysResultsPage.jsx",
+        "start": 12,
+        "end": 17,
+        "startLoc": {
+          "line": 12,
+          "column": 52,
+          "position": 125
+        },
+        "endLoc": {
+          "line": 17,
+          "column": 20,
+          "position": 227
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 30,
+      "fragment": ">\n              </section>\n            </div>\n          </div>\n        </main>\n      \n        <footer className=\"bg-white border-t border-slate-100 pt-16 pb-8\" aria-label=\"Footer\">\n          <div className=\"container mx-auto px-6\">\n            <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-16\">\n              <div className=\"lg:col-span-2 space-y-4\">\n                <a href=\"#\" className=\"block text-2xl font-bold text-slate-900 tracking-tight\">BookingCart</a>\n                <p className=\"text-slate-500 text-sm\">Your Travel, Simplified. Book flights, hotels, and more with confidence and ease.</p>\n              </div>\n              <div>\n                <h3 className=\"font-bold text-slate-900 mb-4\">Navigate</h3>\n                <ul className=\"space-y-3 text-sm text-slate-500 font-medium\">\n                  <li><a href=\"/\" className=\"hover:text-green-600 transition-colors\">Flights</a></li>\n                  <li><a href=\"/stays\" className=\"hover:text-green-600 transition-colors\">Hotels</a></li>\n                  <li><a href=\"/events\" className=\"hover:text-green-600 transition-colors\">Events</a></li>\n                </ul>\n              </div>\n            </div>\n            <div className=\"border-t border-slate-100 pt-8 text-center text-xs text-slate-400\">\n              &copy; 2025 BookingCart. All rights reserved.\n            </div>\n          </div>\n        </footer>\n    </>\n  );\n}",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/StaysCheckoutPage.jsx",
+        "start": 116,
+        "end": 145,
+        "startLoc": {
+          "line": 116,
+          "column": 23,
+          "position": 1813
+        },
+        "endLoc": {
+          "line": 145,
+          "column": 2,
+          "position": 2131
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysResultsPage.jsx",
+        "start": 100,
+        "end": 129,
+        "startLoc": {
+          "line": 100,
+          "column": 83,
+          "position": 1815
+        },
+        "endLoc": {
+          "line": 129,
+          "column": 2,
+          "position": 2133
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 6,
+      "fragment": "\"><i className=\"ph ph-plus\"></i></button>\n                    </div>\n                  </div>\n                  <div className=\"flex justify-between items-center counter\">\n                    <div className=\"counter__meta\">\n                      <div className=\"font-medium text-slate-900\">Infants",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/ResultsPage.jsx",
+        "start": 94,
+        "end": 99,
+        "startLoc": {
+          "line": 94,
+          "column": 205,
+          "position": 1266
+        },
+        "endLoc": {
+          "line": 99,
+          "column": 74,
+          "position": 1326
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/ResultsPage.jsx",
+        "start": 83,
+        "end": 88,
+        "startLoc": {
+          "line": 83,
+          "column": 203,
+          "position": 1087
+        },
+        "endLoc": {
+          "line": 88,
+          "column": 75,
+          "position": 1147
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 6,
+      "fragment": "</span>\n              </label>\n              <label className=\"flex justify-between items-center cursor-pointer group\">\n                <div className=\"flex items-center gap-3\">\n                  <input type=\"checkbox\" className=\"w-4 h-4 rounded border-slate-300 accent-green-600\" />\n                  <span className=\"text-sm text-slate-700 group-hover:text-slate-900 flex items-center gap-2\"><i className=\"ph ph-planet text-slate-400",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/ResultsPage.jsx",
+        "start": 217,
+        "end": 222,
+        "startLoc": {
+          "line": 217,
+          "column": 76,
+          "position": 2844
+        },
+        "endLoc": {
+          "line": 222,
+          "column": 152,
+          "position": 2909
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/ResultsPage.jsx",
+        "start": 210,
+        "end": 208,
+        "startLoc": {
+          "line": 210,
+          "column": 76,
+          "position": 2750
+        },
+        "endLoc": {
+          "line": 208,
+          "column": 150,
+          "position": 2719
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 6,
+      "fragment": "</span>\n              </label>\n              <label className=\"flex justify-between items-center cursor-pointer group\">\n                <div className=\"flex items-center gap-3\">\n                  <input type=\"checkbox\" className=\"w-4 h-4 rounded border-slate-300 accent-green-600\" />\n                  <span className=\"text-sm text-slate-700 group-hover:text-slate-900 flex items-center gap-2\"><div",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/ResultsPage.jsx",
+        "start": 242,
+        "end": 247,
+        "startLoc": {
+          "line": 242,
+          "column": 76,
+          "position": 3131
+        },
+        "endLoc": {
+          "line": 247,
+          "column": 115,
+          "position": 3191
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/ResultsPage.jsx",
+        "start": 210,
+        "end": 215,
+        "startLoc": {
+          "line": 210,
+          "column": 76,
+          "position": 2750
+        },
+        "endLoc": {
+          "line": 215,
+          "column": 113,
+          "position": 2810
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 10,
+      "fragment": "\" role=\"dialog\">\n                          <div data-passengers className=\"space-y-4\">\n                            <div className=\"flex justify-between items-center counter\">\n                              <div className=\"counter__meta\">\n                                <div className=\"font-medium text-slate-900\">Adults</div>\n                                <div className=\"text-xs text-slate-500\">Age 12+</div>\n                              </div>\n                              <div className=\"flex items-center gap-3 counter__controls\">\n                                <button\n                                  ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/HomePage.jsx",
+        "start": 125,
+        "end": 134,
+        "startLoc": {
+          "line": 125,
+          "column": 56,
+          "position": 1198
+        },
+        "endLoc": {
+          "line": 134,
+          "column": 35,
+          "position": 1294
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/ResultsPage.jsx",
+        "start": 73,
+        "end": 81,
+        "startLoc": {
+          "line": 73,
+          "column": 156,
+          "position": 915
+        },
+        "endLoc": {
+          "line": 81,
+          "column": 31,
+          "position": 1011
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 11,
+      "fragment": "type=\"button\" data-plus=\"adults\"><i className=\"ph ph-plus\"></i></button>\n                              </div>\n                            </div>\n                            <div className=\"flex justify-between items-center counter\">\n                              <div className=\"counter__meta\">\n                                <div className=\"font-medium text-slate-900\">Children</div>\n                                <div className=\"text-xs text-slate-500\">Age 2–11</div>\n                              </div>\n                              <div className=\"flex items-center gap-3 counter__controls\">\n                                <button\n                                  ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/HomePage.jsx",
+        "start": 139,
+        "end": 149,
+        "startLoc": {
+          "line": 139,
+          "column": 35,
+          "position": 1360
+        },
+        "endLoc": {
+          "line": 149,
+          "column": 35,
+          "position": 1473
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/ResultsPage.jsx",
+        "start": 83,
+        "end": 92,
+        "startLoc": {
+          "line": 83,
+          "column": 172,
+          "position": 1077
+        },
+        "endLoc": {
+          "line": 92,
+          "column": 31,
+          "position": 1190
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 11,
+      "fragment": "type=\"button\" data-plus=\"children\"><i className=\"ph ph-plus\"></i></button>\n                              </div>\n                            </div>\n                            <div className=\"flex justify-between items-center counter\">\n                              <div className=\"counter__meta\">\n                                <div className=\"font-medium text-slate-900\">Infants</div>\n                                <div className=\"text-xs text-slate-500\">Under 2</div>\n                              </div>\n                              <div className=\"flex items-center gap-3 counter__controls\">\n                                <button\n                                  ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/HomePage.jsx",
+        "start": 154,
+        "end": 164,
+        "startLoc": {
+          "line": 154,
+          "column": 35,
+          "position": 1539
+        },
+        "endLoc": {
+          "line": 164,
+          "column": 35,
+          "position": 1650
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/ResultsPage.jsx",
+        "start": 94,
+        "end": 103,
+        "startLoc": {
+          "line": 94,
+          "column": 172,
+          "position": 1256
+        },
+        "endLoc": {
+          "line": 103,
+          "column": 31,
+          "position": 1367
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 20,
+      "fragment": "\">\n      \n          \n          <div className=\"flex items-center gap-4 mb-8 overflow-x-auto no-scrollbar steps text-sm font-medium\">\n            <a className=\"flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 text-green-700 border border-green-100 whitespace-nowrap\"\n              data-step-id=\"search\" href=\"/\">\n              <span className=\"w-5 h-5 rounded-full bg-green-200 flex items-center justify-center text-xs font-bold\">1</span>\n              Search\n            </a>\n            <a className=\"flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 text-green-700 border border-green-100 whitespace-nowrap\"\n              data-step-id=\"results\" href=\"/results\">\n              <span className=\"w-5 h-5 rounded-full bg-green-200 flex items-center justify-center text-xs font-bold\">2</span>\n              Results\n            </a>\n            <a className=\"flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 text-green-700 border border-green-100 whitespace-nowrap\"\n              data-step-id=\"details\" href=\"/details\">\n              <span className=\"w-5 h-5 rounded-full bg-green-200 flex items-center justify-center text-xs font-bold\">3</span>\n              Details\n            </a>\n            <a className=\"flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 text-green-700 border border-green-100 whitespace-nowrap",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/ExtrasPage.jsx",
+        "start": 13,
+        "end": 32,
+        "startLoc": {
+          "line": 13,
+          "column": 82,
+          "position": 141
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 142,
+          "position": 304
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/PassengersPage.jsx",
+        "start": 13,
+        "end": 32,
+        "startLoc": {
+          "line": 13,
+          "column": 86,
+          "position": 141
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 139,
+          "position": 304
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 11,
+      "fragment": "<i className=\"ph-bold ph-arrow-right\"></i>\n                  </button>\n                </div>\n              </form>\n            </section>\n      \n            \n            <aside className=\"lg:col-span-4 space-y-6\">\n              <div className=\"bg-white rounded-2xl border border-slate-200 shadow-lg p-6 sticky top-24\">\n                <div className=\"flex justify-between items-center mb-4\">\n                  <h2 className=\"font-bold text-lg text-slate-900\">Price",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/ExtrasPage.jsx",
+        "start": 119,
+        "end": 129,
+        "startLoc": {
+          "line": 119,
+          "column": 41,
+          "position": 1140
+        },
+        "endLoc": {
+          "line": 129,
+          "column": 73,
+          "position": 1220
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/PassengersPage.jsx",
+        "start": 87,
+        "end": 98,
+        "startLoc": {
+          "line": 87,
+          "column": 40,
+          "position": 808
+        },
+        "endLoc": {
+          "line": 98,
+          "column": 76,
+          "position": 890
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 82,
+      "fragment": "></div>\n            </div>\n          </div>\n        </section>\n      \n        <footer className=\"bg-white border-t border-slate-100 pt-16 pb-8\" aria-label=\"Footer\">\n          <div className=\"container mx-auto px-6\">\n            <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-16\">\n              \n              <div className=\"lg:col-span-2 space-y-4\">\n                <a href=\"#\" className=\"block text-2xl font-bold text-slate-900 tracking-tight\">BookingCart</a>\n                <p className=\"text-slate-500 text-sm\">Your Travel, Simplified. Book flights, hotels, and more with confidence and\n                  ease.</p>\n                <div className=\"flex gap-4 pt-2\">\n                  <a href=\"#\"\n                    className=\"w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-green-50 hover:text-green-600 transition-colors\"><i\n                      className=\"ph-fill ph-facebook-logo\"></i></a>\n                  <a href=\"#\"\n                    className=\"w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-green-50 hover:text-green-600 transition-colors\"><i\n                      className=\"ph-fill ph-x-logo\"></i></a>\n                  <a href=\"#\"\n                    className=\"w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-green-50 hover:text-green-600 transition-colors\"><i\n                      className=\"ph-fill ph-instagram-logo\"></i></a>\n                  <a href=\"#\"\n                    className=\"w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-green-50 hover:text-green-600 transition-colors\"><i\n                      className=\"ph-fill ph-linkedin-logo\"></i></a>\n                </div>\n              </div>\n      \n              \n              <div>\n                <h3 className=\"font-bold text-slate-900 mb-4\">Navigate</h3>\n                <ul className=\"space-y-3 text-sm text-slate-500 font-medium\">\n                  <li><a href=\"/\" className=\"hover:text-green-600 transition-colors\">Flights</a></li>\n                  <li><a href=\"#\" className=\"hover:text-green-600 transition-colors\">Hotels</a></li>\n                  <li><a href=\"#\" className=\"hover:text-green-600 transition-colors\">Trains</a></li>\n                </ul>\n              </div>\n      \n              <div>\n                <h3 className=\"font-bold text-slate-900 mb-4\">Company</h3>\n                <ul className=\"space-y-3 text-sm text-slate-500 font-medium\">\n                  <li><a href=\"#\" className=\"hover:text-green-600 transition-colors\">About Us</a></li>\n                  <li><a href=\"#\" className=\"hover:text-green-600 transition-colors\">Careers</a></li>\n                  <li><a href=\"#\" className=\"hover:text-green-600 transition-colors\">Blog</a></li>\n                </ul>\n              </div>\n      \n              <div>\n                <h3 className=\"font-bold text-slate-900 mb-4\">Support</h3>\n                <ul className=\"space-y-3 text-sm text-slate-500 font-medium\">\n                  <li><a href=\"#\" className=\"hover:text-green-600 transition-colors\">Help Center</a></li>\n                  <li><a href=\"#\" className=\"hover:text-green-600 transition-colors\">Contact Us</a></li>\n                  <li><a href=\"#\" className=\"hover:text-green-600 transition-colors\">FAQ</a></li>\n                </ul>\n              </div>\n      \n              \n              <div>\n                <h3 className=\"font-bold text-slate-900 mb-4\">Reviews</h3>\n                <div className=\"bg-slate-50 rounded-xl p-4 border border-slate-100\">\n                  <div className=\"flex text-yellow-400 text-sm mb-1\">â˜…â˜…â˜…â˜…â˜…</div>\n                  <div className=\"font-bold text-slate-900\">4.8 out of 5</div>\n                  <div className=\"text-xs text-slate-400 mt-1\">Based on 12,847 reviews</div>\n                </div>\n              </div>\n            </div>\n      \n            <div\n              className=\"border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-400\">\n              <div>&copy; 2026 BookingCart. All rights reserved.</div>\n              <div className=\"flex gap-6\">\n                <a href=\"/privacy\" className=\"hover:text-slate-600\">Privacy Policy</a>\n                <a href=\"/terms\" className=\"hover:text-slate-600\">Terms of Service</a>\n                <a href=\"#\" className=\"hover:text-slate-600\">Cookie Setting</a>\n              </div>\n            </div>\n          </div>\n        </footer>\n    </>\n  );\n}",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/EventsPage.jsx",
+        "start": 50,
+        "end": 131,
+        "startLoc": {
+          "line": 50,
+          "column": 63,
+          "position": 630
+        },
+        "endLoc": {
+          "line": 131,
+          "column": 2,
+          "position": 1550
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/StaysPage.jsx",
+        "start": 123,
+        "end": 205,
+        "startLoc": {
+          "line": 123,
+          "column": 63,
+          "position": 1742
+        },
+        "endLoc": {
+          "line": 205,
+          "column": 2,
+          "position": 2664
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 21,
+      "fragment": "}\n                  icon=\"user\" placeholder=\"Jane Smith\" />\n\n                <Field id=\"register-email\" label=\"Email address\" type=\"email\" value={form.email}\n                  onChange={e => set('email', e.target.value)} error={errors.email}\n                  icon=\"envelope\" placeholder=\"you@example.com\" />\n\n                <div>\n                  <Field id=\"register-password\" label=\"Password\"\n                    type={form.showPass ? 'text' : 'password'}\n                    value={form.password} onChange={e => set('password', e.target.value)}\n                    error={errors.password} icon=\"lock-simple\"\n                    placeholder=\"Min. 8 chars, 1 number, 1 symbol\"\n                    hint=\"At least 8 characters, 1 number and 1 special character.\">\n                    <button type=\"button\" tabIndex={-1}\n                      className=\"absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600\"\n                      onClick={() => set('showPass', !form.showPass)}>\n                      <i className={`ph ph-${form.showPass ? 'eye-slash' : 'eye'} text-lg`} />\n                    </button>\n                  </Field>\n                  <StrengthBar strength={form.password ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/AuthPage.jsx",
+        "start": 427,
+        "end": 447,
+        "startLoc": {
+          "line": 427,
+          "column": 81,
+          "position": 4609
+        },
+        "endLoc": {
+          "line": 447,
+          "column": 56,
+          "position": 4878
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/AuthPage.jsx",
+        "start": 347,
+        "end": 377,
+        "startLoc": {
+          "line": 347,
+          "column": 43,
+          "position": 3700
+        },
+        "endLoc": {
+          "line": 377,
+          "column": 64,
+          "position": 4068
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 13,
+      "fragment": ", redirectTo);\n      navigate(redirectTo, { replace: true });\n      // Force navigation in case react-router delays\n      window.location.href = redirectTo;\n      return;\n    } catch (err) {\n      setGlobalError(err.message);\n    } finally {\n      setLoading(false);\n    }\n  }\n\n  async function handleForgot",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/AuthPage.jsx",
+        "start": 222,
+        "end": 234,
+        "startLoc": {
+          "line": 222,
+          "column": 72,
+          "position": 2486
+        },
+        "endLoc": {
+          "line": 234,
+          "column": 30,
+          "position": 2574
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/AuthPage.jsx",
+        "start": 190,
+        "end": 202,
+        "startLoc": {
+          "line": 190,
+          "column": 65,
+          "position": 2142
+        },
+        "endLoc": {
+          "line": 202,
+          "column": 32,
+          "position": 2230
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 7,
+      "fragment": ", { headers: t ? { 'Authorization': `Bearer ${t}` } : {} });\n    const data = await resp.json();\n    return data.ok ? data.threads : [];\n  } catch { return []; }\n}\n\nasync function updateThread",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/AdminPage.jsx",
+        "start": 12,
+        "end": 18,
+        "startLoc": {
+          "line": 12,
+          "column": 44,
+          "position": 126
+        },
+        "endLoc": {
+          "line": 18,
+          "column": 28,
+          "position": 217
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/CustomerSupportPage.jsx",
+        "start": 95,
+        "end": 103,
+        "startLoc": {
+          "line": 95,
+          "column": 79,
+          "position": 1481
+        },
+        "endLoc": {
+          "line": 103,
+          "column": 29,
+          "position": 1574
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 7,
+      "fragment": ", text) {\n  try {\n    const t = localStorage.getItem('bookingcart_jwt_token') || localStorage.getItem('bookingcart_google_id_token') || '';\n    await fetch('/api/support', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json', ...(t ? { 'Authorization': `Bearer ${t}` } : {}) },\n      body: JSON.stringify({ threadId, message",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/AdminPage.jsx",
+        "start": 29,
+        "end": 35,
+        "startLoc": {
+          "line": 29,
+          "column": 38,
+          "position": 359
+        },
+        "endLoc": {
+          "line": 35,
+          "column": 47,
+          "position": 469
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/CustomerSupportPage.jsx",
+        "start": 103,
+        "end": 112,
+        "startLoc": {
+          "line": 103,
+          "column": 52,
+          "position": 1581
+        },
+        "endLoc": {
+          "line": 112,
+          "column": 45,
+          "position": 1694
+        }
+      }
+    },
+    {
+      "format": "jsx",
+      "lines": 6,
+      "fragment": ">\n              <div>&copy; 2026 BookingCart. All rights reserved.</div>\n              <div className=\"flex gap-6\">\n                <a href=\"/privacy\" className=\"hover:text-slate-600\">Privacy Policy</a>\n                <a href=\"/terms\" className=\"hover:text-slate-600\">Terms of Service</a>\n              </",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/pages/AccountSettingsPage.jsx",
+        "start": 985,
+        "end": 990,
+        "startLoc": {
+          "line": 985,
+          "column": 13,
+          "position": 7722
+        },
+        "endLoc": {
+          "line": 990,
+          "column": 17,
+          "position": 7805
+        }
+      },
+      "secondFile": {
+        "name": "src/pages/TermsPage.jsx",
+        "start": 92,
+        "end": 198,
+        "startLoc": {
+          "line": 92,
+          "column": 143,
+          "position": 1397
+        },
+        "endLoc": {
+          "line": 198,
+          "column": 18,
+          "position": 2614
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 7,
+      "fragment": "},\n  'NC': { x: 807, y: 432, name: 'New Caledonia' },\n  'PF': { x: 750, y: 450, name: 'French Polynesia' },\n  'CK': { x: 740, y: 440, name: 'Cook Islands' },\n  'NU': { x: 735, y: 435, name: 'Niue' },\n  'TK': { x: 730, y: 430, name: 'Tokelau' },\n  'WS'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "public/js/world-map.js",
+        "start": 200,
+        "end": 206,
+        "startLoc": {
+          "line": 200,
+          "column": 43,
+          "position": 5034
+        },
+        "endLoc": {
+          "line": 206,
+          "column": 7,
+          "position": 5168
+        }
+      },
+      "secondFile": {
+        "name": "public/js/world-map.js",
+        "start": 152,
+        "end": 158,
+        "startLoc": {
+          "line": 152,
+          "column": 51,
+          "position": 3786
+        },
+        "endLoc": {
+          "line": 158,
+          "column": 7,
+          "position": 3920
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 6,
+      "fragment": "},\n  'AS': { x: 790, y: 340, name: 'American Samoa' },\n  'UM': { x: 200, y: 250, name: 'U.S. Minor Outlying Islands' },\n  'VI': { x: 230, y: 290, name: 'U.S. Virgin Islands' },\n  'PR': { x: 226, y: 286, name: 'Puerto Rico' },\n  'SH'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "public/js/world-map.js",
+        "start": 215,
+        "end": 220,
+        "startLoc": {
+          "line": 215,
+          "column": 60,
+          "position": 5424
+        },
+        "endLoc": {
+          "line": 220,
+          "column": 7,
+          "position": 5532
+        }
+      },
+      "secondFile": {
+        "name": "public/js/world-map.js",
+        "start": 135,
+        "end": 140,
+        "startLoc": {
+          "line": 135,
+          "column": 48,
+          "position": 3344
+        },
+        "endLoc": {
+          "line": 140,
+          "column": 7,
+          "position": 3452
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 12,
+      "fragment": "},\n  'AX': { x: 435, y: 140, name: 'Åland Islands' },\n  'FO': { x: 400, y: 130, name: 'Faroe Islands' },\n  'GL': { x: 380, y: 100, name: 'Greenland' },\n  'IS': { x: 385, y: 105, name: 'Iceland' },\n  'JE': { x: 395, y: 165, name: 'Jersey' },\n  'GG': { x: 393, y: 163, name: 'Guernsey' },\n  'IM': { x: 391, y: 161, name: 'Isle of Man' },\n  'GI': { x: 398, y: 198, name: 'Gibraltar' },\n  'MT': { x: 412, y: 195, name: 'Malta' },\n  'CY': { x: 437, y: 217, name: 'Cyprus' }\n}",
+      "tokens": 0,
+      "firstFile": {
+        "name": "public/js/world-map.js",
+        "start": 230,
+        "end": 241,
+        "startLoc": {
+          "line": 230,
+          "column": 42,
+          "position": 5814
+        },
+        "endLoc": {
+          "line": 241,
+          "column": 2,
+          "position": 6076
+        }
+      },
+      "secondFile": {
+        "name": "public/js/world-map.js",
+        "start": 220,
+        "end": 230,
+        "startLoc": {
+          "line": 220,
+          "column": 48,
+          "position": 5554
+        },
+        "endLoc": {
+          "line": 230,
+          "column": 44,
+          "position": 5815
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 19,
+      "fragment": ") {\n      closeVisaModal();\n    }\n  });\n\n  // Close on ESC key\n  document.addEventListener('keydown', function(e) {\n    if (e.key === 'Escape') {\n      closeVisaModal();\n    }\n  });\n}\n\nfunction closeVisaModal() {\n  const modal = document.getElementById('visaModal');\n  if (modal) {\n    modal.remove();\n  }\n  document",
+      "tokens": 0,
+      "firstFile": {
+        "name": "public/js/visa-modal.js",
+        "start": 184,
+        "end": 202,
+        "startLoc": {
+          "line": 184,
+          "column": 36,
+          "position": 537
+        },
+        "endLoc": {
+          "line": 202,
+          "column": 11,
+          "position": 650
+        }
+      },
+      "secondFile": {
+        "name": "public/js/visa-tool.js",
+        "start": 426,
+        "end": 444,
+        "startLoc": {
+          "line": 426,
+          "column": 27,
+          "position": 2528
+        },
+        "endLoc": {
+          "line": 444,
+          "column": 2,
+          "position": 2641
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 6,
+      "fragment": ";\n                const paxName = (b.passengers && b.passengers[0])\n                    ? ((b.passengers[0].firstName || '') + ' ' + (b.passengers[0].lastName || '')).trim().toUpperCase()\n                    : (b.contact && b.contact.email ? b.contact.email.split('@')[0].toUpperCase() : 'PASSENGER');\n\n                let",
+      "tokens": 0,
+      "firstFile": {
+        "name": "public/js/admin-page.js",
+        "start": 306,
+        "end": 311,
+        "startLoc": {
+          "line": 306,
+          "column": 93,
+          "position": 3410
+        },
+        "endLoc": {
+          "line": 311,
+          "column": 20,
+          "position": 3527
+        }
+      },
+      "secondFile": {
+        "name": "public/js/admin-page.js",
+        "start": 205,
+        "end": 207,
+        "startLoc": {
+          "line": 205,
+          "column": 72,
+          "position": 2184
+        },
+        "endLoc": {
+          "line": 207,
+          "column": 21,
+          "position": 2298
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 8,
+      "fragment": "(event) {\n  const gate = requireTravelBuddy(event);\n  if (!gate.ok) return json(gate.status, { ok: false, error: gate.error });\n\n  const payload = safeJsonParse(event.body || \"{}\") || {};\n  const passport = String(payload.passport || \"\").trim().toUpperCase();\n\n  if",
+      "tokens": 0,
+      "firstFile": {
+        "name": "netlify/functions/api.js",
+        "start": 228,
+        "end": 235,
+        "startLoc": {
+          "line": 228,
+          "column": 40,
+          "position": 2274
+        },
+        "endLoc": {
+          "line": 235,
+          "column": 5,
+          "position": 2385
+        }
+      },
+      "secondFile": {
+        "name": "netlify/functions/api.js",
+        "start": 205,
+        "end": 211,
+        "startLoc": {
+          "line": 205,
+          "column": 42,
+          "position": 1919
+        },
+        "endLoc": {
+          "line": 211,
+          "column": 8,
+          "position": 2029
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 9,
+      "fragment": "});\n  if (!upstream.ok) {\n    return json(upstream.status || 502, { ok: false, error: \"Upstream error\", details: upstream.bodyText || \"\" });\n  }\n\n  return json(200, { ok: true, data: upstream.json });\n}\n\nfunction",
+      "tokens": 0,
+      "firstFile": {
+        "name": "netlify/functions/api.js",
+        "start": 239,
+        "end": 247,
+        "startLoc": {
+          "line": 239,
+          "column": 69,
+          "position": 2448
+        },
+        "endLoc": {
+          "line": 247,
+          "column": 9,
+          "position": 2541
+        }
+      },
+      "secondFile": {
+        "name": "netlify/functions/api.js",
+        "start": 220,
+        "end": 228,
+        "startLoc": {
+          "line": 220,
+          "column": 84,
+          "position": 2176
+        },
+        "endLoc": {
+          "line": 228,
+          "column": 6,
+          "position": 2269
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 6,
+      "fragment": ": {\n      tourism: { type: \"Visa-free\", governmentFee: 0, documents: [\"Valid passport\", \"Proof of funds\", \"Return/onward ticket\"] },\n      business: { type: \"Visa-free\", governmentFee: 0, documents: [\"Valid passport\", \"Proof of funds\", \"Return/onward ticket\"] },\n      transit: { type: \"Visa-free\", governmentFee: 0, documents: [\"Valid passport\"] }\n    },\n    \"Bahamas\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "netlify/functions/api.js",
+        "start": 378,
+        "end": 383,
+        "startLoc": {
+          "line": 378,
+          "column": 15,
+          "position": 4330
+        },
+        "endLoc": {
+          "line": 383,
+          "column": 14,
+          "position": 4434
+        }
+      },
+      "secondFile": {
+        "name": "netlify/functions/api.js",
+        "start": 368,
+        "end": 373,
+        "startLoc": {
+          "line": 368,
+          "column": 16,
+          "position": 4120
+        },
+        "endLoc": {
+          "line": 373,
+          "column": 17,
+          "position": 4224
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 6,
+      "fragment": ": {\n      tourism: { type: \"Visa-free\", governmentFee: 0, documents: [\"Valid passport\", \"Proof of funds\", \"Return/onward ticket\"] },\n      business: { type: \"Visa-free\", governmentFee: 0, documents: [\"Valid passport\", \"Proof of funds\", \"Return/onward ticket\"] },\n      transit: { type: \"Visa-free\", governmentFee: 0, documents: [\"Valid passport\"] }\n    },\n    \"Fiji\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "netlify/functions/api.js",
+        "start": 383,
+        "end": 388,
+        "startLoc": {
+          "line": 383,
+          "column": 14,
+          "position": 4435
+        },
+        "endLoc": {
+          "line": 388,
+          "column": 11,
+          "position": 4539
+        }
+      },
+      "secondFile": {
+        "name": "netlify/functions/api.js",
+        "start": 368,
+        "end": 373,
+        "startLoc": {
+          "line": 368,
+          "column": 16,
+          "position": 4120
+        },
+        "endLoc": {
+          "line": 373,
+          "column": 17,
+          "position": 4224
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 6,
+      "fragment": ": {\n      tourism: { type: \"Visa-free\", governmentFee: 0, documents: [\"Valid passport\", \"Proof of funds\", \"Return/onward ticket\"] },\n      business: { type: \"Visa-free\", governmentFee: 0, documents: [\"Valid passport\", \"Proof of funds\", \"Return/onward ticket\"] },\n      transit: { type: \"Visa-free\", governmentFee: 0, documents: [\"Valid passport\"] }\n    }\n  }",
+      "tokens": 0,
+      "firstFile": {
+        "name": "netlify/functions/api.js",
+        "start": 388,
+        "end": 393,
+        "startLoc": {
+          "line": 388,
+          "column": 11,
+          "position": 4540
+        },
+        "endLoc": {
+          "line": 393,
+          "column": 4,
+          "position": 4643
+        }
+      },
+      "secondFile": {
+        "name": "netlify/functions/api.js",
+        "start": 368,
+        "end": 372,
+        "startLoc": {
+          "line": 368,
+          "column": 16,
+          "position": 4120
+        },
+        "endLoc": {
+          "line": 372,
+          "column": 7,
+          "position": 4221
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 9,
+      "fragment": "|| \"\");\n\n  if (!id) return json(400, { ok: false, error: \"Missing id\" });\n\n  try {\n    const application = await githubGetFile(`visa-applications/${id}.json`);\n    if (!application) return json(404, { ok: false, error: \"Not found\" });\n\n    if",
+      "tokens": 0,
+      "firstFile": {
+        "name": "netlify/functions/api.js",
+        "start": 566,
+        "end": 574,
+        "startLoc": {
+          "line": 566,
+          "column": 60,
+          "position": 6702
+        },
+        "endLoc": {
+          "line": 574,
+          "column": 7,
+          "position": 6802
+        }
+      },
+      "secondFile": {
+        "name": "netlify/functions/api.js",
+        "start": 527,
+        "end": 533,
+        "startLoc": {
+          "line": 527,
+          "column": 53,
+          "position": 6071
+        },
+        "endLoc": {
+          "line": 533,
+          "column": 11,
+          "position": 6169
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 8,
+      "fragment": "if (process.env.NODE_ENV === 'production' && !users) {\n        return res.status(503).json({ ok: false, error: 'Database is not configured (MONGODB_URI)' });\n      }\n\n      const auth = await verifyAuthToken(req);\n      if (!auth.ok) return res.status(auth.status).json({ ok: false, error: auth.error });\n\n      const",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/user.js",
+        "start": 98,
+        "end": 105,
+        "startLoc": {
+          "line": 98,
+          "column": 7,
+          "position": 1133
+        },
+        "endLoc": {
+          "line": 105,
+          "column": 12,
+          "position": 1246
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/user.js",
+        "start": 80,
+        "end": 86,
+        "startLoc": {
+          "line": 80,
+          "column": 7,
+          "position": 851
+        },
+        "endLoc": {
+          "line": 86,
+          "column": 9,
+          "position": 963
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 9,
+      "fragment": ") {\n      if (process.env.NODE_ENV === 'production' && !users) {\n        return res.status(503).json({ ok: false, error: 'Database is not configured (MONGODB_URI)' });\n      }\n\n      const auth = await verifyAuthToken(req);\n      if (!auth.ok) return res.status(auth.status).json({ ok: false, error: auth.error });\n\n      const email",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/user.js",
+        "start": 132,
+        "end": 140,
+        "startLoc": {
+          "line": 132,
+          "column": 32,
+          "position": 1528
+        },
+        "endLoc": {
+          "line": 140,
+          "column": 18,
+          "position": 1648
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/user.js",
+        "start": 97,
+        "end": 105,
+        "startLoc": {
+          "line": 97,
+          "column": 30,
+          "position": 1128
+        },
+        "endLoc": {
+          "line": 105,
+          "column": 17,
+          "position": 1248
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 18,
+      "fragment": "function applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\nmodule.exports = async (req, res) => {\n  applyCors(req, res);\n  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');\n\n  if (req.method === 'OPTIONS') return res.status(200).end();\n\n  try {\n    let collections;\n    try {\n      collections = await getCollections();\n    } catch (err) {\n      if (process.env.NODE_ENV === 'production') throw err;\n      if (!global.__support",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/support.js",
+        "start": 6,
+        "end": 23,
+        "startLoc": {
+          "line": 6,
+          "column": 1,
+          "position": 65
+        },
+        "endLoc": {
+          "line": 23,
+          "column": 28,
+          "position": 259
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/user.js",
+        "start": 39,
+        "end": 56,
+        "startLoc": {
+          "line": 39,
+          "column": 1,
+          "position": 359
+        },
+        "endLoc": {
+          "line": 56,
+          "column": 26,
+          "position": 553
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 7,
+      "fragment": "(req);\n        if (!auth.ok) return res.status(auth.status).json({ ok: false, error: auth.error });\n        if (auth.email !== email) {\n          return res.status(403).json({ ok: false, error: 'Email does not match signed-in account' });\n        }\n        \n        if (support",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/support.js",
+        "start": 46,
+        "end": 52,
+        "startLoc": {
+          "line": 46,
+          "column": 47,
+          "position": 515
+        },
+        "endLoc": {
+          "line": 52,
+          "column": 20,
+          "position": 615
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/user.js",
+        "start": 84,
+        "end": 90,
+        "startLoc": {
+          "line": 84,
+          "column": 41,
+          "position": 915
+        },
+        "endLoc": {
+          "line": 90,
+          "column": 16,
+          "position": 1014
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 14,
+      "fragment": ": 'https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'nairobi': 'https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'johannesburg': 'https://images.pexels.com/photos/259447/pexels-photo-259447.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'cairo': 'https://images.pexels.com/photos/3290075/pexels-photo-3290075.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'istanbul': 'https://images.pexels.com/photos/2064827/pexels-photo-2064827.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'singapore': 'https://images.pexels.com/photos/777059/pexels-photo-777059.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'bangkok': 'https://images.pexels.com/photos/1682748/pexels-photo-1682748.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'amsterdam': 'https://images.pexels.com/photos/2031706/pexels-photo-2031706.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'mumbai': 'https://images.pexels.com/photos/2104152/pexels-photo-2104152.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'miami': 'https://images.pexels.com/photos/421655/pexels-photo-421655.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'los-angeles': 'https://images.pexels.com/photos/2263683/pexels-photo-2263683.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n        'cancun': 'https://images.pexels.com/photos/1174732/pexels-photo-1174732.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',\n    };\n    const FALLBACK_IMG",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/flight-deals.js",
+        "start": 210,
+        "end": 223,
+        "startLoc": {
+          "line": 210,
+          "column": 19,
+          "position": 2725
+        },
+        "endLoc": {
+          "line": 223,
+          "column": 23,
+          "position": 2814
+        }
+      },
+      "secondFile": {
+        "name": "public/js/deals.js",
+        "start": 23,
+        "end": 36,
+        "startLoc": {
+          "line": 23,
+          "column": 19,
+          "position": 98
+        },
+        "endLoc": {
+          "line": 36,
+          "column": 25,
+          "position": 187
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 12,
+      "fragment": "module.exports = async (req, res) => {\n  // Enable CORS\n  res.setHeader('Access-Control-Allow-Origin', '*');\n  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');\n  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');\n\n  if (req.method === 'OPTIONS') {\n    return res.status(200).end();\n  }\n\n  try {\n    const location",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/events-search.js",
+        "start": 14,
+        "end": 25,
+        "startLoc": {
+          "line": 14,
+          "column": 1,
+          "position": 89
+        },
+        "endLoc": {
+          "line": 25,
+          "column": 19,
+          "position": 189
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/events-status.js",
+        "start": 10,
+        "end": 21,
+        "startLoc": {
+          "line": 10,
+          "column": 1,
+          "position": 58
+        },
+        "endLoc": {
+          "line": 21,
+          "column": 31,
+          "position": 158
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 11,
+      "fragment": ");\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\nmodule.exports = async (req, res) => {\n  applyCors(req, res);\n\n  if",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-search.js",
+        "start": 9,
+        "end": 19,
+        "startLoc": {
+          "line": 9,
+          "column": 90,
+          "position": 107
+        },
+        "endLoc": {
+          "line": 19,
+          "column": 5,
+          "position": 200
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/support.js",
+        "start": 4,
+        "end": 46,
+        "startLoc": {
+          "line": 4,
+          "column": 63,
+          "position": 61
+        },
+        "endLoc": {
+          "line": 46,
+          "column": 6,
+          "position": 447
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 25,
+      "fragment": "require('dotenv').config();\n\nconst fetch = require('node-fetch');\nconst { getCorsHeaders } = require('../lib/cors');\n\nconst DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';\nconst DUFFEL_BASE_URL = 'https://api.duffel.com';\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\n/**\n * POST /api/duffel-payments\n *\n * Pays for a 'held' order.\n * \n * Body:\n * {\n *   orderId: string,\n *   amount: string,\n *   currency: string\n * }\n */",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-payments.js",
+        "start": 1,
+        "end": 25,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 25,
+          "column": 4,
+          "position": 126
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-seat-maps.js",
+        "start": 1,
+        "end": 24,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 24,
+          "column": 4,
+          "position": 126
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 7,
+      "fragment": "module.exports = async (req, res) => {\n  applyCors(req, res);\n\n  if (req.method === 'OPTIONS') return res.status(200).end();\n  if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed' });\n\n  if",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-payments.js",
+        "start": 26,
+        "end": 32,
+        "startLoc": {
+          "line": 26,
+          "column": 1,
+          "position": 128
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 5,
+          "position": 227
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-search.js",
+        "start": 16,
+        "end": 22,
+        "startLoc": {
+          "line": 16,
+          "column": 1,
+          "position": 170
+        },
+        "endLoc": {
+          "line": 22,
+          "column": 6,
+          "position": 269
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 16,
+      "fragment": "require('dotenv').config();\n\nconst fetch = require('node-fetch');\nconst { getCorsHeaders } = require('../lib/cors');\n\nconst DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';\nconst DUFFEL_BASE_URL = 'https://api.duffel.com';\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\n/**\n * Validate a YYYY-MM-DD date string.\n */",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-orders.js",
+        "start": 1,
+        "end": 16,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 16,
+          "column": 4,
+          "position": 126
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-seat-maps.js",
+        "start": 1,
+        "end": 24,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 24,
+          "column": 4,
+          "position": 126
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 7,
+      "fragment": "req.method !== 'GET') return res.status(405).json({ ok: false, error: 'Method not allowed' });\n\n  if (!DUFFEL_API_KEY) {\n    return res.status(503).json({ ok: false, error: 'Duffel is not configured (missing DUFFEL_API_KEY)' });\n  }\n\n  // ── GET Logic (Fetch Order) ─────────────────────────────────────────────────",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-orders.js",
+        "start": 57,
+        "end": 63,
+        "startLoc": {
+          "line": 57,
+          "column": 32,
+          "position": 252
+        },
+        "endLoc": {
+          "line": 63,
+          "column": 82,
+          "position": 334
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-seat-maps.js",
+        "start": 29,
+        "end": 35,
+        "startLoc": {
+          "line": 29,
+          "column": 7,
+          "position": 188
+        },
+        "endLoc": {
+          "line": 35,
+          "column": 8,
+          "position": 270
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 19,
+      "fragment": "require('dotenv').config();\n\nconst fetch = require('node-fetch');\nconst { getCorsHeaders } = require('../lib/cors');\n\nconst DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';\nconst DUFFEL_BASE_URL = 'https://api.duffel.com';\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\n/**\n * Post-Booking Services API\n * \n * GET  /api/duffel-order-services?orderId=... - Get available services (bags, seats, meals)\n * POST /api/duffel-order-services - Add services to order\n */",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-services.js",
+        "start": 1,
+        "end": 19,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 19,
+          "column": 4,
+          "position": 126
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-seat-maps.js",
+        "start": 1,
+        "end": 24,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 24,
+          "column": 4,
+          "position": 126
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 20,
+      "fragment": "require('dotenv').config();\n\nconst fetch = require('node-fetch');\nconst { getCorsHeaders } = require('../lib/cors');\n\nconst DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';\nconst DUFFEL_BASE_URL = 'https://api.duffel.com';\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\n/**\n * Order Change API\n * \n * POST /api/duffel-order-changes - Create change request\n * GET  /api/duffel-order-changes?id=... - Get change request details\n * POST /api/duffel-confirm-order-change - Confirm order change\n */",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-changes.js",
+        "start": 1,
+        "end": 20,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 20,
+          "column": 4,
+          "position": 126
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-seat-maps.js",
+        "start": 1,
+        "end": 24,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 24,
+          "column": 4,
+          "position": 126
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 11,
+      "fragment": "module.exports = async (req, res) => {\n  applyCors(req, res);\n\n  if (req.method === 'OPTIONS') return res.status(200).end();\n\n  if (!DUFFEL_API_KEY) {\n    return res.status(503).json({ ok: false, error: 'Duffel is not configured (missing DUFFEL_API_KEY)' });\n  }\n\n  try {\n    // GET - Get change request details",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-changes.js",
+        "start": 22,
+        "end": 32,
+        "startLoc": {
+          "line": 22,
+          "column": 1,
+          "position": 129
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 40,
+          "position": 235
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-services.js",
+        "start": 21,
+        "end": 31,
+        "startLoc": {
+          "line": 21,
+          "column": 1,
+          "position": 129
+        },
+        "endLoc": {
+          "line": 31,
+          "column": 46,
+          "position": 235
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 12,
+      "fragment": "`, {\n        method: 'GET',\n        headers: {\n          'Accept': 'application/json',\n          'Duffel-Version': 'v2',\n          'Authorization': `Bearer ${DUFFEL_API_KEY}`\n        }\n      });\n\n      if (!response.ok) {\n        const errorText = await response.text();\n        console.error('Duffel change request get error:'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-changes.js",
+        "start": 41,
+        "end": 52,
+        "startLoc": {
+          "line": 41,
+          "column": 100,
+          "position": 354
+        },
+        "endLoc": {
+          "line": 52,
+          "column": 57,
+          "position": 439
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-services.js",
+        "start": 40,
+        "end": 51,
+        "startLoc": {
+          "line": 40,
+          "column": 96,
+          "position": 355
+        },
+        "endLoc": {
+          "line": 51,
+          "column": 51,
+          "position": 440
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 7,
+      "fragment": ", response.status, errorText);\n          \n          try {\n            const errorJson = JSON.parse(errorText);\n            return res.status(response.status).json({\n              ok: false,\n              error: errorJson.errors?.[0]?.title || `Failed to create change request: ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-changes.js",
+        "start": 132,
+        "end": 138,
+        "startLoc": {
+          "line": 132,
+          "column": 62,
+          "position": 1141
+        },
+        "endLoc": {
+          "line": 138,
+          "column": 88,
+          "position": 1214
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-services.js",
+        "start": 157,
+        "end": 163,
+        "startLoc": {
+          "line": 157,
+          "column": 51,
+          "position": 1491
+        },
+        "endLoc": {
+          "line": 163,
+          "column": 77,
+          "position": 1564
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 31,
+      "fragment": "const offers = data.data.order_change_offers?.map(offer => ({\n          id: offer.id,\n          changeTotalAmount: offer.change_total_amount,\n          changeTotalCurrency: offer.change_total_currency,\n          penaltyTotalAmount: offer.penalty_total_amount,\n          penaltyTotalCurrency: offer.penalty_total_currency,\n          refundAmount: offer.refund_amount,\n          refundCurrency: offer.refund_currency,\n          newTotalAmount: offer.new_total_amount,\n          newTotalCurrency: offer.new_total_currency,\n          slices: {\n            remove: offer.slices?.remove || [],\n            add: offer.slices?.add || []\n          },\n          expiresAt: offer.expires_at\n        })) || [];\n\n        return res.json({\n          ok: true,\n          changeRequest: {\n            id: data.data.id,\n            orderId: data.data.order_id,\n            status: data.data.status,\n            createdAt: data.data.created_at,\n            updatedAt: data.data.updated_at,\n            offers: offers\n          }\n        });\n      }\n\n      // Confirm order change",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-changes.js",
+        "start": 154,
+        "end": 184,
+        "startLoc": {
+          "line": 154,
+          "column": 9,
+          "position": 1332
+        },
+        "endLoc": {
+          "line": 184,
+          "column": 30,
+          "position": 1591
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-changes.js",
+        "start": 62,
+        "end": 92,
+        "startLoc": {
+          "line": 62,
+          "column": 7,
+          "position": 518
+        },
+        "endLoc": {
+          "line": 92,
+          "column": 54,
+          "position": 777
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 7,
+      "fragment": ", response.status, errorText);\n          \n          try {\n            const errorJson = JSON.parse(errorText);\n            return res.status(response.status).json({\n              ok: false,\n              error: errorJson.errors?.[0]?.title || `Failed to confirm order change: ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-changes.js",
+        "start": 211,
+        "end": 217,
+        "startLoc": {
+          "line": 211,
+          "column": 61,
+          "position": 1818
+        },
+        "endLoc": {
+          "line": 217,
+          "column": 87,
+          "position": 1891
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-services.js",
+        "start": 157,
+        "end": 163,
+        "startLoc": {
+          "line": 157,
+          "column": 51,
+          "position": 1491
+        },
+        "endLoc": {
+          "line": 163,
+          "column": 77,
+          "position": 1564
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 20,
+      "fragment": "require('dotenv').config();\n\nconst fetch = require('node-fetch');\nconst { getCorsHeaders } = require('../lib/cors');\n\nconst DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';\nconst DUFFEL_BASE_URL = 'https://api.duffel.com';\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\n/**\n * Order Cancellation API\n * \n * POST /api/duffel-order-cancellations - Create a pending cancellation\n * GET  /api/duffel-order-cancellations?id=... - Get cancellation status\n * POST /api/duffel-confirm-cancellation - Confirm the cancellation\n */",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-cancellations.js",
+        "start": 1,
+        "end": 20,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 20,
+          "column": 4,
+          "position": 126
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-seat-maps.js",
+        "start": 1,
+        "end": 24,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 24,
+          "column": 4,
+          "position": 126
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 11,
+      "fragment": "module.exports = async (req, res) => {\n  applyCors(req, res);\n\n  if (req.method === 'OPTIONS') return res.status(200).end();\n\n  if (!DUFFEL_API_KEY) {\n    return res.status(503).json({ ok: false, error: 'Duffel is not configured (missing DUFFEL_API_KEY)' });\n  }\n\n  try {\n    // GET - Check cancellation status",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-cancellations.js",
+        "start": 22,
+        "end": 32,
+        "startLoc": {
+          "line": 22,
+          "column": 1,
+          "position": 129
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 39,
+          "position": 235
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-services.js",
+        "start": 21,
+        "end": 31,
+        "startLoc": {
+          "line": 21,
+          "column": 1,
+          "position": 129
+        },
+        "endLoc": {
+          "line": 31,
+          "column": 46,
+          "position": 235
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 12,
+      "fragment": "}`, {\n        method: 'GET',\n        headers: {\n          'Accept': 'application/json',\n          'Duffel-Version': 'v2',\n          'Authorization': `Bearer ${DUFFEL_API_KEY}`\n        }\n      });\n\n      if (!response.ok) {\n        const errorText = await response.text();\n        console.error('Duffel cancellation get error:'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-cancellations.js",
+        "start": 41,
+        "end": 52,
+        "startLoc": {
+          "line": 41,
+          "column": 96,
+          "position": 353
+        },
+        "endLoc": {
+          "line": 52,
+          "column": 55,
+          "position": 439
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-changes.js",
+        "start": 41,
+        "end": 51,
+        "startLoc": {
+          "line": 41,
+          "column": 99,
+          "position": 353
+        },
+        "endLoc": {
+          "line": 51,
+          "column": 51,
+          "position": 440
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 7,
+      "fragment": ", response.status, errorText);\n          \n          try {\n            const errorJson = JSON.parse(errorText);\n            return res.status(response.status).json({\n              ok: false,\n              error: errorJson.errors?.[0]?.title || `Failed to create cancellation: ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-cancellations.js",
+        "start": 105,
+        "end": 111,
+        "startLoc": {
+          "line": 105,
+          "column": 60,
+          "position": 898
+        },
+        "endLoc": {
+          "line": 111,
+          "column": 86,
+          "position": 971
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-services.js",
+        "start": 157,
+        "end": 163,
+        "startLoc": {
+          "line": 157,
+          "column": 51,
+          "position": 1491
+        },
+        "endLoc": {
+          "line": 163,
+          "column": 77,
+          "position": 1564
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 11,
+      "fragment": ");\n\n        return res.json({\n          ok: true,\n          cancellation: {\n            id: data.data.id,\n            orderId: data.data.order_id,\n            refundAmount: data.data.refund_amount,\n            refundCurrency: data.data.refund_currency,\n            status: data.data.status,\n            createdAt",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-cancellations.js",
+        "start": 124,
+        "end": 134,
+        "startLoc": {
+          "line": 124,
+          "column": 60,
+          "position": 1081
+        },
+        "endLoc": {
+          "line": 134,
+          "column": 22,
+          "position": 1163
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-cancellations.js",
+        "start": 59,
+        "end": 68,
+        "startLoc": {
+          "line": 59,
+          "column": 40,
+          "position": 509
+        },
+        "endLoc": {
+          "line": 68,
+          "column": 73,
+          "position": 591
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 7,
+      "fragment": ", response.status, errorText);\n          \n          try {\n            const errorJson = JSON.parse(errorText);\n            return res.status(response.status).json({\n              ok: false,\n              error: errorJson.errors?.[0]?.title || `Failed to confirm cancellation: ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-cancellations.js",
+        "start": 164,
+        "end": 170,
+        "startLoc": {
+          "line": 164,
+          "column": 61,
+          "position": 1405
+        },
+        "endLoc": {
+          "line": 170,
+          "column": 87,
+          "position": 1478
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-services.js",
+        "start": 157,
+        "end": 163,
+        "startLoc": {
+          "line": 157,
+          "column": 51,
+          "position": 1491
+        },
+        "endLoc": {
+          "line": 163,
+          "column": 77,
+          "position": 1564
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 11,
+      "fragment": "${data.data.id}`);\n\n        return res.json({\n          ok: true,\n          cancellation: {\n            id: data.data.id,\n            orderId: data.data.order_id,\n            refundAmount: data.data.refund_amount,\n            refundCurrency: data.data.refund_currency,\n            status: data.data.status,\n            confirmedAt",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-cancellations.js",
+        "start": 183,
+        "end": 193,
+        "startLoc": {
+          "line": 183,
+          "column": 46,
+          "position": 1580
+        },
+        "endLoc": {
+          "line": 193,
+          "column": 24,
+          "position": 1670
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-cancellations.js",
+        "start": 124,
+        "end": 68,
+        "startLoc": {
+          "line": 124,
+          "column": 44,
+          "position": 1073
+        },
+        "endLoc": {
+          "line": 68,
+          "column": 73,
+          "position": 591
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 11,
+      "fragment": "}\n        });\n      }\n\n      return res.status(400).json({ ok: false, error: 'Invalid action. Use \"create\" or \"confirm\"' });\n    }\n\n    return res.status(405).json({ ok: false, error: 'Method not allowed' });\n\n  } catch (error) {\n    console.error('Order cancellation error:'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-order-cancellations.js",
+        "start": 195,
+        "end": 205,
+        "startLoc": {
+          "line": 195,
+          "column": 11,
+          "position": 1691
+        },
+        "endLoc": {
+          "line": 205,
+          "column": 46,
+          "position": 1781
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-order-changes.js",
+        "start": 249,
+        "end": 259,
+        "startLoc": {
+          "line": 249,
+          "column": 11,
+          "position": 2181
+        },
+        "endLoc": {
+          "line": 259,
+          "column": 40,
+          "position": 2271
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 32,
+      "fragment": "require('dotenv').config();\n\nconst fetch = require('node-fetch');\nconst { getCorsHeaders } = require('../lib/cors');\n\nconst DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';\nconst DUFFEL_BASE_URL = 'https://api.duffel.com';\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\n/**\n * GET /api/duffel-offer?id=off_...\n *\n * Fetches the latest price and details for a single Duffel offer.\n * Per the Duffel getting-started guide, this should be called right before\n * orders.create to confirm the offer is still valid and get the current price.\n *\n * Returns:\n * {\n *   ok: true,\n *   offer: {\n *     id:             string\n *     total_amount:   string   — latest price (may differ from search)\n *     total_currency: string\n *     expires_at:     string   — ISO 8601 expiry timestamp\n *     available:      boolean  — false if the offer has expired\n *   }\n * }\n */",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-offer.js",
+        "start": 1,
+        "end": 32,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 4,
+          "position": 126
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-seat-maps.js",
+        "start": 1,
+        "end": 24,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 24,
+          "column": 4,
+          "position": 126
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 11,
+      "fragment": "module.exports = async (req, res) => {\n  applyCors(req, res);\n\n  if (req.method === 'OPTIONS') return res.status(200).end();\n  if (req.method !== 'GET') return res.status(405).json({ ok: false, error: 'Method not allowed' });\n\n  if (!DUFFEL_API_KEY) {\n    return res.status(503).json({ ok: false, error: 'Duffel is not configured (missing DUFFEL_API_KEY)' });\n  }\n\n  const offerId = String(req.query.id",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-offer.js",
+        "start": 33,
+        "end": 43,
+        "startLoc": {
+          "line": 33,
+          "column": 1,
+          "position": 128
+        },
+        "endLoc": {
+          "line": 43,
+          "column": 38,
+          "position": 282
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-seat-maps.js",
+        "start": 25,
+        "end": 35,
+        "startLoc": {
+          "line": 25,
+          "column": 1,
+          "position": 128
+        },
+        "endLoc": {
+          "line": 35,
+          "column": 44,
+          "position": 282
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 14,
+      "fragment": "require('dotenv').config();\n\nconst fetch = require('node-fetch');\nconst { getCorsHeaders } = require('../lib/cors');\n\nconst DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';\nconst DUFFEL_BASE_URL = 'https://api.duffel.com';\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\nmodule",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-client-key.js",
+        "start": 1,
+        "end": 14,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 14,
+          "column": 7,
+          "position": 126
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-seat-maps.js",
+        "start": 1,
+        "end": 24,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 24,
+          "column": 4,
+          "position": 126
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 18,
+      "fragment": ";\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\nmodule.exports = async (req, res) => {\n  applyCors(req, res);\n\n  if (req.method === 'OPTIONS') return res.status(200).end();\n  if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed' });\n\n  if (!DUFFEL_API_KEY) {\n    return res.status(503).json({ ok: false, error: 'Duffel is not configured' });\n  }\n\n  try",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-client-key.js",
+        "start": 7,
+        "end": 24,
+        "startLoc": {
+          "line": 7,
+          "column": 49,
+          "position": 64
+        },
+        "endLoc": {
+          "line": 24,
+          "column": 6,
+          "position": 268
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/support.js",
+        "start": 4,
+        "end": 36,
+        "startLoc": {
+          "line": 4,
+          "column": 64,
+          "position": 62
+        },
+        "endLoc": {
+          "line": 36,
+          "column": 8,
+          "position": 270
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 17,
+      "fragment": "require('dotenv').config();\n\nconst fetch = require('node-fetch');\nconst { getCorsHeaders } = require('../lib/cors');\n\nconst DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';\nconst DUFFEL_BASE_URL = 'https://api.duffel.com';\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\nmodule.exports = async (req, res) => {\n  applyCors(req, res);\n\n  if (req.method === 'OPTIONS') {",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/duffel-airports.js",
+        "start": 1,
+        "end": 17,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 17,
+          "column": 34,
+          "position": 168
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-seat-maps.js",
+        "start": 1,
+        "end": 19,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 19,
+          "column": 39,
+          "position": 212
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 13,
+      "fragment": "}\n\nfunction applyCors(req, res) {\n  const h = getCorsHeaders(req);\n  Object.entries(h).forEach(([k, v]) => res.setHeader(k, v));\n}\n\nmodule.exports = async (req, res) => {\n  applyCors(req, res);\n  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');\n\n  if (req.method === 'OPTIONS') return res.status(200).end();\n  if",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/bookings.js",
+        "start": 20,
+        "end": 32,
+        "startLoc": {
+          "line": 20,
+          "column": 1,
+          "position": 201
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 5,
+          "position": 332
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/user.js",
+        "start": 37,
+        "end": 50,
+        "startLoc": {
+          "line": 37,
+          "column": 1,
+          "position": 356
+        },
+        "endLoc": {
+          "line": 50,
+          "column": 6,
+          "position": 488
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 7,
+      "fragment": ".contact.email) || '')\n          .trim()\n          .toLowerCase();\n        if (!em || em !== auth.email) {\n          return res.status(403).json({ ok: false, error: 'Not allowed for this booking' });\n        }\n        global",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/bookings.js",
+        "start": 163,
+        "end": 169,
+        "startLoc": {
+          "line": 163,
+          "column": 78,
+          "position": 2241
+        },
+        "endLoc": {
+          "line": 169,
+          "column": 15,
+          "position": 2318
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/ticket-download.js",
+        "start": 35,
+        "end": 40,
+        "startLoc": {
+          "line": 35,
+          "column": 44,
+          "position": 422
+        },
+        "endLoc": {
+          "line": 40,
+          "column": 25,
+          "position": 496
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 9,
+      "fragment": "} },\n          { returnDocument: 'after' }\n        );\n        if (!doc) return res.status(404).json({ ok: false, error: 'Booking not found' });\n        return res.json({ ok: true, booking: doc });\n      }\n      const idx = global.__bookings.findIndex((b) => b.ref === id);\n      if (idx === -1) return res.status(404).json({ ok: false, error: 'Booking not found' });\n      global.__bookings[idx].status = 'issued'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/bookings.js",
+        "start": 196,
+        "end": 204,
+        "startLoc": {
+          "line": 196,
+          "column": 54,
+          "position": 2733
+        },
+        "endLoc": {
+          "line": 204,
+          "column": 47,
+          "position": 2896
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/bookings.js",
+        "start": 135,
+        "end": 143,
+        "startLoc": {
+          "line": 135,
+          "column": 36,
+          "position": 1641
+        },
+        "endLoc": {
+          "line": 143,
+          "column": 45,
+          "position": 1804
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 6,
+      "fragment": "module.exports = async (req, res) => {\n  applyCors(req, res);\n  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');\n\n  if (req.method === 'OPTIONS') return res.status(200).end();\n  if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/auth.js",
+        "start": 71,
+        "end": 76,
+        "startLoc": {
+          "line": 71,
+          "column": 1,
+          "position": 569
+        },
+        "endLoc": {
+          "line": 76,
+          "column": 98,
+          "position": 672
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/bookings.js",
+        "start": 27,
+        "end": 32,
+        "startLoc": {
+          "line": 27,
+          "column": 1,
+          "position": 263
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 89,
+          "position": 366
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 6,
+      "fragment": ");\n\n  if (req.method === 'OPTIONS') return res.status(200).end();\n  if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed' });\n\n  // Determine action from sub-path (e.g. /api/auth/register → \"register\")",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/auth.js",
+        "start": 73,
+        "end": 78,
+        "startLoc": {
+          "line": 73,
+          "column": 78,
+          "position": 606
+        },
+        "endLoc": {
+          "line": 78,
+          "column": 75,
+          "position": 680
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/duffel-search.js",
+        "start": 17,
+        "end": 22,
+        "startLoc": {
+          "line": 17,
+          "column": 21,
+          "position": 195
+        },
+        "endLoc": {
+          "line": 22,
+          "column": 6,
+          "position": 269
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 12,
+      "fragment": "module.exports = async (req, res) => {\n  // Enable CORS\n  res.setHeader('Access-Control-Allow-Origin', '*');\n  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');\n  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');\n\n  if (req.method === 'OPTIONS') {\n    return res.status(200).end();\n  }\n\n  try {\n    const {",
+      "tokens": 0,
+      "firstFile": {
+        "name": "api-routes/amadeus-airports.js",
+        "start": 9,
+        "end": 20,
+        "startLoc": {
+          "line": 9,
+          "column": 1,
+          "position": 28
+        },
+        "endLoc": {
+          "line": 20,
+          "column": 12,
+          "position": 128
+        }
+      },
+      "secondFile": {
+        "name": "api-routes/events-status.js",
+        "start": 10,
+        "end": 21,
+        "startLoc": {
+          "line": 10,
+          "column": 1,
+          "position": 58
+        },
+        "endLoc": {
+          "line": 21,
+          "column": 31,
+          "position": 158
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 7,
+      "fragment": ", apiLimiter, async (req, res) => {\n  if (!stripe) {\n    return res.status(503).json({ ok: false, error: stripeConfigError });\n  }\n\n  try {\n    const sessionId ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "server.js",
+        "start": 211,
+        "end": 217,
+        "startLoc": {
+          "line": 211,
+          "column": 30,
+          "position": 2094
+        },
+        "endLoc": {
+          "line": 217,
+          "column": 21,
+          "position": 2151
+        }
+      },
+      "secondFile": {
+        "name": "server.js",
+        "start": 156,
+        "end": 162,
+        "startLoc": {
+          "line": 156,
+          "column": 47,
+          "position": 1499
+        },
+        "endLoc": {
+          "line": 162,
+          "column": 19,
+          "position": 1556
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 8,
+      "fragment": ", apiLimiter, async (req, res) => {\n  try {\n    const location = String(req.query.location || '').trim();\n    if (!location) {\n      return res.status(400).json({ ok: false, error: 'Missing required parameter: location' });\n    }\n\n    const result = await fetchTicketmasterEventsByLocation",
+      "tokens": 0,
+      "firstFile": {
+        "name": "server.js",
+        "start": 410,
+        "end": 417,
+        "startLoc": {
+          "line": 410,
+          "column": 35,
+          "position": 3996
+        },
+        "endLoc": {
+          "line": 417,
+          "column": 59,
+          "position": 4081
+        }
+      },
+      "secondFile": {
+        "name": "server.js",
+        "start": 390,
+        "end": 397,
+        "startLoc": {
+          "line": 390,
+          "column": 29,
+          "position": 3772
+        },
+        "endLoc": {
+          "line": 397,
+          "column": 57,
+          "position": 3857
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 8,
+      "fragment": ", apiLimiter, async (req, res) => {\n  try {\n    const location = String(req.query.location || '').trim();\n    if (!location) {\n      return res.status(400).json({ ok: false, error: 'Missing required parameter: location' });\n    }\n\n    const ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "server.js",
+        "start": 430,
+        "end": 437,
+        "startLoc": {
+          "line": 430,
+          "column": 38,
+          "position": 4220
+        },
+        "endLoc": {
+          "line": 437,
+          "column": 11,
+          "position": 4300
+        }
+      },
+      "secondFile": {
+        "name": "server.js",
+        "start": 390,
+        "end": 397,
+        "startLoc": {
+          "line": 390,
+          "column": 29,
+          "position": 3772
+        },
+        "endLoc": {
+          "line": 397,
+          "column": 18,
+          "position": 3852
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 9,
+      "fragment": ".events || []) {\n      const key = String(e?.url || e?.id || '').trim();\n      if (key && !seen.has(key)) {\n        seen.add(key);\n        combined.push(e);\n      }\n    }\n\n    ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "server.js",
+        "start": 454,
+        "end": 462,
+        "startLoc": {
+          "line": 454,
+          "column": 23,
+          "position": 4484
+        },
+        "endLoc": {
+          "line": 462,
+          "column": 5,
+          "position": 4551
+        }
+      },
+      "secondFile": {
+        "name": "server.js",
+        "start": 447,
+        "end": 454,
+        "startLoc": {
+          "line": 447,
+          "column": 23,
+          "position": 4409
+        },
+        "endLoc": {
+          "line": 454,
+          "column": 5,
+          "position": 4476
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 9,
+      "fragment": ", async (req, res) => {\n  try {\n    const { keyword } = req.query;\n\n    if (!keyword || keyword.length < 2) {\n      return res.json({ ok: true, airports: [] });\n    }\n\n    // Duffel doesn't have a public airport search API",
+      "tokens": 0,
+      "firstFile": {
+        "name": "duffel-api.js",
+        "start": 254,
+        "end": 262,
+        "startLoc": {
+          "line": 254,
+          "column": 31,
+          "position": 1432
+        },
+        "endLoc": {
+          "line": 262,
+          "column": 55,
+          "position": 1503
+        }
+      },
+      "secondFile": {
+        "name": "server.js",
+        "start": 482,
+        "end": 490,
+        "startLoc": {
+          "line": 482,
+          "column": 47,
+          "position": 4758
+        },
+        "endLoc": {
+          "line": 490,
+          "column": 10,
+          "position": 4829
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 9,
+      "fragment": ", async (req, res) => {\n  try {\n    const { keyword } = req.query;\n\n    if (!keyword || keyword.length < 2) {\n      return res.json({ ok: true, airports: [] });\n    }\n\n    // Aviationstack doesn't have airport search, so return common airports",
+      "tokens": 0,
+      "firstFile": {
+        "name": "alternative-api.js",
+        "start": 92,
+        "end": 100,
+        "startLoc": {
+          "line": 92,
+          "column": 38,
+          "position": 591
+        },
+        "endLoc": {
+          "line": 100,
+          "column": 76,
+          "position": 662
+        }
+      },
+      "secondFile": {
+        "name": "server.js",
+        "start": 482,
+        "end": 490,
+        "startLoc": {
+          "line": 482,
+          "column": 47,
+          "position": 4758
+        },
+        "endLoc": {
+          "line": 490,
+          "column": 10,
+          "position": 4829
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 9,
+      "fragment": "\n    const commonAirports = [\n      { city: \"New York\", name: \"John F. Kennedy International\", code: \"JFK\", country: \"United States\" },\n      { city: \"Los Angeles\", name: \"Los Angeles International\", code: \"LAX\", country: \"United States\" },\n      { city: \"London\", name: \"Heathrow\", code: \"LHR\", country: \"United Kingdom\" },\n      { city: \"Paris\", name: \"Charles de Gaulle\", code: \"CDG\", country: \"France\" },\n      { city: \"Tokyo\", name: \"Haneda\", code: \"HND\", country: \"Japan\" },\n      { city: \"Dubai\", name: \"Dubai International\", code: \"DXB\", country: \"UAE\" }\n    ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "alternative-api.js",
+        "start": 100,
+        "end": 108,
+        "startLoc": {
+          "line": 100,
+          "column": 76,
+          "position": 663
+        },
+        "endLoc": {
+          "line": 108,
+          "column": 5,
+          "position": 836
+        }
+      },
+      "secondFile": {
+        "name": "duffel-api.js",
+        "start": 263,
+        "end": 270,
+        "startLoc": {
+          "line": 263,
+          "column": 53,
+          "position": 1506
+        },
+        "endLoc": {
+          "line": 270,
+          "column": 83,
+          "position": 1679
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 16,
+      "fragment": " }\n    ];\n\n    const filtered = commonAirports.filter(airport => \n      airport.city.toLowerCase().includes(keyword.toLowerCase()) ||\n      airport.code.toLowerCase().includes(keyword.toLowerCase()) ||\n      airport.name.toLowerCase().includes(keyword.toLowerCase())\n    );\n\n    res.json({\n      ok: true,\n      airports: filtered.slice(0, 5)\n    });\n\n  } catch (error) {\n    console.error('Airport search error:'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "alternative-api.js",
+        "start": 107,
+        "end": 122,
+        "startLoc": {
+          "line": 107,
+          "column": 80,
+          "position": 834
+        },
+        "endLoc": {
+          "line": 122,
+          "column": 42,
+          "position": 946
+        }
+      },
+      "secondFile": {
+        "name": "duffel-api.js",
+        "start": 274,
+        "end": 289,
+        "startLoc": {
+          "line": 274,
+          "column": 86,
+          "position": 1789
+        },
+        "endLoc": {
+          "line": 289,
+          "column": 53,
+          "position": 1901
+        }
+      }
+    }
+  ]
+}
