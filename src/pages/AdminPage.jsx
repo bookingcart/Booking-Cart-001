@@ -37,20 +37,55 @@ async function replyToThread(threadId, text) {
   } catch {}
 }
 
+function playNotificationSound() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(1760, ctx.currentTime + 0.1);
+    
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.3);
+  } catch(e) {}
+}
+
 function SupportInbox() {
   const [threads, setThreads] = useState([]);
   const [selected, setSelected] = useState(null);
   const [reply, setReply] = useState('');
   const [filter, setFilter] = useState('all');
   const bottomRef = useRef(null);
+  const prevUnreadRef = useRef(0);
+  const firstLoadRef = useRef(true);
 
   async function loadData() {
     const fresh = await fetchSupportMessages();
     setThreads(fresh);
-    if (selected) {
-      const up = fresh.find(t => t.id === selected.id);
-      if (up) setSelected(up);
+    
+    setSelected(prev => {
+      if (!prev) return prev;
+      const up = fresh.find(t => t.id === prev.id);
+      return up || prev;
+    });
+
+    const unreadCount = fresh.filter(t => !t.adminRead).length;
+    if (!firstLoadRef.current && unreadCount > prevUnreadRef.current) {
+      playNotificationSound();
     }
+    firstLoadRef.current = false;
+    prevUnreadRef.current = unreadCount;
   }
 
   useEffect(() => {
