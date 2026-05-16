@@ -696,11 +696,15 @@
     });
   }
 
-   catch (e) {
+  function money(n, currency = "USD") {
+    try {
+      return new Intl.NumberFormat(undefined, { style: "currency", currency: currency, maximumFractionDigits: 0 }).format(n);
+    } catch (e) {
       const sym = currency === "GBP" ? "£" : currency === "EUR" ? "€" : "$";
       return sym + n;
     }
   }
+  window.money = money;
 
   function durationLabel(min) {
     const h = Math.floor(min / 60);
@@ -1079,6 +1083,8 @@
             }
             listEl.innerHTML = '<div class="bg-white rounded-2xl p-8 text-center border border-slate-100 shadow-sm"><div class="text-lg font-medium text-slate-900 mb-2">No flights found</div><div class="text-slate-500">No flights available for this route and dates. Try different airports or dates.</div></div>';
           }
+          const countEl = document.querySelector("[data-flight-count]");
+          if (countEl) window.setText(countEl, "0");
           window.writeState({ flights: [] });
           return;
         }
@@ -1092,6 +1098,8 @@
           }
           listEl.innerHTML = '<div class="bg-white rounded-2xl p-8 text-center border border-slate-100 shadow-sm"><div class="text-red-500">Error loading flights. Please try again.</div></div>';
         }
+        const countEl = document.querySelector("[data-flight-count]");
+        if (countEl) window.setText(countEl, "0");
         window.writeState({ flights: [] });
       }
     })();
@@ -1321,11 +1329,7 @@
     });
   }
 
-  
-    return Number(flight.price) || 0;
-  }
 
-  
 
   function initExtras() {
     const root = document.querySelector("[data-extras]");
