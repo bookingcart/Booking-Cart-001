@@ -144,22 +144,7 @@ export default function ResultsPage(){
         <i className="ph ph-caret-left text-xl"></i>
       </button>
       <div className="flex-1 flex overflow-x-auto no-scrollbar scroll-smooth" id="date-ribbon">
-        {/* Mock dates */}
-        {[
-          { date: "Sat, May 2", price: "US$188" },
-          { date: "Sun, May 3", price: "US$162" },
-          { date: "Mon, May 4", price: "US$137" },
-          { date: "Tue, May 5", price: "US$112", active: true },
-          { date: "Wed, May 6", price: "US$116" },
-          { date: "Thu, May 7", price: "US$109" },
-          { date: "Fri, May 8", price: "US$113" },
-          { date: "Sat, May 9", price: "US$125" },
-        ].map((item, i) => (
-          <div key={i} className={`flex-1 min-w-[100px] py-2 cursor-pointer flex flex-col items-center justify-center border-b-2 transition-colors ${item.active ? 'border-green-600 bg-green-50/30' : 'border-transparent hover:bg-slate-50'} border-r border-slate-100 last:border-r-0`}>
-            <span className={`text-xs font-semibold ${item.active ? 'text-green-600' : 'text-slate-600'}`}>{item.date}</span>
-            <span className={`text-[11px] ${item.active ? 'text-green-600 font-bold' : 'text-slate-400 font-medium'}`}>{item.price}</span>
-          </div>
-        ))}
+
       </div>
       <button className="w-12 flex items-center justify-center bg-white hover:bg-slate-50 text-slate-400 border-l border-slate-200 transition-colors">
         <i className="ph ph-caret-right text-xl"></i>

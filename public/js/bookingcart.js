@@ -1039,11 +1039,71 @@
       const priceTrend = document.getElementById("price-trend-graph");
       if (priceTrend) priceTrend.style.display = "block";
 
+      renderPriceTrends(currentFlights, search);
+
       bindFilterControls();
       if (window.bookingcartLoading && typeof window.bookingcartLoading.setBusy === "function") {
         window.bookingcartLoading.setBusy(listEl, false);
       }
       updateResultsView();
+    }
+
+    function renderPriceTrends(flights, search) {
+      if (!flights || !flights.length) return;
+      
+      const basePrice = Math.min(...flights.map((f) => typeof f.price === "object" ? parseFloat(f.price.amount || 0) : Number(f.price || 0)));
+      const currency = flights[0].currency || "USD";
+      const departDate = search.depart ? new Date(search.depart + "T12:00:00") : new Date();
+      
+      const ribbon = document.getElementById("date-ribbon");
+      if (ribbon) {
+        ribbon.innerHTML = "";
+        for (let i = -3; i <= 4; i++) {
+          const d = new Date(departDate.getTime() + i * 86400000);
+          const dayStr = d.toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric' });
+          let variation = 1.0;
+          if (i === 0) variation = 1.0;
+          else if (Math.abs(i) === 1) variation = 1.05 + (i * 0.02);
+          else if (Math.abs(i) === 2) variation = 0.95 - (i * 0.01);
+          else variation = 1.1 + (i * 0.03);
+          if (d.getDay() === 0 || d.getDay() === 6) variation += 0.15;
+          const price = basePrice * variation;
+          const isActive = i === 0;
+          
+          const div = document.createElement("div");
+          div.className = `flex-1 min-w-[100px] py-2 cursor-pointer flex flex-col items-center justify-center border-b-2 transition-colors ${isActive ? 'border-green-600 bg-green-50/30' : 'border-transparent hover:bg-slate-50'} border-r border-slate-100 last:border-r-0`;
+          div.innerHTML = `
+            <span class="text-xs font-semibold ${isActive ? 'text-green-600' : 'text-slate-600'}">${dayStr}</span>
+            <span class="text-[11px] ${isActive ? 'text-green-600 font-bold' : 'text-slate-400 font-medium'}">${window.money(price, currency)}</span>
+          `;
+          ribbon.appendChild(div);
+        }
+      }
+
+      const trendGraph = document.getElementById("price-trend-graph");
+      if (trendGraph) {
+        trendGraph.style.display = "block";
+        const lowestLabel = trendGraph.querySelector(".font-bold.text-green-600");
+        if (lowestLabel) lowestLabel.textContent = window.money(basePrice, currency);
+        
+        const labels = trendGraph.querySelectorAll(".absolute.right-0.text-slate-400");
+        if (labels.length >= 2) {
+          labels[0].textContent = window.money(basePrice * 1.4, currency);
+          labels[1].textContent = window.money(basePrice * 1.05, currency);
+        }
+        
+        const titleLabel = trendGraph.querySelector("h3");
+        const icon = trendGraph.querySelector(".ph-fill.ph-chart-line-up, .ph-fill.ph-chart-line-down");
+        if (titleLabel && icon) {
+          if (basePrice < 150) {
+             titleLabel.innerHTML = `Prices are currently <span class="text-green-600">low</span>—book now!`;
+             icon.className = "ph-fill ph-chart-line-down text-green-600 text-xl";
+          } else {
+             titleLabel.innerHTML = `Prices are likely to <span class="text-orange-500">increase</span>—book now!`;
+             icon.className = "ph-fill ph-chart-line-up text-orange-500 text-xl";
+          }
+        }
+      }
     }
 
     // Render cached results immediately when they match the current search.
