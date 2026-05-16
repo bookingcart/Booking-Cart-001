@@ -6,7 +6,21 @@ const { applyCors } = require('../lib/cors');
 const DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';
 const DUFFEL_BASE_URL = 'https://api.duffel.com';
 
-);
+/**
+ * Order Cancellation API
+ * 
+ * POST /api/duffel-order-cancellations - Create a pending cancellation
+ * GET  /api/duffel-order-cancellations?id=... - Get cancellation status
+ * POST /api/duffel-confirm-cancellation - Confirm the cancellation
+ */
+
+module.exports = async (req, res) => {
+  applyCors(req, res);
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+
+  if (!DUFFEL_API_KEY) {
+    return res.status(503).json({ ok: false, error: 'Duffel is not configured (missing DUFFEL_API_KEY)' });
   }
 
   try {

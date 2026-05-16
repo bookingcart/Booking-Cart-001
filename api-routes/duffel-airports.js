@@ -6,7 +6,12 @@ const { applyCors } = require('../lib/cors');
 const DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';
 const DUFFEL_BASE_URL = 'https://api.duffel.com';
 
+module.exports = async (req, res) => {
+  applyCors(req, res);
 
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
 
   try {
     const keyword = (req.query && req.query.keyword) || '';

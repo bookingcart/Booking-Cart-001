@@ -8,7 +8,11 @@ const DUFFEL_BASE_URL = 'https://api.duffel.com';
 const SEARCH_CACHE_TTL_MS = 5 * 60 * 1000;
 const searchCache = global.__duffelSearchCache || (global.__duffelSearchCache = new Map());
 
-);
+module.exports = async (req, res) => {
+  applyCors(req, res);
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed' });
 
   try {
     const body = req.body || {};

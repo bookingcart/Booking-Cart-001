@@ -6,7 +6,20 @@ const { applyCors } = require('../lib/cors');
 const DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';
 const DUFFEL_BASE_URL = 'https://api.duffel.com';
 
-);
+/**
+ * Post-Booking Services API
+ * 
+ * GET  /api/duffel-order-services?orderId=... - Get available services (bags, seats, meals)
+ * POST /api/duffel-order-services - Add services to order
+ */
+
+module.exports = async (req, res) => {
+  applyCors(req, res);
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+
+  if (!DUFFEL_API_KEY) {
+    return res.status(503).json({ ok: false, error: 'Duffel is not configured (missing DUFFEL_API_KEY)' });
   }
 
   try {

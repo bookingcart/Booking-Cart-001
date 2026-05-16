@@ -6,7 +6,23 @@ const { applyCors } = require('../lib/cors');
 const DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';
 const DUFFEL_BASE_URL = 'https://api.duffel.com';
 
-
+/**
+ * GET /api/duffel-offer?id=off_...
+ *
+ * Fetches the latest price and details for a single Duffel offer.
+ * Per the Duffel getting-started guide, this should be called right before
+ * orders.create to confirm the offer is still valid and get the current price.
+ *
+ * Returns:
+ * {
+ *   ok: true,
+ *   offer: {
+ *     id:             string
+ *     total_amount:   string   — latest price (may differ from search)
+ *     total_currency: string
+ *     expires_at:     string   — ISO 8601 expiry timestamp
+ *     available:      boolean  — false if the offer has expired
+ *   }
  * }
  */
 module.exports = async (req, res) => {

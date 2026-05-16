@@ -6,7 +6,12 @@ const { applyCors } = require('../lib/cors');
 const DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';
 const DUFFEL_BASE_URL = 'https://api.duffel.com';
 
--\d{2}-\d{2}$/.test(str.trim());
+/**
+ * Validate a YYYY-MM-DD date string.
+ */
+function isValidDate(str) {
+  if (!str || typeof str !== 'string') return false;
+  return /^\d{4}-\d{2}-\d{2}$/.test(str.trim());
 }
 
 /**

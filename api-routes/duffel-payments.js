@@ -6,7 +6,17 @@ const { applyCors } = require('../lib/cors');
 const DUFFEL_API_KEY = process.env.DUFFEL_API_KEY || '';
 const DUFFEL_BASE_URL = 'https://api.duffel.com';
 
-
+/**
+ * POST /api/duffel-payments
+ *
+ * Pays for a 'held' order.
+ * 
+ * Body:
+ * {
+ *   orderId: string,
+ *   amount: string,
+ *   currency: string
+ * }
  */
 module.exports = async (req, res) => {
   applyCors(req, res);
