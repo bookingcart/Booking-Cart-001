@@ -1494,7 +1494,6 @@
           // Show success screen inside the modal
           const modalContentEl = document.getElementById("price-alert-modal-content");
           if (modalContentEl) {
-            const currency = currentFlights[0]?.currency || "USD";
             modalContentEl.innerHTML = `
               <div class="flex flex-col items-center justify-center text-center p-10 gap-5">
                 <div class="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center shadow-lg shadow-green-100 border-4 border-green-100 animate-[scale-in_0.4s_ease]">
